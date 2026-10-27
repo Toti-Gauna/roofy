@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "EstateOS · site em preparação",
-    "description": "EstateOS, da Eclipse, para imobiliárias. Estamos montando este site."
+    "title": "EstateOS · demo para imobiliárias",
+    "description": "EstateOS, da Eclipse, para imobiliárias. Teste a demo da Lumen Propiedades com dados fictícios."
   },
   "languages": {
     "label": "Idioma",
@@ -11,39 +11,734 @@
   },
   "home": {
     "name": "EstateOS",
-    "status": "Em preparação",
-    "lead": "Estamos montando este site. Até ficar pronto, a demo de imobiliárias continua no site da Eclipse.",
     "back": "Voltar para a Eclipse"
-  },
-  "link": {
-    "title": "Teste do link",
-    "intro": "Isto é o que este site recebeu da Eclipse. É um teste técnico e vai ser removido.",
-    "language": "Idioma",
-    "currency": "Moeda",
-    "view": "Visão",
-    "area": "Área",
-    "none": "—",
-    "currencies": {
-      "ARS": "Pesos argentinos (ARS)",
-      "BRL": "Reais (BRL)",
-      "USD": "Dólares (USD)"
-    },
-    "views": {
-      "entrada": "Entrada",
-      "guia": "Com guia",
-      "branding": "Branding",
-      "intelligence": "Intelligence",
-      "academy": "Academy"
-    },
-    "areas": {
-      "recepcion": "Recepção",
-      "administracion": "Administração",
-      "ventas": "Vendas",
-      "marketing": "Marketing"
-    }
   },
   "notFound": {
     "title": "Não encontramos essa página",
     "back": "Ir para o início"
+  },
+  "demoKit": {
+    "shell": {
+      "collapse": "Recolher menu",
+      "expand": "Expandir menu",
+      "more": "Mais",
+      "menu": "Menu",
+      "close": "Fechar"
+    },
+    "chat": {
+      "typing": "digitando…",
+      "online": "online",
+      "read": "Lida",
+      "replies": "Respostas rápidas",
+      "typingLabel": "{name} está digitando",
+      "composer": "Digite uma mensagem"
+    },
+    "voice": {
+      "incoming": "Chamada recebida",
+      "answering": "{agent} vai atender",
+      "answeredBy": "{agent} na linha",
+      "working": "{agent} está consultando a agenda",
+      "ended": "Chamada encerrada",
+      "waiting": "Nenhuma chamada agora",
+      "caller": "Quem liga",
+      "action": "Ação",
+      "duration": "Duração {time}",
+      "transcript": "Transcrição ao vivo",
+      "open": "Ver chamada",
+      "missed": "Chamada perdida"
+    },
+    "browser": {
+      "address": "Endereço"
+    },
+    "feed": {
+      "now": "Agora"
+    },
+    "game": {
+      "level": "Nível {n}",
+      "toNext": "Progresso até o nível {n}",
+      "streak": "{count, plural, one {dia de sequência} other {dias de sequência}}",
+      "done": "feito",
+      "pending": "pendente",
+      "earned": "Conquistada",
+      "progress": "{pct}% concluída",
+      "rank": "Posição {n}"
+    },
+    "sim": {
+      "title": "Simulação",
+      "note": "As ações são simuladas com dados de demonstração; nada é enviado.",
+      "play": "Simular: {label}",
+      "playing": "Simulando: {label}",
+      "skip": "Pular para o fim",
+      "reset": "Reiniciar",
+      "resetAll": "Reiniciar a demo",
+      "counter": "Evento {current} de {total}",
+      "counterIdle": "{total} eventos para simular",
+      "events": "Eventos simulados",
+      "close": "Fechar",
+      "landed": "Pronto: {label}. {counter}.",
+      "state": {
+        "done": "Feito",
+        "playing": "Simulando",
+        "next": "Próximo",
+        "pending": "Pendente"
+      }
+    },
+    "calendar": {
+      "prevDay": "Dia anterior",
+      "nextDay": "Próximo dia",
+      "prevWeek": "Semana anterior",
+      "nextWeek": "Próxima semana",
+      "today": "Hoje",
+      "view": "Visualização",
+      "day": "Dia",
+      "week": "Semana"
+    },
+    "kanban": {
+      "hint": "Arraste um card para outra coluna ou use o botão Mover.",
+      "moveCard": "Mover “{card}”",
+      "moveTo": "Mover para {column}",
+      "moved": "“{card}” foi para {column}."
+    }
+  },
+  "demoRealEstate": {
+    "slotLong": "{day} às {time}",
+    "zones": {
+      "centro": "Centro",
+      "arboleda": "La Arboleda",
+      "ribera": "La Ribera",
+      "colinas": "Las Colinas",
+      "parque": "Parque Norte"
+    },
+    "features": {
+      "balcony": "Sacada",
+      "garage": "Garagem",
+      "garden": "Jardim",
+      "pool": "Piscina",
+      "river": "Vista para o rio",
+      "terrace": "Terraço",
+      "credit": "Aceita financiamento",
+      "light": "Bem iluminado",
+      "patio": "Quintal"
+    },
+    "listing": {
+      "price": "US$ {amount}",
+      "baths": "{count, plural, one {# banheiro} other {# banheiros}}",
+      "area": "{count} m²",
+      "title": "{kind} em {zone}",
+      "inquiries": "{count, plural, one {# contato} other {# contatos}}",
+      "rooms": "{rooms, select, other {{beds} quartos}}",
+      "roomsShort": "{rooms, select, other {{beds} qts}}",
+      "fees": "Condomínio US$ {amount}",
+      "noFees": "Sem condomínio",
+      "visits": "{count, plural, one {# visita} other {# visitas}}",
+      "days": "{count} dias anunciado",
+      "available": "Disponível",
+      "reserved": "Reservado",
+      "photo": "Fachada da {street}, ilustração",
+      "photoN": "Fachada da {street}, ilustração {n} de {total}"
+    },
+    "listings": {
+      "title": "Imóveis",
+      "sub": "{count} anunciados no site",
+      "caption": "Imóveis anunciados",
+      "cols": {
+        "property": "Imóvel",
+        "price": "Preço",
+        "area": "Área",
+        "inquiries": "Contatos",
+        "visits": "Visitas",
+        "status": "Status"
+      }
+    },
+    "people": {
+      "tomas": "Thiago Bauer",
+      "lucia": "Larissa Ferraz",
+      "martin": "Gustavo Gil",
+      "valeria": "Fernanda Lima",
+      "diego": "Diego Ramos",
+      "carolina": "Mariana Costa",
+      "carolinaFirst": "Mariana",
+      "julia": "Júlia Rocha",
+      "juliaFirst": "Júlia",
+      "marcos": "Marcos Vidal",
+      "andres": "Rafael Souza",
+      "pablo": "Paulo Nunes",
+      "sofia": "Sofia Arce",
+      "you": "Você",
+      "marcosFirst": "Marcos"
+    },
+    "stages": {
+      "new": "Novo",
+      "qualified": "Qualificado",
+      "visit": "Visita",
+      "reserve": "Reserva"
+    },
+    "chat": {
+      "subtitle": "Lumi · responde na hora",
+      "subtitleOff": "Fora do horário",
+      "label": "Chat do site da {business} com {name}",
+      "composer": "Escreva sua pergunta",
+      "open": "Conversar",
+      "close": "Fechar o chat",
+      "expand": "Abrir o chat do site",
+      "as": "Você é a {name}: escolha as respostas dela.",
+      "answeredIn": "{seconds} s",
+      "ai": "IA",
+      "steps": {
+        "ask": "Oi! O apê de 2 quartos da {street} ainda está disponível? Dá pra visitar esta semana?",
+        "hi": "Oi, {name}! Está disponível, sim. Te faço duas perguntas e já te passo os horários de visita.",
+        "pay": "Como você pretende pagar?",
+        "budget": "Até quanto você quer investir?",
+        "fits_cash": "Cabe certinho: está US$ {price}, e à vista dá pra negociar.",
+        "fits_credit": "Cabe certinho: está US$ {price} e aceita financiamento.",
+        "fits_sell": "Cabe certinho: está US$ {price}. Se quiser, avaliamos o seu apê sem custo.",
+        "alt": "Esse está US$ {price}. A quatro quadras tenho um bem parecido por US$ {altPrice}:",
+        "slots": "A {advisor}, nossa corretora, pode te mostrar. Qual horário fica melhor?",
+        "booked": "Pronto, {name}: visita {slot} com a {advisor}. Te mando a localização pelo WhatsApp.",
+        "crm": "Lead qualificado · ficha e visita salvas no CRM",
+        "wait": "Escritório fechado · ninguém responde",
+        "opens": "Sexta 9:00 · o escritório abre",
+        "human": "Oi, {name}! Desculpa a demora, acabamos de abrir. Ainda está disponível, sim. Quando você quer ver?",
+        "lost": "Obrigada, mas já marquei uma visita com outra imobiliária.",
+        "lostNote": "Lead perdido · primeira resposta {late} depois"
+      },
+      "replies": {
+        "cash": "À vista",
+        "credit": "Com financiamento",
+        "sell": "Vendendo meu apê",
+        "low": "Até US$ 150.000",
+        "mid": "US$ 150.000 a 200.000",
+        "high": "Mais de US$ 200.000"
+      }
+    },
+    "inbox": {
+      "title": "Contatos",
+      "list": "Conversas",
+      "previews": {
+        "lucia": "Dá pra visitar a casa de vila no sábado?",
+        "valeria": "O duplex tem garagem pra dois carros?",
+        "diego": "Vi a placa na Los Aromos. Qual o preço?",
+        "andres": "O loft da Mitre aceita financiamento?"
+      },
+      "transcript": "Transcrição",
+      "simulate": "Escolha a resposta da {name}",
+      "extract": {
+        "pay": "Pagamento → {value}",
+        "budget": "Orçamento → {value}",
+        "visit": "Visita → {value}",
+        "crm": "Etapa → {value}"
+      },
+      "botLabel": "Lumi · IA",
+      "humanLabel": "{name} · equipe",
+      "noReply": "Sem resposta",
+      "channel": "Canal da conversa",
+      "emptyTitle": "Ninguém escreveu ainda.",
+      "emptyBody": "Toque em “Simular” lá em cima: às 23:40 chega o contato da Mariana e a Lumi atende."
+    },
+    "lead": {
+      "title": "Ficha do lead",
+      "pending": "Pendente",
+      "score": "Intenção",
+      "seeks": "Procura",
+      "budget": "Orçamento",
+      "next": "Próximo passo",
+      "scoreOf": "/ 100",
+      "seeksValue": "{kind} · {rooms} · {zone}",
+      "pay": "Pagamento",
+      "visit": "Visita",
+      "source": "Origem",
+      "nextSteps": {
+        "qualify": "A Lumi está qualificando",
+        "book": "Oferecer horários de visita",
+        "visit": "Visita com a {advisor}",
+        "follow": "Follow-up pelo WhatsApp",
+        "reserve": "Sinal com a {advisor} amanhã 10:00",
+        "similar": "Aguardar resposta às opções",
+        "think": "Lembrete na terça",
+        "call": "Ligar logo cedo",
+        "lost": "Perdido: respondemos tarde"
+      },
+      "stageTrack": "Etapa do lead: {stage}"
+    },
+    "nav": {
+      "today": "Hoje",
+      "inbox": "Contatos",
+      "pipeline": "Funil",
+      "visits": "Visitas",
+      "followups": "Follow-ups",
+      "listings": "Imóveis",
+      "site": "Site",
+      "groupAuto": "Automações",
+      "groupShop": "Vitrine"
+    },
+    "top": {
+      "closed": "Escritório fechado · Lumi atende",
+      "open": "Escritório aberto",
+      "off": "Assistente desligada",
+      "buyer": "Comprador",
+      "buyerLabel": "Ver o que o comprador vê no celular",
+      "date": "{date} · {time}"
+    },
+    "bot": {
+      "name": "Lumi",
+      "title": "Lumi · assistente de IA",
+      "on": "Atende 24/7 no site e no WhatsApp",
+      "offShort": "Desligada: os contatos esperam",
+      "switch": "Assistente 24/7",
+      "hint": "Desligue: a demo volta às 23:40 e você simula a mesma noite sem a assistente.",
+      "hintOff": "Ligue: a demo volta às 23:40 e o contato é respondido em segundos."
+    },
+    "kinds": {
+      "apartment": "Apartamento",
+      "duplex": "Duplex",
+      "house": "Casa",
+      "loft": "Loft",
+      "ph": "Casa de vila"
+    },
+    "sources": {
+      "web": "Site",
+      "whatsapp": "WhatsApp",
+      "portal": "Portais",
+      "sign": "Placa",
+      "site": "Agenda online"
+    },
+    "pay": {
+      "cash": "À vista",
+      "credit": "Financiamento",
+      "sell": "Vende o apê"
+    },
+    "budget": {
+      "low": "Até US$ 150 mil",
+      "mid": "US$ 150–200 mil",
+      "high": "Mais de US$ 200 mil"
+    },
+    "slot": "{day} · {time}",
+    "follow": {
+      "steps": {
+        "how": "Oi, {name}. O que achou do apê da {street}? Se gostou, eu seguro ele pra você por 72 h, sem custo.",
+        "reserved": "Feito: está reservado até segunda às 19h. A {advisor} te liga amanhã às 10 pra combinar o sinal.",
+        "reservedNote": "Reserva registrada · {street} agora está Reservado",
+        "similarList": "Te mando dois parecidos na região:",
+        "similarNote": "Follow-up: 2 opções enviadas",
+        "later": "Claro, sem pressa. Na terça te escrevo com novidades e duas opções parecidas.",
+        "laterNote": "Lembrete agendado · terça, 13"
+      },
+      "replies": {
+        "reserve": "Quero reservar",
+        "similar": "Ver parecidos",
+        "think": "Vou pensar"
+      },
+      "label": "WhatsApp da {business} com {name}",
+      "composer": "Mensagem"
+    },
+    "buyer": {
+      "app": "WhatsApp",
+      "now": "agora",
+      "push": "O que achou do apê da {street}?",
+      "openPush": "Abrir a mensagem do WhatsApp",
+      "backToSite": "Site",
+      "backToApp": "Voltar ao app",
+      "jump": "{date} · depois da visita",
+      "you": "Você, no site",
+      "openThread": "Abrir o WhatsApp"
+    },
+    "time": {
+      "late": "{hours} h {minutes} min",
+      "seconds": "{seconds} s",
+      "minutes": "{minutes} min"
+    },
+    "notes": {
+      "base": "{listing}",
+      "waiting": "Sem resposta · {wait}",
+      "lost": "Perdido · {wait} sem resposta",
+      "answered": "Respondido em 4 s · qualificando",
+      "qualified": "{budget} · {pay}",
+      "booked": "Visita {slot}",
+      "visited": "Visita feita · follow-up",
+      "reserved": "Reservou {street}",
+      "similar": "Recebeu 2 opções parecidas",
+      "think": "Vai pensar · lembrete na terça",
+      "you": "Sua visita · {slot}",
+      "youNew": "Seu contato · a Lumi está te qualificando",
+      "youQualified": "{budget} · procura {listing}",
+      "moved": "Movido por você"
+    },
+    "today": {
+      "kicker": "Hoje · {date}",
+      "headline": "Escritório fechado. <em>A Lumi atende.</em>",
+      "headlineOff": "Escritório fechado. Ninguém atende.",
+      "headlineJump": "A visita já foi. A Lumi faz o follow-up.",
+      "key": "dos contatos respondidos em menos de 1 minuto",
+      "keyOf": "{fast} de {total} nesta semana",
+      "keyWaiting": "1 contato esperando · {wait}",
+      "avg": "Primeira resposta",
+      "avgHint": "Média da semana",
+      "visits": "Visitas agendadas",
+      "visitsHint": "Nesta semana",
+      "afterHours": "Fora do horário",
+      "afterHoursHint": "{count} de {total} contatos",
+      "reserves": "Reservas",
+      "reservesHint": "Nesta semana",
+      "now": "Agora",
+      "nowEmpty": "Nada ainda. Simule o contato das 23:40.",
+      "pipeline": "Funil",
+      "openPipeline": "Ver funil",
+      "openInbox": "Ver conversa",
+      "sources": "Contatos por origem",
+      "sourcesLabel": "O site traz mais contatos: {count} de {total} nesta semana.",
+      "activity": "Atividade",
+      "headlineReserved": "Reservado. <em>Sem abrir o escritório.</em>",
+      "headlineOpens": "9:00: o escritório abre. O contato esperou a noite toda.",
+      "headlineLost": "{late} depois, <em>o lead já tinha ido.</em>"
+    },
+    "pipeline": {
+      "title": "Funil",
+      "label": "Funil de vendas: {count} leads",
+      "value": "US$ {amount}",
+      "empty": "Sem leads",
+      "note": "A Lumi move os cards quando qualifica e agenda. Você também: arraste ou use “Mover”."
+    },
+    "visits": {
+      "title": "Visitas",
+      "free": "Livre",
+      "freeLabel": "{day}, {time}: livre, agendar uma visita",
+      "next": "Próxima visita",
+      "nextEmpty": "Nenhuma visita nova esta noite",
+      "reminder": "Lembrete pelo WhatsApp 2 h antes",
+      "withAdvisor": "com {advisor}",
+      "hint": "Toque num horário livre para agendar uma visita.",
+      "what": {
+        "visit": "Visita",
+        "appraisal": "Avaliação",
+        "openHouse": "Open house",
+        "signing": "Assinatura da reserva"
+      },
+      "you": "Sua visita",
+      "done": "Feita",
+      "booked": "Visita agendada: {slot}",
+      "legendLive": "Agendada pela Lumi",
+      "freeLabelWith": "{time} com {advisor}: livre, agendar uma visita",
+      "dayLabel": "Visitas de {day}, por corretor",
+      "weekLabel": "Visitas da semana, de {from} a {to}",
+      "summary": "{day} · {count, plural, =0 {sem visitas} one {# visita} other {# visitas}}",
+      "summaryPast": "{day} · {count, plural, =0 {sem visitas} one {# visita feita} other {# visitas feitas}}",
+      "weekSummary": "{count, plural, one {# visita} other {# visitas}} na semana · toque num horário livre para agendar",
+      "closed": "{day} · sem visitas neste dia",
+      "hintLaptop": "Alterne entre semana e dia, veja semanas passadas e futuras e toque num horário livre para agendar.",
+      "hintPast": "Dia passado: só leitura.",
+      "bookTitle": "Agendar visita",
+      "property": "Imóvel",
+      "confirm": "Agendar visita",
+      "cancel": "Cancelar",
+      "localNote": "Visita de demonstração: fica só nesta tela."
+    },
+    "followups": {
+      "title": "Follow-ups",
+      "sequence": "Depois de cada visita",
+      "sequenceSub": "Pelo WhatsApp, com o nome de quem visitou e o imóvel.",
+      "for": "Agora com {name}",
+      "steps": {
+        "confirm": {
+          "when": "Ao agendar",
+          "what": "Confirmação e localização"
+        },
+        "remind": {
+          "when": "2 h antes",
+          "what": "Lembrete da visita"
+        },
+        "after": {
+          "when": "Ao terminar",
+          "what": "O que achou? + reservar"
+        },
+        "similar": {
+          "when": "+3 dias sem resposta",
+          "what": "Duas opções parecidas"
+        },
+        "news": {
+          "when": "+7 dias",
+          "what": "Novidades de preço"
+        }
+      },
+      "status": {
+        "sent": "Enviado",
+        "scheduled": "Agendado",
+        "skipped": "Não precisa",
+        "waiting": "Em espera"
+      },
+      "preview": "O que o comprador vê",
+      "previewEmpty": "A mensagem sai sozinha quando a visita termina.",
+      "stats": "{sent} follow-ups nesta semana · {pct} respondidos"
+    },
+    "site": {
+      "nav": {
+        "all": "Imóveis ({count})"
+      },
+      "kicker": "Imobiliária · La Arboleda e arredores",
+      "title": "Casas com boa luz, <em>à vista.</em>",
+      "body": "Busque, veja a planta e agende a visita a qualquer hora.",
+      "search": {
+        "zone": "Região",
+        "zoneAll": "Todas",
+        "rooms": "Cômodos",
+        "roomsAny": "Qualquer",
+        "roomsMin": "{count}+",
+        "results": "{count, plural, one {# imóvel} other {# imóveis}}",
+        "label": "Buscar imóveis",
+        "price": "Preço",
+        "priceAny": "Qualquer",
+        "priceMax": "Até US$ {amount}",
+        "none": "Nada com esses filtros. Tente outra região ou um orçamento maior."
+      },
+      "crumbs": "Comprar · {zone}",
+      "back": "Resultados",
+      "gallery": "Foto {n} de {total}",
+      "features": "Características",
+      "map": "Localização aproximada",
+      "plan": "Planta",
+      "planRooms": {
+        "living": "Sala",
+        "bed": "Quarto",
+        "kitchen": "Cozinha",
+        "bath": "Banheiro",
+        "balcony": "Sacada"
+      },
+      "ask": "Perguntar",
+      "book": "Agendar visita",
+      "booking": {
+        "title": "Agende sua visita",
+        "day": "Dia",
+        "time": "Horário",
+        "none": "Sem horários livres",
+        "confirm": "Confirmar visita",
+        "booked": "Visita agendada",
+        "bookedBody": "{slot} · {street}. A confirmação chega pelo WhatsApp.",
+        "again": "Agendar outra",
+        "pickDay": "Escolha um dia",
+        "seeAgenda": "Ver na agenda",
+        "note": "Visita de demonstração: nada é enviado."
+      },
+      "url": "Endereço do site",
+      "prevPhoto": "Foto anterior",
+      "nextPhoto": "Próxima foto",
+      "viewSub": "{url} · busque, abra um imóvel, agende uma visita ou converse com a Lumi"
+    },
+    "toast": {
+      "inquiry": "Contato novo · 23:40",
+      "answered": "Respondido em 4 s",
+      "qualified": "Lead qualificado",
+      "booked": "Visita agendada",
+      "followSent": "Follow-up enviado",
+      "reserved": "Reserva",
+      "similar": "Opções enviadas",
+      "think": "Lembrete agendado",
+      "waiting": "Contato sem resposta",
+      "lost": "Lead perdido",
+      "you": "Sua visita"
+    },
+    "feed": {
+      "pastPortal": "{name} chegou por um portal · respondido em 7 s",
+      "pastWhatsApp": "{name} perguntou pelo WhatsApp · respondido em 5 s",
+      "pastFollow": "Lembrete de visita enviado para {name}",
+      "inquiry": "{name} perguntou pela {street} no site",
+      "answered": "A Lumi respondeu em 4 s",
+      "qualified": "{name} qualificada: {budget}, {pay}",
+      "booked": "Visita agendada: {slot} com a {advisor}",
+      "visited": "Visita feita na {street}",
+      "followSent": "Follow-up pelo WhatsApp para {name}",
+      "reserved": "{name} reservou a {street}",
+      "similar": "{name} recebeu duas opções parecidas",
+      "think": "{name} vai pensar: lembrete na terça",
+      "waiting": "Ninguém respondeu: o escritório está fechado",
+      "opens": "O escritório abre",
+      "human": "A {advisor} respondeu {late} depois",
+      "lost": "{name} fechou com outra imobiliária",
+      "you": "Você agendou uma visita: {slot}",
+      "youLead": "Seu contato entrou no CRM: {listing}"
+    },
+    "sim": {
+      "inquiry": "Chega um contato às 23:40",
+      "qualify": "A Lumi qualifica a Mariana",
+      "visit": "A Lumi agenda a visita",
+      "followup": "Acompanhamento depois da visita",
+      "reply": "A Mariana responde o acompanhamento",
+      "note": "Contatos, visitas e mensagens simulados com dados de demonstração; nada é enviado.",
+      "off": {
+        "inquiry": "Chega um contato às 23:40",
+        "qualify": "A noite passa sem resposta",
+        "visit": "O escritório abre: a Júlia responde",
+        "followup": "A Mariana responde",
+        "reply": "O lead é perdido"
+      }
+    },
+    "own": {
+      "label": "Seu chat com a Lumi no site da {business}",
+      "steps": {
+        "hi": "Oi! Eu sou a Lumi, assistente da Lumen. O que você está procurando?",
+        "pay": "Como você pretende pagar?",
+        "budget": "Até quanto você quer investir?",
+        "match_two": "Para 1 quarto, olha este loft na {street}. Quer visitar?",
+        "match_three": "Tenho um que encaixa: {street}. Quer visitar?",
+        "match_house": "Olha esta casa na {street}, com jardim e piscina. Quer visitar?",
+        "booked": "Pronto: visita {slot} com o {advisor}. A confirmação chega pelo WhatsApp.",
+        "note": "Lead qualificado · ficha e visita salvas no CRM",
+        "later": "Combinado. Te aviso pelo WhatsApp se o preço baixar ou entrar algo parecido.",
+        "laterNote": "Lead qualificado · acompanhamento programado"
+      },
+      "replies": {
+        "two": "1 quarto",
+        "three": "2 quartos",
+        "house": "Casa com jardim",
+        "later": "Agora não"
+      }
+    }
+  },
+  "sound": {
+    "toggle": "Som",
+    "turnOn": "Ativar som e música",
+    "turnOff": "Silenciar"
+  },
+  "tour": {
+    "label": "Guia",
+    "labelFor": "Guia de {name}",
+    "next": "Próximo",
+    "prev": "Voltar",
+    "done": "Pronto",
+    "skip": "Pular",
+    "close": "Fechar o guia",
+    "progress": "Passo {current} de {total}",
+    "help": "Ajuda",
+    "withGuide": "Ver com guia",
+    "onMyOwn": "Explorar sozinho",
+    "replay": "Ver o guia de novo",
+    "dontShowAgain": "Não mostrar de novo",
+    "tagDesktop": "Versão desktop",
+    "tagMobile": "Versão celular",
+    "tagBoth": "As duas versões"
+  },
+  "common": {
+    "demo": "Demo",
+    "preview": "Prévia",
+    "close": "Fechar",
+    "open": "Abrir",
+    "back": "Voltar",
+    "from": "a partir de",
+    "to": "até",
+    "perMonth": "/mês",
+    "perYear": "/ano",
+    "monthly": "Mensal",
+    "annual": "Anual",
+    "included": "Incluído",
+    "none": "Nenhum",
+    "copy": "Copiar",
+    "play": "Reproduzir",
+    "pause": "Pausar",
+    "next": "Próximo",
+    "whatsapp": "WhatsApp",
+    "approxPrefix": "≈",
+    "sections": "seções"
+  },
+  "demoTours": {
+    "realEstate": {
+      "sim": {
+        "title": "Você decide o que acontece esta noite",
+        "body": "Nada se mexe sozinho. Toque em “Simular” e acompanhe o contato das 23:40: resposta, qualificação, visita e acompanhamento. Desligue a assistente para ver a mesma noite sem ela."
+      },
+      "chat": {
+        "title": "Cada contato, respondido em segundos",
+        "body": "A Lumi responde a qualquer hora, pergunta como a pessoa vai pagar e quanto quer investir, e deixa a ficha pronta. Você pode responder pela Mariana."
+      },
+      "site": {
+        "title": "Seu site busca e agenda",
+        "body": "Filtros por região, quartos e preço, página do imóvel com planta e “Agendar visita”. Agende uma: ela aparece na agenda e no funil."
+      },
+      "pipeline": {
+        "title": "Um funil que se organiza sozinho",
+        "body": "Cada lead passa de Novo para Qualificado, Visita e Reserva conforme a Lumi avança. Arraste um card ou use “Mover” para organizar na mão."
+      },
+      "visits": {
+        "title": "Visitas sem vai e volta",
+        "body": "Os dois corretores numa agenda só. Alterne entre semana e dia, veja semanas passadas e futuras e toque num horário livre para agendar."
+      },
+      "followups": {
+        "title": "Acompanhamento depois de cada visita",
+        "body": "Confirmação, lembrete e “o que achou?” pelo WhatsApp, com o imóvel e o nome. É assim que uma visita vira reserva."
+      }
+    }
+  },
+  "experience": {
+    "entry": {
+      "title": "Como você quer ver?",
+      "guide": {
+        "name": "Ver com guia",
+        "text": "Mostramos o que importa, passo a passo."
+      },
+      "own": {
+        "name": "Ver por conta própria",
+        "text": "Toque e teste tudo, no seu ritmo."
+      },
+      "eyebrow": "EstateOS · demo da Lumen Propiedades",
+      "note": "Demo com dados fictícios. Nada é enviado."
+    },
+    "stage": {
+      "label": "Demo do EstateOS",
+      "exit": "Voltar",
+      "plan": "Plano",
+      "allPlans": "Todos os planos",
+      "planMenu": "Escolher plano",
+      "phone": "Celular",
+      "desktop": "Desktop",
+      "showPhone": "Ver celular",
+      "hidePhone": "Ocultar celular",
+      "showDesktop": "Ver desktop",
+      "phoneLabel": "Celular da {business}: demo navegável",
+      "desktopLabel": "Desktop da {business}: demo navegável",
+      "draft": "Demo em preparação: ainda não mostra tudo o que este plano inclui.",
+      "fictional": "Demo · dados fictícios",
+      "barLabel": "Controles da demo",
+      "guideStart": "Iniciar o guia",
+      "proposal": "proposta"
+    },
+    "locked": {
+      "from": "A partir de {plan}",
+      "price": "USD {price}/mês",
+      "body": "{area} faz parte do {plan} e dos planos acima.",
+      "seePlan": "Ver demo do {plan}"
+    },
+    "plans": {
+      "contact": {
+        "tagline": "Produto base completo"
+      },
+      "growth": {
+        "tagline": "Crescimento e acompanhamento do proprietário"
+      },
+      "escalar": {
+        "tagline": "Coordenação comercial"
+      },
+      "hipergrowth": {
+        "tagline": "Decidir com dados"
+      },
+      "deluxe": {
+        "tagline": "Novos serviços"
+      },
+      "partner": {
+        "tagline": "Várias sedes e carteiras"
+      }
+    },
+    "video": {
+      "open": "Ver o vídeo",
+      "close": "Fechar",
+      "transcript": "Transcrição",
+      "label": "Vídeo do {plan}",
+      "general": "Vídeo da EstateOS"
+    }
+  },
+  "demoShowcase": {
+    "laptopLabel": "{business}: demo navegável, versão para computador",
+    "phoneLabel": "{business}: demo navegável, versão para celular",
+    "desktop": "Computador",
+    "mobile": "Celular",
+    "viewsLabel": "Demo de {business}: escolha a visualização",
+    "panHint": "Deslize para ver tudo",
+    "loading": "Carregando a demo de {business}…"
   }
 }

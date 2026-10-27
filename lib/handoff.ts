@@ -17,6 +17,8 @@ export const LOCALES = ['es', 'en', 'pt'] as const;
 export const CURRENCIES = ['ARS', 'BRL', 'USD'] as const;
 export const VISTAS = ['entrada', 'guia', 'branding', 'intelligence', 'academy'] as const;
 export const AREAS = ['recepcion', 'administracion', 'ventas', 'marketing'] as const;
+/** The six plans (EstateOS catalog): `plan` opens the demo of one of them. Same ids as `PLAN_IDS` in lib/plans.ts (a test checks it). */
+export const PLANS = ['contact', 'growth', 'escalar', 'hipergrowth', 'deluxe', 'partner'] as const;
 /** Ids of the sections of the Eclipse home (Eclipse-Web `SECTION_IDS`). */
 export const ECLIPSE_SECTIONS = ['inicio', 'servicios', 'pyme', 'ejemplos', 'precios', 'problema', 'proceso', 'contacto'] as const;
 export const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
@@ -25,6 +27,7 @@ export type Locale = (typeof LOCALES)[number];
 export type Currency = (typeof CURRENCIES)[number];
 export type Vista = (typeof VISTAS)[number];
 export type Area = (typeof AREAS)[number];
+export type Plan = (typeof PLANS)[number];
 export type EclipseSection = (typeof ECLIPSE_SECTIONS)[number];
 export type UtmKey = (typeof UTM_KEYS)[number];
 
@@ -46,6 +49,8 @@ export interface HandoffInput {
   vista?: Vista;
   /** Only valid inside the guide (`vista: 'guia'`); anywhere else it is left out. */
   area?: Area;
+  /** The plan whose demo opens (the plan lens). */
+  plan?: Plan;
   utm?: Partial<Record<UtmKey, string>>;
 }
 
@@ -55,13 +60,14 @@ export interface HandoffState {
   currencyExplicit: boolean;
   vista: Vista;
   area: Area | null;
+  plan: Plan | null;
   utm: Partial<Record<UtmKey, string>>;
   /** `true` when every owned parameter received was valid (or there was none). */
   clean: boolean;
 }
 
-/** The owned parameters in their fixed order: moneda, vista, area, utm_*. */
-function ownedParams(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | 'utm'>): [string, string][] {
+/** The owned parameters in their fixed order: moneda, vista, area, plan, utm_*. */
+function ownedParams(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | 'plan' | 'utm'>): [string, string][] {
   const out: [string, string][] = [];
   const currency = pick(CURRENCIES, input.currency ?? null);
   if (currency) out.push(['moneda', currency]);
@@ -69,6 +75,8 @@ function ownedParams(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | '
   if (vista) out.push(['vista', vista]);
   const area = vista === 'guia' ? pick(AREAS, input.area ?? null) : null;
   if (area) out.push(['area', area]);
+  const plan = pick(PLANS, input.plan ?? null);
+  if (plan) out.push(['plan', plan]);
   for (const key of UTM_KEYS) {
     const value = input.utm?.[key];
     if (value !== undefined && UTM_VALUE.test(value)) out.push([key, value]);
@@ -76,9 +84,9 @@ function ownedParams(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | '
   return out;
 }
 
-const OWNED_KEYS: readonly string[] = ['moneda', 'vista', 'area', ...UTM_KEYS];
+const OWNED_KEYS: readonly string[] = ['moneda', 'vista', 'area', 'plan', ...UTM_KEYS];
 
-function toQuery(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | 'utm'>): string {
+function toQuery(input: Pick<HandoffInput, 'currency' | 'vista' | 'area' | 'plan' | 'utm'>): string {
   const query = new URLSearchParams(ownedParams(input)).toString();
   return query ? `?${query}` : '';
 }
@@ -118,6 +126,10 @@ export function parseHandoff(locale: Locale, search: string): HandoffState {
     clean = false;
   }
 
+  const rawPlan = p.get('plan');
+  const plan = pick(PLANS, rawPlan);
+  if (rawPlan !== null && !plan) clean = false;
+
   const utm: Partial<Record<UtmKey, string>> = {};
   for (const key of UTM_KEYS) {
     const value = p.get(key);
@@ -131,6 +143,7 @@ export function parseHandoff(locale: Locale, search: string): HandoffState {
     currencyExplicit: currency !== null,
     vista: vista ?? 'entrada',
     area,
+    plan,
     utm,
     clean,
   };
@@ -148,6 +161,7 @@ export function cleanSearch(locale: Locale, search: string): string {
     currency: state.currencyExplicit ? state.currency : undefined,
     vista: pick(VISTAS, new URLSearchParams(search).get('vista')) ?? undefined,
     area: state.area ?? undefined,
+    plan: state.plan ?? undefined,
     utm: state.utm,
   })) {
     p.append(key, value);

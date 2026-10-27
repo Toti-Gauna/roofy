@@ -1,0 +1,173 @@
+{
+  "digest": "42b268777840a7001524fe83575e429b5a3326e8f1c01f66eb4223f4b51ea25c",
+  "catalogVersion": "estateos-2026-10-27-v3",
+  "source": "Eclipse-Web docs/v3/estateos/catalogo-estateos.v3.json",
+  "plans": [
+    {
+      "id": "contact",
+      "name": "Contact",
+      "priceUsdMonthly": 30,
+      "priceStatus": "owner_direction",
+      "inherits": null,
+      "capabilityIds": [
+        "web",
+        "crm_core",
+        "guided_chat",
+        "setup_brand"
+      ]
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "priceUsdMonthly": 75,
+      "priceStatus": "owner_direction",
+      "inherits": "contact",
+      "capabilityIds": [
+        "owner_panel",
+        "maps_metrics",
+        "academy_initial",
+        "private_archive",
+        "content_monthly",
+        "local_recreation",
+        "whatsapp_auto"
+      ]
+    },
+    {
+      "id": "escalar",
+      "name": "Escalar",
+      "priceUsdMonthly": 100,
+      "priceStatus": "owner_direction",
+      "inherits": "growth",
+      "capabilityIds": [
+        "team_coordination",
+        "campaigns",
+        "voice_agent",
+        "tour_kit",
+        "contract_drafts"
+      ]
+    },
+    {
+      "id": "hipergrowth",
+      "name": "Hípergrowth",
+      "priceUsdMonthly": 150,
+      "priceStatus": "owner_direction",
+      "inherits": "escalar",
+      "capabilityIds": [
+        "intelligence",
+        "compliance_docs"
+      ]
+    },
+    {
+      "id": "deluxe",
+      "name": "Deluxe",
+      "priceUsdMonthly": 200,
+      "priceStatus": "owner_direction",
+      "inherits": "hipergrowth",
+      "capabilityIds": [
+        "crm_chatbot",
+        "administration"
+      ]
+    },
+    {
+      "id": "partner",
+      "name": "Partner",
+      "priceUsdMonthly": 500,
+      "priceStatus": "proposal",
+      "inherits": "deluxe",
+      "capabilityIds": [
+        "multi_site",
+        "monthly_review"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "web",
+      "fromPlan": "contact"
+    },
+    {
+      "id": "crm_core",
+      "fromPlan": "contact"
+    },
+    {
+      "id": "guided_chat",
+      "fromPlan": "contact"
+    },
+    {
+      "id": "setup_brand",
+      "fromPlan": "contact"
+    },
+    {
+      "id": "owner_panel",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "maps_metrics",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "academy_initial",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "private_archive",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "content_monthly",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "local_recreation",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "whatsapp_auto",
+      "fromPlan": "growth"
+    },
+    {
+      "id": "team_coordination",
+      "fromPlan": "escalar"
+    },
+    {
+      "id": "campaigns",
+      "fromPlan": "escalar"
+    },
+    {
+      "id": "voice_agent",
+      "fromPlan": "escalar"
+    },
+    {
+      "id": "tour_kit",
+      "fromPlan": "escalar"
+    },
+    {
+      "id": "contract_drafts",
+      "fromPlan": "escalar"
+    },
+    {
+      "id": "intelligence",
+      "fromPlan": "hipergrowth"
+    },
+    {
+      "id": "compliance_docs",
+      "fromPlan": "hipergrowth"
+    },
+    {
+      "id": "crm_chatbot",
+      "fromPlan": "deluxe"
+    },
+    {
+      "id": "administration",
+      "fromPlan": "deluxe"
+    },
+    {
+      "id": "multi_site",
+      "fromPlan": "partner"
+    },
+    {
+      "id": "monthly_review",
+      "fromPlan": "partner"
+    }
+  ]
+}

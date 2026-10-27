@@ -4,8 +4,8 @@
 
 Repositorio y subdominio propios de EstateOS (decisión D11 de Ignacio, 26/10/2026):
 `roofy.eclipse-business.com`. «Roofy» es solo el nombre técnico del repo y del subdominio: el visitante ve
-**EstateOS**. Nació en el lote 1.6 de Eclipse v3 como un esqueleto; la experiencia real se construye en los
-lotes 3.5–3.9 (ver `docs/v3/` en Eclipse-Web).
+**EstateOS**. Nació en el lote 1.6 de Eclipse v3 como un esqueleto; desde el lote 3.5 muestra la demo de Lumen en pantalla completa
+(ver `docs/v3/` en Eclipse-Web: biblia, guía de motion y lote 3.1 con las decisiones D28–D36).
 
 Export estático (`output: 'export'`) en el subdominio (`NEXT_PUBLIC_BASE_PATH` vacío). Next 16 App Router +
 TypeScript + Tailwind v4 + next-intl (es / en / pt). **Mismo stack, mismos tokens y mismas reglas que
@@ -33,10 +33,28 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 - **Un solo ámbar sólido por pantalla.**
 - **Sin dependencias nuevas** sin una razón fuerte (el esqueleto usa las mismas que Eclipse-Web, menos GSAP/OGL).
 
+## La experiencia (lote 3.5)
+
+- `components/experience/`: `Experience` (escenario), `Entry` («¿Cómo la querés ver?»: «Ver con guía» / «Ver por mi cuenta»,
+  se ofrece en CADA carga y no se recuerda nada), `PlanMenu` (lente de plan), `VideoPlayer` y `lens.ts`.
+- **D35:** Lumen va a pantalla completa. Barra inferior: plan · «Ver la guía» · sonido · botón del celular (abajo a la derecha).
+  Desde 1280 px el celular se acopla al escritorio y los dos comparten la misma historia; por debajo se ve una vista por vez
+  (en un celular de verdad arranca el celular y el botón muestra el escritorio).
+- **Lente de plan:** `?plan=<id>` o el menú de la barra. Sin plan = demo general (todo abierto). Con plan, las áreas que no
+  incluye aparecen con candado y «Desde <plan> · USD <precio>/mes» + «Ver demo de <plan>». Nombres y precios salen de
+  `content/estateos-plans.json` (copia del catálogo v3 de Eclipse-Web; `tests/plans.test.ts` fija su digest y Eclipse-Web fija el
+  mismo): nunca se escribe un número en un componente. Qué área pide qué capacidad: `components/experience/lens.ts`.
+- `PLAN_DEMO_STATUS` (`lib/plans.ts`) dice la verdad sobre el avance: mientras un plan esté `draft`, el escenario avisa que la
+  demo todavía no muestra todo lo que incluye. Cada lote 3.6–3.8d pasa su plan a `built`.
+- **Videos:** `content/estateos-videos.json` está vacío hasta que se rendericen (V1–V5). El botón «Ver el video» y el
+  reproductor (póster, transcripción en los tres idiomas, nunca autoplay, un medio a la vez) aparecen solo si hay un video para
+  el plan en pantalla.
+- La demo de Lumen es una copia de Eclipse-Web: `docs/procedencia-lumen.md` dice qué cambió.
+
 ## Contrato de enlace con Eclipse-Web
 
 `lib/handoff.ts` + `tests/fixtures/handoff-cases.json` (**el mismo archivo, byte a byte, en Eclipse-Web**).
-Idioma por ruta (`/es/`, `/en/`, `/pt/`), moneda y vista por query (`moneda`, `vista`, `area`, `utm_*`).
+Idioma por ruta (`/es/`, `/en/`, `/pt/`), moneda, vista y plan por query (`moneda`, `vista`, `area`, `plan`, `utm_*`).
 Spec: `docs/contrato-enlace.md`. **Regla:** un cambio al contrato se hace en los dos repos en el mismo ciclo:
 se copia el fixture, se recalcula el `digest` y se actualiza el test de cada lado. Valores fuera de las
 listas permitidas se descartan; nunca se muestra ni se interpola lo recibido.
@@ -45,5 +63,5 @@ listas permitidas se descartan; nunca se muestra ni se interpola lo recibido.
 
 - `noindex` en cada página, `robots.txt` con `Disallow: /` y `X-Robots-Tag` en `.htaccess`. Se quitan solo
   en el lote 3.9 (lanzamiento comercial), con el OK de Ignacio.
-- El panel «Prueba del enlace» de la home (`components/HandoffPanel.tsx`) es técnico y se elimina en el lote 3.5.
+- El panel técnico «Prueba del enlace» se eliminó en el lote 3.5: la home es la demo.
 - No hay formularios, cuentas, pagos ni envío de datos.
