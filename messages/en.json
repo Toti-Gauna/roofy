@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "EstateOS · site in progress",
+    "description": "EstateOS, by Eclipse, for real estate agencies. We are building this site."
+  },
+  "languages": {
+    "label": "Language",
+    "es": "Español",
+    "en": "English",
+    "pt": "Português"
+  },
+  "home": {
+    "name": "EstateOS",
+    "status": "In progress",
+    "lead": "We are building this site. Until it is ready, the real estate demo stays on the Eclipse site.",
+    "back": "Back to Eclipse"
+  },
+  "link": {
+    "title": "Link test",
+    "intro": "This is what this site received from Eclipse. It is a technical test and will be removed.",
+    "language": "Language",
+    "currency": "Currency",
+    "view": "View",
+    "area": "Area",
+    "none": "—",
+    "currencies": {
+      "ARS": "Argentine pesos (ARS)",
+      "BRL": "Brazilian reais (BRL)",
+      "USD": "US dollars (USD)"
+    },
+    "views": {
+      "entrada": "Entrance",
+      "guia": "Guided",
+      "branding": "Branding",
+      "intelligence": "Intelligence",
+      "academy": "Academy"
+    },
+    "areas": {
+      "recepcion": "Front desk",
+      "administracion": "Administration",
+      "ventas": "Sales",
+      "marketing": "Marketing"
+    }
+  },
+  "notFound": {
+    "title": "We could not find that page",
+    "back": "Go to the home page"
+  }
+}

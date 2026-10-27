@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# Executed on Hostinger over SSH; no credentials are passed to this script.
+# Publishes the EstateOS static export into the SUBDOMAIN's folder and nowhere else: it refuses the
+# main site's public_html (that one belongs to the Eclipse-Web deployment).
+set -Eeuo pipefail
+
+action=${1:?Expected publish or rollback}
+target=${2:?Expected the subdomain directory}
+release=${3:?Expected a release identifier}
+[[ "$action" == publish || "$action" == rollback ]] || exit 2
+[[ "$release" =~ ^[0-9]+-[0-9]+-[a-f0-9]{40}$ ]] || exit 2
+# Accepted layouts (Hostinger's default is the first one):
+#   /…/domains/eclipse-business.com/public_html/<subdomain>
+#   /…/domains/<subdomain>.eclipse-business.com/public_html
+re_nested='^/[A-Za-z0-9_./-]+/domains/eclipse-business\.com/public_html/[a-z0-9]([a-z0-9-]*[a-z0-9])?$'
+re_own='^/[A-Za-z0-9_./-]+/domains/[a-z0-9]([a-z0-9-]*[a-z0-9])?\.eclipse-business\.com/public_html$'
+if [[ "$target" =~ ^/.+/domains/eclipse-business\.com/public_html/?$ ]]; then
+  echo 'Refusing the main site directory.' >&2; exit 2
+fi
+[[ "$target" =~ $re_nested || "$target" =~ $re_own ]] || { echo 'Unexpected deployment directory.' >&2; exit 2; }
+[[ "$target" != *..* && "$target" != */./* ]] || exit 2
+[[ -d "$target" && ! -L "$target" ]] || { echo 'The subdomain directory must already exist (create the subdomain in hPanel first).' >&2; exit 2; }
+domain_root="${target%%/public_html*}"
+# Private area next to (not inside) public_html, separate from the main site's .eclipse-deploy.
+base="$domain_root/.eclipse-deploy-estateos"
+stage="$base/staging/$release"
+backup="$base/backups/$release.tar.gz"
+umask 077
+mkdir -p "$base/backups"
+chmod 700 "$base" "$base/backups"
+mkdir "$base/lock" || { echo 'Another deployment is active; inspect the lock before retrying.' >&2; exit 1; }
+trap 'rmdir "$base/lock"' EXIT
+
+restore() {
+  [[ -f "$backup" && -f "$backup.list" && -d "$stage" ]] || return 1
+  # Jailed Hostinger shells may not expose /dev/fd for Bash process substitution.
+  # Use a private on-disk manifest instead.
+  local incoming="$base/backups/$release.incoming"
+  find "$stage" -type f -print0 > "$incoming" || return 1
+  # Remove only files introduced by this release, then restore the complete backup.
+  while IFS= read -r -d '' file; do
+    relative=${file#"$stage/"}
+    if ! grep -Fxq -- "./$relative" "$backup.list"; then
+      rm -f -- "$target/$relative" || return 1
+    fi
+  done < "$incoming"
+  tar --same-permissions -xzf "$backup" -C "$target" || return 1
+  echo "Restored backup for release $release."
+}
+
+if [[ "$action" == rollback ]]; then
+  restore
+  exit
+fi
+
+for file in index.html 404.html .htaccess robots.txt es/index.html en/index.html pt/index.html; do
+  [[ -s "$stage/$file" ]] || { echo 'Incomplete static export.' >&2; exit 1; }
+done
+[[ -d "$stage/_next/static" ]] || { echo 'Incomplete static export.' >&2; exit 1; }
+if [[ -s "$target/.htaccess" ]] && ! grep -Fxq '# EstateOS Hostinger managed static export' "$target/.htaccess"; then
+  echo 'Existing .htaccess needs review before the first deployment; live files were not changed.' >&2
+  exit 1
+fi
+# Do not follow pre-existing symlinks while copying into the public directory.
+[[ -z "$(find "$target" "$stage" -type l -print -quit)" ]] || {
+  echo 'Review symbolic links before deploying.' >&2; exit 1;
+}
+[[ ! -e "$backup" ]] || { echo 'Release already has a backup.' >&2; exit 1; }
+tar -czf "$backup" -C "$target" .
+tar -tzf "$backup" > "$backup.list"
+
+publication_failed() {
+  trap - ERR
+  echo 'Publication failed; restoring the previous files.' >&2
+  if ! restore; then
+    echo 'Automatic restore failed. Use the saved backup before retrying.' >&2
+  fi
+  exit 1
+}
+trap publication_failed ERR
+find "$stage" -type d -exec chmod 755 {} +
+find "$stage" -type f -exec chmod 644 {} +
+# The private backup uses umask 077; public files must stay readable.
+umask 022
+# Assets first; keep old hashed assets so previously opened pages keep working.
+cp -R --preserve=mode "$stage/_next" "$target/"
+cp -R --preserve=mode "$stage/." "$target/"
+trap - ERR
+echo "Published release $release. Backup: $backup"

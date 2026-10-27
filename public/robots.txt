@@ -1,0 +1,3 @@
+# Test publication (lote 1.6): the site is not indexed until the commercial launch gate (lote 3.9).
+User-agent: *
+Disallow: /
