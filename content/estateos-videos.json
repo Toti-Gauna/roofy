@@ -1,5 +1,62 @@
 {
   "version": 1,
-  "note": "Motion-graphics videos of EstateOS (lotes V1–V5). Empty until the first one is rendered and approved: the player and its button appear only for a plan (or the general demo) that has an entry here. `plan: null` is the general demo.",
-  "videos": []
+  "note": "Motion-graphics videos of EstateOS (lotes V1–V5): the player's registry and each video's manifest (guía de motion v1 §6). Written by `node scripts/render-video.mjs --piece=<id> --manifest`; the transcript and approvedAt are kept by hand. `plan: null` is the general demo.",
+  "videos": [
+    {
+      "id": "contact-v1",
+      "plan": "contact",
+      "version": 1,
+      "lang": "es",
+      "durationSec": 36.4,
+      "src": "/videos/contact/contact-v1-es-16x9.mp4",
+      "poster": "/videos/contact/contact-v1-es-16x9.webp",
+      "files": [
+        {
+          "ratio": "16x9",
+          "src": "/videos/contact/contact-v1-es-16x9.mp4",
+          "poster": "/videos/contact/contact-v1-es-16x9.webp",
+          "width": 1920,
+          "height": 1080,
+          "durationSec": 36.4,
+          "fps": 30,
+          "codec": "h264 high",
+          "bytes": 5380105,
+          "sha256": "9656e7323e71319ebf0e6c7857970b572e82bfb570bd6a82e490afbfa1bedbc1",
+          "lufs": -16.1,
+          "truePeak": -1.5
+        },
+        {
+          "ratio": "9x16",
+          "src": "/videos/contact/contact-v1-es-9x16.mp4",
+          "poster": "/videos/contact/contact-v1-es-9x16.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSec": 36.4,
+          "fps": 30,
+          "codec": "h264 high",
+          "bytes": 3054720,
+          "sha256": "f41a6ea25c9e67867e5336bccf10129e78d9e9a3a267528eabd9da85d885d041",
+          "lufs": -16.1,
+          "truePeak": -1.3
+        }
+      ],
+      "subtitles": {
+        "es": "/videos/contact/contact-v1-es.vtt",
+        "en": "/videos/contact/contact-v1-en.vtt",
+        "pt": "/videos/contact/contact-v1-pt.vtt"
+      },
+      "transcript": {
+        "es": "Video de 36 segundos, sin locución; los textos están en pantalla. Jueves 8, 23:40: la oficina de Lumen Propiedades está cerrada y su pantalla de «Hoy» se ilumina. En el celular de Carolina, el chat guiado del sitio le contesta con botones: ella cuenta que va a pagar con crédito hipotecario. En el CRM la consulta aparece completa y, cuando Carolina responde que quiere invertir de USD 150.000 a 200.000, su ficha se completa y su tarjeta pasa de «Nuevo» a «Calificado» en el pipeline. La visita queda en la agenda: viernes 9 a las 18:30 en Olmos 1420. Después, la web y una ficha pasan de la plantilla base a la marca de Lumen. Cierre: Contact, la primera fase del eclipse: web, CRM y chat guiado. Es una demo con datos ficticios.",
+        "en": "A 36-second video with no voice-over; the words are on screen. Thursday 8, 11:40 pm: Lumen Propiedades' office is closed and its «Today» screen lights up. On Carolina's phone, the site's guided chat answers her with buttons: she says she will pay with a mortgage. In the CRM the inquiry arrives complete and, when Carolina answers that she wants to spend USD 150,000 to 200,000, her file fills in and her card moves from «New» to «Qualified» in the pipeline. The visit lands in the agenda: Friday 9 at 6:30 pm at Olmos 1420. Then the website and a listing switch from the base template to Lumen's brand. Close: Contact, the first phase of the eclipse: website, CRM and guided chat. It is a demo with fictional data.",
+        "pt": "Vídeo de 36 segundos, sem locução; os textos estão na tela. Quinta 8, 23:40: o escritório da Lumen Propiedades está fechado e a tela «Hoje» se acende. No celular da Carolina, o chat guiado do site responde com botões: ela conta que vai pagar com financiamento. No CRM a consulta chega completa e, quando Carolina responde que quer investir de USD 150.000 a 200.000, a ficha dela se completa e o card passa de «Novo» para «Qualificado» no pipeline. A visita entra na agenda: sexta 9 às 18:30 em Olmos 1420. Depois, o site e um anúncio passam do modelo base para a marca da Lumen. Encerramento: Contact, a primeira fase do eclipse: site, CRM e chat guiado. É uma demo com dados fictícios."
+      },
+      "sourceType": "render",
+      "license": "Eclipse (render propio: interfaz de la demo, tipografías OFL del sitio, música y efectos sintetizados por el motor del sitio)",
+      "consent": "No aplica: sin personas reales, voces ni material generado",
+      "synthetic": false,
+      "catalogVersion": "estateos-2026-10-27-v3",
+      "sourceHash": "cd884264cc2f57c46c5cf0321414e1981e23461230dbf9cfbb5fd479f74f8417",
+      "approvedAt": null
+    }
+  ]
 }

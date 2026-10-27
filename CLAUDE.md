@@ -46,9 +46,9 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   mismo): nunca se escribe un número en un componente. Qué área pide qué capacidad: `components/experience/lens.ts`.
 - `PLAN_DEMO_STATUS` (`lib/plans.ts`) dice la verdad sobre el avance: mientras un plan esté `draft`, el escenario avisa que la
   demo todavía no muestra todo lo que incluye. Cada lote 3.6–3.8d pasa su plan a `built`.
-- **Videos:** `content/estateos-videos.json` está vacío hasta que se rendericen (V1–V5). El botón «Ver el video» y el
-  reproductor (póster, transcripción en los tres idiomas, nunca autoplay, un medio a la vez) aparecen solo si hay un video para
-  el plan en pantalla.
+- **Videos:** `content/estateos-videos.json` tiene el de Contact (V1); V2–V5 suman los suyos. El botón «Ver el video» y el
+  reproductor (póster, 9:16 en pantallas verticales, sin sonido al empezar, subtítulos y transcripción en los tres idiomas, precio
+  al lado, nunca autoplay, un medio a la vez) aparecen solo si hay un video para el plan en pantalla.
 - La demo de Lumen es una copia de Eclipse-Web: `docs/procedencia-lumen.md` dice qué cambió.
 
 ## Demos por plan
@@ -59,6 +59,18 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 - El chat del sitio es **guiado** (botones, guion fijo) en todas las vistas: ningún plan vende un asistente con IA en el sitio.
   No escribas «IA»/«AI» en los textos de la demo (`tests/contact.test.ts`).
 - Las áreas nuevas de cada plan se mapean a su capacidad en `components/experience/lens.ts` (`TAB_CAPABILITY`, `BEAT_CAPABILITY`).
+
+## Videos (lote V1)
+
+- La fábrica filma la demo real cuadro por cuadro: página de render solo en dev (`app/[locale]/render/page.dev.tsx`), piezas en
+  `components/video/pieces/`, driver `scripts/render-video.mjs` (Playwright con reloj simulado + ffmpeg; sin dependencias
+  nuevas). Guía: `docs/video-factory.md`.
+- Ningún precio ni cupo dentro del video; el sello «Demo · datos ficticios» en cada cuadro; cada pieza filma solo lo que su
+  plan incluye. El precio está en el HTML al lado del reproductor.
+- `content/estateos-videos.json` es el registro y el manifest. Si cambia una pieza, el escenario o los textos `video.*`, hay que
+  volver a renderizar (`tests/videos.test.ts` compara el `sourceHash`) y la aprobación de Ignacio vuelve a `null`.
+- Mientras corre un render no edites `components/video/*` ni `messages/*`: el servidor de desarrollo recarga la página y el
+  render se corta.
 
 ## Interacción premium (lote 3.5b, D34)
 

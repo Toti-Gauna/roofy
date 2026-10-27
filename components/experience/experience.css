@@ -400,6 +400,40 @@
   border-radius: 12px;
   background: var(--void);
 }
+/* A portrait screen gets the 9:16 cut: as tall as the screen allows, centred. */
+.xp-video[data-ratio='9x16'] {
+  width: min(460px, calc(100vw - 2 * var(--xp-gap)));
+}
+.xp-video[data-ratio='9x16'] .xp-video-media {
+  aspect-ratio: 9 / 16;
+  max-height: calc(100dvh - 220px);
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.xp-video-length {
+  margin-left: 0.4em;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+/* The plan and its price, next to the video (never inside it: §9). */
+.xp-video-plan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 12px 4px 0;
+  font-size: 0.875rem;
+}
+.xp-link {
+  min-height: 44px;
+  margin-left: auto;
+  padding: 0 4px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .xp-video-transcript {
   padding: 12px 4px 4px;
   font-size: 0.875rem;

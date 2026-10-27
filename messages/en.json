@@ -1128,7 +1128,14 @@
       "close": "Close",
       "transcript": "Transcript",
       "label": "{plan} video",
-      "general": "EstateOS video"
+      "general": "EstateOS video",
+      "duration": "{seconds} s",
+      "back": "See the {plan} demo",
+      "subtitles": {
+        "es": "Spanish",
+        "en": "English",
+        "pt": "Portuguese"
+      }
     }
   },
   "demoShowcase": {
@@ -1139,5 +1146,19 @@
     "viewsLabel": "{business} demo: choose a view",
     "panHint": "Swipe to see it all",
     "loading": "Loading the {business} demo…"
+  },
+  "video": {
+    "seal": "Demo · fictional data",
+    "brand": "EstateOS",
+    "contact": {
+      "headline": "Office closed.",
+      "shots": {
+        "chat": "Guided chat: it answers with buttons, any time.",
+        "inbox": "The inquiry lands in the CRM, complete.",
+        "pipeline": "Every inquiry has a stage and a next step.",
+        "brand": "Your brand, built in from setup."
+      },
+      "close": "web · CRM · guided chat"
+    }
   }
 }

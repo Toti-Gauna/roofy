@@ -1128,7 +1128,14 @@
       "close": "Fechar",
       "transcript": "Transcrição",
       "label": "Vídeo do {plan}",
-      "general": "Vídeo da EstateOS"
+      "general": "Vídeo da EstateOS",
+      "duration": "{seconds} s",
+      "back": "Ver a demo do {plan}",
+      "subtitles": {
+        "es": "Espanhol",
+        "en": "Inglês",
+        "pt": "Português"
+      }
     }
   },
   "demoShowcase": {
@@ -1139,5 +1146,19 @@
     "viewsLabel": "Demo de {business}: escolha a visualização",
     "panHint": "Deslize para ver tudo",
     "loading": "Carregando a demo de {business}…"
+  },
+  "video": {
+    "seal": "Demo · dados fictícios",
+    "brand": "EstateOS",
+    "contact": {
+      "headline": "Escritório fechado.",
+      "shots": {
+        "chat": "Chat guiado: responde com botões, a qualquer hora.",
+        "inbox": "A consulta chega ao CRM, completa.",
+        "pipeline": "Cada consulta tem etapa e próximo passo.",
+        "brand": "Com a sua marca, desde a implantação."
+      },
+      "close": "site · CRM · chat guiado"
+    }
   }
 }
