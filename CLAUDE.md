@@ -51,6 +51,14 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   el plan en pantalla.
 - La demo de Lumen es una copia de Eclipse-Web: `docs/procedencia-lumen.md` dice qué cambió.
 
+## Interacción premium (lote 3.5b, D34)
+
+Toda demo de EstateOS usa el kit de `components/demos/kit` (`pace.ts`, `pacer.ts`, `interaction.tsx`): el asistente
+piensa («Pensando la respuesta…», 1,2–2,5 s) y escribe de a poco (30–45 caracteres/s, tocar lo muestra entero); las
+acciones son optimistas y se confirman con un aviso con «Deshacer»; éxito con destello una vez; errores simulados con
+la salida a mano; vacíos con la acción; sello «Demostración guionada» / «Llamada simulada». Un solo estado de espera a
+la vez, nada arranca solo, movimiento reducido sin pulso ni escritura. Guía: `docs/kit-interaccion.md`.
+
 ## Contrato de enlace con Eclipse-Web
 
 `lib/handoff.ts` + `tests/fixtures/handoff-cases.json` (**el mismo archivo, byte a byte, en Eclipse-Web**).

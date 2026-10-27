@@ -1,15 +1,19 @@
 'use client';
 
-import { useId, useLayoutEffect, useRef, useState } from 'react';
+import { useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
+import { Play } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
-import { ChatWidget, Readout, Switch, TypingDots, type ChatRun } from '../../kit';
+import { Button, ChatWidget, EmptyState, Readout, Seal, Switch, ThinkingBubble, usePacedChat, WrittenText, type ChatItem, type ChatRun } from '../../kit';
 import { ASKED, BASE_LEADS, CHAT_SLOTS, STORY, listingById } from '../data';
 import { act } from '../story';
 import { useEstate } from '../context';
 import { chatStoryAt, useEstateChats, useStamp } from '../scripts';
 import { Field, LumenMark, SOURCE_ICON, StageTrack, useEstateText, ViewHead } from '../ui';
 import { FollowThread, useFollow } from './Followups';
+
+/** An empty run (the follow-up before it starts). */
+const NO_RUN: ChatRun = { items: [], typing: false, awaiting: null, done: false, at: {}, chosen: {}, manual: false };
 
 /** Hook: the localized 23:40 conversation + a pick handler (as the buyer). */
 export function useInquiry(): { run: ChatRun; pick: (step: string, reply: string) => void } {
@@ -42,6 +46,8 @@ export function LiveChat({ className = '', header = true, announce: announceProp
       avatar={<LumenMark />}
       label={t('chat.label', { business, name: t('people.carolina') })}
       announce={announce}
+      seal={view.botOff ? undefined : <Seal kind="scripted" />}
+      paceKey="inquiry"
       stamp={(at) => stamp(chatStoryAt(at))}
       onPick={pick}
       composer={t('chat.composer')}
@@ -88,38 +94,67 @@ function useAnnotation() {
 /** The conversation as the agency reads it: a timed transcript with what the assistant extracted. */
 function Transcript() {
   const t = useTranslations('demoRealEstate');
-  const { view, reduced } = useEstate();
+  const { view, reduced, store } = useEstate();
   const { run, pick } = useInquiry();
   const follow = useFollow();
   const stamp = useStamp();
   const note = useAnnotation();
   const x = useEstateText();
   const list = useRef<HTMLOListElement>(null);
-  const count = run.items.length + (follow.run?.items.length ?? 0);
-  const typing = run.typing || !!follow.run?.typing;
+  // Same pacing as the buyer's chat (shared by name): Lumi thinks, then writes, in both views at once.
+  const paced = usePacedChat(run, true, 'inquiry');
+  const pacedFollow = usePacedChat(follow.run ?? NO_RUN, !!follow.run, 'follow');
+  const lines = run.items.filter(paced.shows);
+  const followLines = follow.run ? follow.run.items.filter(pacedFollow.shows) : [];
+  const thinking = paced.thinking || (!!follow.run && pacedFollow.thinking);
+  const writing = paced.writing ?? pacedFollow.writing;
+  const busy = paced.busy || pacedFollow.busy || thinking;
+  const count = lines.length + followLines.length;
   // Keep the newest line in view (inside the device, never the page).
   useLayoutEffect(() => {
     const el = list.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: reduced ? 'auto' : 'smooth' });
-  }, [count, typing, reduced]);
-  const awaiting = follow.run?.awaiting ? { ...follow.run.awaiting, pick: follow.pick } : run.awaiting ? { ...run.awaiting, pick } : null;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: reduced || writing ? 'auto' : 'smooth' });
+  }, [count, thinking, writing, reduced]);
+  const awaiting = busy ? null : follow.run?.awaiting ? { ...follow.run.awaiting, pick: follow.pick } : run.awaiting ? { ...run.awaiting, pick } : null;
+  const body = (it: ChatItem, skip: () => void, extra?: ReactNode) =>
+    writing?.id === it.id ? (
+      <WrittenText text={writing.typeable ? it.text : <>{it.text}{it.card ? <div className="re-line-card">{it.card}</div> : null}</>} chars={writing.chars} progress={writing.progress} typeable={writing.typeable} onSkip={skip} />
+    ) : (
+      <>
+        {it.text}
+        {it.card ? <div className="re-line-card">{it.card}</div> : null}
+        {extra}
+      </>
+    );
+  if (!run.items.length && !run.typing) {
+    return (
+      <section className="re-transcript" aria-label={t('inbox.transcript')}>
+        <EmptyState
+          className="re-transcript-empty"
+          title={t('inbox.emptyTitle')}
+          body={t('inbox.emptyBody')}
+          action={
+            <Button icon={Play} onClick={() => store.play?.()}>
+              {t('inbox.emptyAction')}
+            </Button>
+          }
+        />
+      </section>
+    );
+  }
   const who = (from: string) =>
     from === 'user' ? t('people.carolinaFirst') : from === 'bot' ? (view.botOff ? t('inbox.humanLabel', { name: t('people.juliaFirst') }) : t('inbox.botLabel')) : '';
   return (
     <section className="re-transcript" aria-label={t('inbox.transcript')}>
       {/* Scrolls on its own (long conversations): reachable with the keyboard. */}
       <ol ref={list} className="re-lines" tabIndex={0} aria-label={t('inbox.transcript')}>
-        {run.items.map((it) => {
+        {lines.map((it) => {
           const tag = note(it.id);
           return (
             <li key={it.id} className="re-line" data-from={it.from}>
               <span className="re-line-time demo-num">{stamp(chatStoryAt(it.at))}</span>
               <span className="re-line-who">{who(it.from)}</span>
-              <div className="re-line-text">
-                {it.text}
-                {it.card ? <div className="re-line-card">{it.card}</div> : null}
-                {tag ? <p className="re-line-tag">{tag}</p> : null}
-              </div>
+              <div className="re-line-text">{body(it, paced.skip, tag ? <p className="re-line-tag">{tag}</p> : null)}</div>
             </li>
           );
         })}
@@ -131,24 +166,21 @@ function Transcript() {
                 {t('sources.whatsapp')} · {t('buyer.jump', { date: x.day(view.clock.day) })}
               </div>
             </li>
-            {follow.run.items.map((it) => (
+            {followLines.map((it) => (
               <li key={`wa-${it.id}`} className="re-line" data-from={it.from}>
                 <span className="re-line-time demo-num">{stamp(view.followStart! + it.at)}</span>
                 <span className="re-line-who">{who(it.from)}</span>
-                <div className="re-line-text">
-                  {it.text}
-                  {it.card ? <div className="re-line-card">{it.card}</div> : null}
-                </div>
+                <div className="re-line-text">{body(it, pacedFollow.skip)}</div>
               </li>
             ))}
           </>
         ) : null}
-        {typing ? (
+        {thinking ? (
           <li className="re-line" data-from="bot">
             <span className="re-line-time demo-num">{stamp(view.t)}</span>
             <span className="re-line-who">{who('bot')}</span>
             <div className="re-line-text">
-              <TypingDots label={t('chat.subtitle')} />
+              <ThinkingBubble name={who('bot')} />
             </div>
           </li>
         ) : null}
@@ -271,7 +303,7 @@ export function LeadFile({ compact = false }: { compact?: boolean }) {
 /* ------------------------------------------------------------------ */
 export function PhoneInbox() {
   const t = useTranslations('demoRealEstate');
-  const { view, go, loop, focus } = useEstate();
+  const { view, go, loop, focus, store } = useEstate();
   const x = useEstateText();
   const stamp = useStamp();
   // After the visit the conversation continues on WhatsApp (shown on its own unless the visitor picks,
@@ -306,10 +338,17 @@ export function PhoneInbox() {
       {channel === 'wa' && view.follow ? (
         <FollowThread className="re-live-chat" />
       ) : view.t < view.inquiryAt ? (
-        <div className="re-live-empty" data-tour="chat">
-          <p className="re-title demo-display">{t('inbox.emptyTitle')}</p>
-          <p className="re-sub">{t('inbox.emptyBody')}</p>
-        </div>
+        <EmptyState
+          className="re-live-empty"
+          tour="chat"
+          title={t('inbox.emptyTitle')}
+          body={t('inbox.emptyBody')}
+          action={
+            <Button icon={Play} onClick={() => store.play?.()}>
+              {t('inbox.emptyAction')}
+            </Button>
+          }
+        />
       ) : (
         <div className="re-live-chat" data-tour="chat">
           <LiveChat className="h-full" />

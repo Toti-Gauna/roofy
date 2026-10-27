@@ -2,9 +2,9 @@
 
 import type { CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
-import { ActivityFeed, Kanban, Readout, type KanbanCard } from '../../kit';
+import { ActivityFeed, Kanban, Readout, useConfirm, type KanbanCard } from '../../kit';
 import { SOURCES, STAGES, STAGE_TONE, listingById, type Stage } from '../data';
 import { act } from '../story';
 import { useEstate } from '../context';
@@ -111,6 +111,7 @@ export function PipelineBoard({ layout = 'columns', className = '' }: { layout?:
   const t = useTranslations('demoRealEstate');
   const { view, store, active } = useEstate();
   const { play } = useSound();
+  const confirm = useConfirm();
   const cards = usePipelineCards();
   // Carolina (and the visitor's own leads) first in their column.
   const sorted = [...cards].sort((a, b) => Number(b.tone !== 'neutral') - Number(a.tone !== 'neutral'));
@@ -122,8 +123,17 @@ export function PipelineBoard({ layout = 'columns', className = '' }: { layout?:
       layout={layout}
       empty={t('pipeline.empty')}
       onMove={(id, column) => {
+        // Optimistic: the card moves at once; the notice confirms it and can undo it.
+        const prev = store.getSnapshot().state.moved[id];
+        const name = cards.find((c) => c.id === id)?.title;
         store.update(act.moveCard(id, column as Stage));
         if (active) play('select');
+        confirm({
+          text: t('confirm.moved', { name: name ?? '', stage: t(`stages.${column}`) }),
+          icon: Check,
+          silent: true,
+          undo: () => store.update(act.restoreMove(id, prev)),
+        });
       }}
       className={`re-kanban ${className}`}
     />

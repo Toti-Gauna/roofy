@@ -98,6 +98,20 @@
       "moveCard": "Move “{card}”",
       "moveTo": "Move to {column}",
       "moved": "“{card}” moved to {column}."
+    },
+    "pace": {
+      "thinking": "Thinking of an answer…",
+      "thinkingShort": "Thinking…",
+      "thinkingLabel": "{name} is thinking of an answer",
+      "skip": "Show the whole answer",
+      "loading": "Loading the page…"
+    },
+    "seal": {
+      "scripted": "Scripted demo",
+      "simulatedCall": "Simulated call"
+    },
+    "confirm": {
+      "undo": "Undo"
     }
   },
   "demoRealEstate": {
@@ -233,7 +247,8 @@
       "noReply": "No reply",
       "channel": "Conversation channel",
       "emptyTitle": "No one has written yet.",
-      "emptyBody": "Tap “Simulate” above: at 11:40 PM Carolina's inquiry arrives and Lumi takes it."
+      "emptyBody": "At 11:40 PM Carolina's inquiry arrives and Lumi takes it.",
+      "emptyAction": "Simulate the inquiry"
     },
     "lead": {
       "title": "Lead file",
@@ -515,7 +530,11 @@
         "again": "Book another",
         "pickDay": "Pick a day",
         "seeAgenda": "See it in the calendar",
-        "note": "Demo viewing: nothing is sent."
+        "note": "Demo viewing: nothing is sent.",
+        "confirmed": "Visit booked · {slot}",
+        "taken": "{time} is no longer free. Try {alt}.",
+        "takenDay": "{time} was just taken and that day is full. Pick another day.",
+        "bookAlt": "Book {time}"
       },
       "url": "Website address",
       "prevPhoto": "Previous photo",
@@ -590,6 +609,9 @@
         "house": "House with a garden",
         "later": "Not now"
       }
+    },
+    "confirm": {
+      "moved": "{name} moved to {stage}"
     }
   },
   "sound": {

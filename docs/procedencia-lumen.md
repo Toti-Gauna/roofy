@@ -16,12 +16,23 @@ porta a mano mirando esta lista.
 | `components/demos/real-estate/RealEstateDemo.tsx` | Lee `LUMEN` en vez de `verticalById`; aplica la lente de plan: marca con candado las áreas que el plan no incluye y muestra `LockedArea` en su lugar. |
 | `components/demos/kit/AppShell.tsx` | `NavItem.badge` acepta `'lock'` (ícono de candado en el menú). |
 | `components/demos/demo.css` | Regla `.demo-navlock`. |
-| `components/demos/real-estate/real-estate.css` | Estilos `.re-locked*`. |
+| `components/demos/real-estate/real-estate.css` | Estilos `.re-locked*` (3.5); esqueleto de la ficha, estado vacío de la transcripción y lugar para la × del chat (3.5b). |
+| `components/demos/kit.tsx` | Exporta `kit/pace` y `kit/interaction` (3.5b). |
+| `components/demos/kit/ChatWidget.tsx` | Las respuestas piensan y se escriben en tiempo real (`usePacedChat`), las opciones esperan a que la respuesta termine, el sello va junto al estado; `pace` y `paceKey` (3.5b). |
+| `components/demos/real-estate/RealEstateDemo.tsx` | `PaceScopeProvider` (el ritmo de cada conversación se comparte entre vistas) y `ConfirmProvider` + `ConfirmToast` en la capa que está arriba (3.5b). |
+| `components/demos/real-estate/story.ts` | `act.restoreMove` y `act.unbook` para «Deshacer» (3.5b). |
+| `components/demos/real-estate/ui.tsx` | Sin el aviso de historia «Tu visita»: la reserva del visitante la confirma el aviso del kit o la respuesta de Lumi (3.5b). |
+| `components/demos/real-estate/views/Inbox.tsx` | La transcripción comparte el ritmo con el chat del comprador; estado vacío con «Simular la consulta»; sello (3.5b). |
+| `components/demos/real-estate/views/Site.tsx` | Reserva optimista con aviso y «Deshacer», destello, error simulado si el horario se ocupó, esqueleto al abrir una ficha, sello y `paceKey` (3.5b). |
+| `components/demos/real-estate/views/Today.tsx` | Mover una tarjeta: aviso con «Deshacer» (3.5b). |
+| `components/demos/real-estate/views/Followups.tsx` | Sello y `paceKey` (3.5b). |
 
 ## Archivos nuevos (no existen en Eclipse-Web)
 
 - `components/demos/real-estate/lens.tsx`: contexto de la lente (`plan`, `lockedFrom`, `seePlan`); sin proveedor todo está abierto.
 - `components/demos/real-estate/LockedArea.tsx`: «Desde <plan> · USD <precio>/mes» y «Ver demo de <plan>».
+- `components/demos/kit/pace.ts`, `pacer.ts`, `interaction.tsx`, `interaction.css`: el kit de interacción premium (lote 3.5b,
+  D34). Guía de uso: `docs/kit-interaccion.md`.
 
 ## No se copió
 

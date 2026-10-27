@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { CheckCheck, EllipsisVertical, Mic, Phone, SendHorizontal, Video, type LucideIcon } from 'lucide-react';
 import { prefersReducedMotion } from '@/components/motion/useReducedMotion';
-import { TypingDots } from './primitives';
+import { ThinkingBubble, usePacedChat, WrittenText } from './interaction';
 import './chat.css';
 
 /* ------------------------------------------------------------------ */
@@ -160,6 +160,8 @@ export function ChatPeek({
   openLabel,
   side = 'right',
   className = '',
+  pace = true,
+  paceKey,
 }: {
   run: ChatRun;
   title: string;
@@ -170,25 +172,37 @@ export function ChatPeek({
   /** Corner the launcher sits in. */
   side?: 'left' | 'right';
   className?: string;
+  /** Real-time pacing of answers (D34). Default on. */
+  pace?: boolean;
+  /** The conversation's name, to share its pacing with every view of it (see `PaceScopeProvider`). */
+  paceKey?: string;
 }) {
   const t = useTranslations('demoKit.chat');
-  const last = [...run.items].reverse().find((i) => i.from === 'bot');
+  const paced = usePacedChat(run, pace, paceKey);
+  const last = [...run.items].reverse().find((i) => i.from === 'bot' && paced.shows(i));
+  const writing = last && paced.writing?.id === last.id ? paced.writing : null;
   return (
     <div className={`demo-chat-peek ${className}`} data-side={side}>
-      {last || run.typing ? (
+      {last || paced.thinking ? (
         <div className="demo-chat-peek-card">
           <p className="demo-chat-peek-who">{title}</p>
           <div aria-live="polite">
-            {run.typing ? (
-              <TypingDots label={t('typingLabel', { name: title })} />
+            {paced.thinking ? (
+              <ThinkingBubble name={title} />
             ) : last ? (
               <div key={last.id} className="demo-chat-peek-text">
-                {last.text}
-                {last.card ? <div className="demo-msg-card">{last.card}</div> : null}
+                {writing ? (
+                  <WrittenText text={last.text} chars={writing.chars} progress={writing.progress} typeable={writing.typeable} onSkip={paced.skip} />
+                ) : (
+                  <>
+                    {last.text}
+                    {last.card ? <div className="demo-msg-card">{last.card}</div> : null}
+                  </>
+                )}
               </div>
             ) : null}
           </div>
-          {run.awaiting && !run.typing ? (
+          {run.awaiting && !paced.thinking && !paced.busy ? (
             <div className="demo-chat-peek-replies" role="group" aria-label={t('replies')}>
               {run.awaiting.replies.map((r) => (
                 <button key={r.id} type="button" className="demo-chat-chip" onClick={() => onPick?.(run.awaiting!.step, r.id)}>
@@ -235,12 +249,20 @@ export interface ChatWidgetProps {
   replyLayout?: 'buttons' | 'chips';
   /** Extra content after the messages (e.g. a "replay" button). */
   footer?: ReactNode;
+  /** Next to the title: the assistant's seal («Demostración guionada»). */
+  seal?: ReactNode;
+  /** Real-time pacing of answers (D34: thinks, then writes). Default on. */
+  pace?: boolean;
+  /** The conversation's name, to share its pacing with every view of it (see `PaceScopeProvider`). */
+  paceKey?: string;
   className?: string;
 }
 
 /**
- * A scripted conversation (WhatsApp or site chat): typing indicator, quick replies
- * that branch, result cards. Feed it `runChat(...)`.
+ * A scripted conversation (WhatsApp or site chat): quick replies that branch, result cards. Feed it
+ * `runChat(...)`. Answers are paced in real time (D34, `usePacedChat`): the assistant thinks («Pensando la
+ * respuesta…»), then writes at 30–45 characters per second (a tap shows it whole); the quick replies wait
+ * until the answer has landed. `pace={false}` shows the run as it is (previews).
  */
 export function ChatWidget({
   run,
@@ -257,20 +279,31 @@ export function ChatWidget({
   header = true,
   replyLayout,
   footer,
+  seal,
+  pace = true,
+  paceKey,
   className = '',
 }: ChatWidgetProps) {
   const t = useTranslations('demoKit.chat');
+  const tp = useTranslations('demoKit.pace');
   const log = useRef<HTMLDivElement>(null);
   const layout = replyLayout ?? (variant === 'whatsapp' ? 'buttons' : 'chips');
-  const status = run.typing ? t('typing') : (subtitle ?? t('online'));
+  const paced = usePacedChat(run, pace, paceKey);
+  const items = run.items.filter(paced.shows);
+  const status = paced.thinking ? tp('thinkingShort') : paced.writing ? t('typing') : (subtitle ?? t('online'));
   const placeholder = composer === undefined ? t('composer') : composer;
+  // Quick replies wait until the answer before them has landed (one waiting state at a time).
+  const open = !paced.busy && !paced.thinking;
+  const writingId = paced.writing?.id ?? null;
+  const writtenLines = paced.writing ? Math.floor(paced.writing.chars / 24) : 0;
 
-  // Keep the newest message in view (inside the device, never the page).
+  // Keep the newest message in view (inside the device, never the page). While a message is being written
+  // it follows line by line, without smoothing (a smooth scroll per line would lag behind the text).
   useLayoutEffect(() => {
     const el = log.current;
     if (!el) return;
-    el.scrollTo({ top: el.scrollHeight, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-  }, [run.items.length, run.typing, run.awaiting, run.done]);
+    el.scrollTo({ top: el.scrollHeight, behavior: prefersReducedMotion() || writingId ? 'auto' : 'smooth' });
+  }, [items.length, paced.thinking, writingId, writtenLines, run.awaiting, run.done, open]);
 
   const pick = (step: string, reply: string) => onPick?.(step, reply);
 
@@ -281,8 +314,11 @@ export function ChatWidget({
           {avatar ? <span className="demo-chat-avatar">{avatar}</span> : null}
           <span className="min-w-0 flex-1 leading-[1.2]">
             <span className="block truncate text-[0.86em] font-semibold">{title}</span>
-            <span className="demo-chat-status block truncate text-[0.68em]" data-typing={run.typing ? '' : undefined}>
-              {status}
+            <span className="flex min-w-0 items-center gap-[0.5em]">
+              <span className="demo-chat-status block min-w-0 truncate text-[0.68em]" data-typing={paced.thinking || paced.writing ? '' : undefined}>
+                {status}
+              </span>
+              {seal}
             </span>
           </span>
           {variant === 'whatsapp' ? (
@@ -297,7 +333,7 @@ export function ChatWidget({
       {/* Focusable: the log scrolls, and keyboard users must be able to scroll it too. */}
       <div ref={log} role="log" tabIndex={0} aria-live={announce ? 'polite' : 'off'} aria-label={label} className="demo-chat-log">
         {dateLabel ? <p className="demo-chat-date">{dateLabel}</p> : null}
-        {run.items.map((item) => {
+        {items.map((item) => {
           if (item.from === 'note') {
             return (
               <p key={item.id} className="demo-chat-note">
@@ -306,11 +342,26 @@ export function ChatWidget({
             );
           }
           const out = item.from === 'user';
+          const writing = writingId === item.id ? paced.writing : null;
           return (
             <div key={item.id} className="demo-msg-wrap" data-from={item.from}>
-              <div className="demo-msg" data-from={item.from}>
-                {item.text ? <div className="demo-msg-text">{item.text}</div> : null}
-                {item.card ? <div className="demo-msg-card">{item.card}</div> : null}
+              <div className="demo-msg" data-from={item.from} data-writing={writing ? '' : undefined}>
+                {writing ? (
+                  <div className="demo-msg-text">
+                    <WrittenText
+                      text={writing.typeable ? item.text : <>{item.text}{item.card ? <div className="demo-msg-card">{item.card}</div> : null}</>}
+                      chars={writing.chars}
+                      progress={writing.progress}
+                      typeable={writing.typeable}
+                      onSkip={paced.skip}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {item.text ? <div className="demo-msg-text">{item.text}</div> : null}
+                    {item.card ? <div className="demo-msg-card demo-msg-card-in">{item.card}</div> : null}
+                  </>
+                )}
                 {stamp ? (
                   <p className="demo-msg-meta">
                     <span className="demo-num">{stamp(item.at)}</span>
@@ -323,17 +374,17 @@ export function ChatWidget({
                   </p>
                 ) : null}
               </div>
-              {layout === 'buttons' && item.replies ? (
+              {layout === 'buttons' && item.replies && !writing ? (
                 <div className="demo-chat-buttons" role="group" aria-label={t('replies')}>
                   {item.replies.map((r) => {
                     const Icon = r.icon;
-                    const open = run.awaiting?.step === item.step;
+                    const waiting = run.awaiting?.step === item.step;
                     const chosen = item.chosen === r.id;
                     return (
                       <button
                         key={r.id}
                         type="button"
-                        disabled={!open}
+                        disabled={!waiting || !open}
                         aria-pressed={chosen}
                         onClick={() => pick(item.step, r.id)}
                         className="demo-chat-button"
@@ -348,16 +399,16 @@ export function ChatWidget({
             </div>
           );
         })}
-        {run.typing ? (
+        {paced.thinking ? (
           <div className="demo-msg-wrap" data-from="bot">
-            <div className="demo-msg demo-msg-typing" data-from="bot">
-              <TypingDots label={t('typingLabel', { name: title })} />
+            <div className="demo-msg demo-msg-thinking" data-from="bot">
+              <ThinkingBubble name={title} />
             </div>
           </div>
         ) : null}
         {footer}
       </div>
-      {layout === 'chips' && run.awaiting ? (
+      {layout === 'chips' && run.awaiting && open ? (
         <div className="demo-chat-chips" role="group" aria-label={t('replies')}>
           {run.awaiting.replies.map((r) => {
             const Icon = r.icon;

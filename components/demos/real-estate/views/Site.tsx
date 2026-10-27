@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, Bath, CalendarCheck, CalendarDays, Check, ChevronLeft, ChevronRight, MessageCircle, Ruler, Square, X } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
-import { BrowserFrame, Button, ChatPeek, ChatWidget, DemoBadge, PushBanner, SiteSection } from '../../kit';
+import { BrowserFrame, Button, ChatPeek, ChatWidget, DemoBadge, Glint, PushBanner, Seal, SimError, SiteSection, Skeleton, useConfirm, useSimulatedLoad } from '../../kit';
 import { ASKED, CAL_DAYS, LISTINGS, SITE_TIMES, SITE_URL, listingById, listingPath, type ListingId, type Scene, type ZoneId } from '../data';
 import { act, buyerStory, freeSiteSlots, isVisitFree, parseSlotReply } from '../story';
 import { useEstate } from '../context';
@@ -29,7 +29,34 @@ function BookingWidget({ listing, compact, onSeeAgenda }: { listing: ListingId; 
   const [day, setDay] = useState<number | null>(null);
   const [start, setStart] = useState<number | null>(null);
   const [done, setDone] = useState<{ day: number; start: number } | null>(null);
+  // The slot was taken while the visitor was choosing (a simulation booked it): say so and offer the next one.
+  const [taken, setTaken] = useState<{ day: number; start: number; alt: number | null } | null>(null);
+  const confirm = useConfirm();
   const times = day === null ? [] : SITE_TIMES[day].filter((m) => isVisitFree(view, day, m));
+
+  const book = (d: number, m: number) => {
+    if (!isVisitFree(view, d, m)) {
+      const alt = SITE_TIMES[d].find((x2) => x2 > m && isVisitFree(view, d, x2)) ?? SITE_TIMES[d].find((x2) => isVisitFree(view, d, x2)) ?? null;
+      setTaken({ day: d, start: m, alt });
+      if (active) play('error');
+      return;
+    }
+    // Optimistic: the visit is in the agenda at once; the notice confirms it and can undo it.
+    store.update(act.book({ day: d, start: m, listing, advisor: 'marcos', via: 'site' }));
+    if (active) play('success');
+    setTaken(null);
+    setDone({ day: d, start: m });
+    setDay(null);
+    setStart(null);
+    confirm({
+      text: t('confirmed', { slot: x.slot({ day: d, start: m }) }),
+      icon: CalendarCheck,
+      undo: () => {
+        store.update(act.unbook(d, m));
+        setDone(null);
+      },
+    });
+  };
 
   if (done) {
     const bookedDay = done.day;
@@ -37,6 +64,7 @@ function BookingWidget({ listing, compact, onSeeAgenda }: { listing: ListingId; 
       <div className="re-book" data-compact={compact ? '' : undefined} data-state="booked" role="status">
         <span className="re-book-check" aria-hidden>
           <Check strokeWidth={2.2} />
+          <Glint play={`${done.day}-${done.start}`} />
         </span>
         <p className="re-book-title demo-display">{t('booked')}</p>
         <p className="text-[0.74em] leading-[1.45]">{t('bookedBody', { slot: x.slotLong(done), street: listingById(listing).street })}</p>
@@ -55,6 +83,7 @@ function BookingWidget({ listing, compact, onSeeAgenda }: { listing: ListingId; 
   }
   const choose = (fn: () => void) => {
     fn();
+    setTaken(null);
     if (active) play('select');
   };
   return (
@@ -82,17 +111,26 @@ function BookingWidget({ listing, compact, onSeeAgenda }: { listing: ListingId; 
           ))}
         </div>
       </fieldset>
+      {taken ? (
+        <SimError
+          action={
+            taken.alt !== null ? (
+              <Button variant="secondary" icon={CalendarCheck} onClick={() => book(taken.day, taken.alt!)}>
+                {t('bookAlt', { time: x.fmt.time(taken.alt) })}
+              </Button>
+            ) : undefined
+          }
+        >
+          {taken.alt !== null ? t('taken', { time: x.fmt.time(taken.start), alt: x.fmt.time(taken.alt) }) : t('takenDay', { time: x.fmt.time(taken.start) })}
+        </SimError>
+      ) : null}
       <Button
         disabled={day === null || start === null}
         className="re-book-go"
         icon={CalendarCheck}
         onClick={() => {
           if (day === null || start === null) return;
-          store.update(act.book({ day, start, listing, advisor: 'marcos', via: 'site' }));
-          if (active) play('success');
-          setDone({ day, start });
-          setDay(null);
-          setStart(null);
+          book(day, start);
         }}
       >
         {t('confirm')}
@@ -187,6 +225,28 @@ function HomePage({ compact, open }: { compact: boolean; open: (id: ListingId) =
         )}
       </SiteSection>
     </>
+  );
+}
+
+/** The listing page's shape while it "loads" (≤ 600 ms): gallery, title, price, facts, action. */
+function ListingSkeleton({ compact }: { compact: boolean }) {
+  const t = useTranslations('demoKit.pace');
+  return (
+    <div className="re-listing re-listing-skel" data-compact={compact ? '' : undefined}>
+      <Skeleton className="re-skel-photo" label={t('loading')} />
+      <div className="re-skel-body">
+        <Skeleton className="re-skel-line re-skel-line--title" />
+        <Skeleton className="re-skel-line re-skel-line--price" />
+        <span className="re-skel-facts">
+          <Skeleton className="re-skel-chip" />
+          <Skeleton className="re-skel-chip" />
+          <Skeleton className="re-skel-chip" />
+        </span>
+        <Skeleton className="re-skel-line" />
+        <Skeleton className="re-skel-line re-skel-line--short" />
+        <Skeleton className="re-skel-btn" />
+      </div>
+    </div>
   );
 }
 
@@ -297,6 +357,8 @@ function PublicSite({
 }) {
   const t = useTranslations('demoRealEstate');
   const { business } = useEstate();
+  // Opening a listing is a page load: its skeleton (final shape) shows briefly; the home shows at once.
+  const loading = useSimulatedLoad(page.name === 'home' ? 'home' : page.id);
   return (
     <div className="demo-site re-site" data-compact={compact ? '' : undefined}>
       <nav className="demo-site-nav" aria-label={business}>
@@ -315,6 +377,8 @@ function PublicSite({
       </nav>
       {page.name === 'home' ? (
         <HomePage compact={compact} open={(id) => setPage({ name: 'listing', id })} />
+      ) : loading ? (
+        <ListingSkeleton compact={compact} />
       ) : (
         <ListingPage key={page.id} id={page.id} compact={compact} back={() => setPage({ name: 'home' })} onAsk={onAsk} onSeeAgenda={onSeeAgenda} />
       )}
@@ -354,6 +418,8 @@ export function OwnChat({ className = '', announce: announceProp }: { className?
       avatar={<LumenMark />}
       label={t('own.label', { business })}
       announce={announceProp ?? announce}
+      seal={<Seal kind="scripted" />}
+      paceKey="own"
       onPick={pick}
       composer={t('chat.composer')}
       className={`re-chat ${className}`}
@@ -402,6 +468,7 @@ function SiteChatDock() {
         if (active) play('open');
       }}
       openLabel={t('expand')}
+      paceKey="own"
       className="re-peek"
     />
   );

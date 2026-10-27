@@ -21,3 +21,5 @@ export * from './kit/feed';
 export * from './kit/gamification';
 export * from './kit/flip';
 export * from './kit/SimBar';
+export * from './kit/pace';
+export * from './kit/interaction';
