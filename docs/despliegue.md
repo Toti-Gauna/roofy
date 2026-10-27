@@ -18,14 +18,17 @@ de la del sitio de Eclipse.
 
 ## Qué falta para activarla (lo hace Ignacio)
 
-1. **Carpeta del subdominio en hPanel.** Por defecto Hostinger usa `…/domains/eclipse-business.com/public_html/roofy`;
-   confirmar la ruta real. El script acepta esa forma y `…/domains/roofy.eclipse-business.com/public_html`.
-2. **Variables del repositorio** (Settings → Secrets and variables → Actions → Variables):
-   `HOSTINGER_HOST`, `HOSTINGER_PORT`, `HOSTINGER_USER` (los mismos que usa el sitio de Eclipse) y `HOSTINGER_PATH`
-   (la carpeta del paso 1).
-3. **Secrets:** `HOSTINGER_SSH_KEY` y `HOSTINGER_KNOWN_HOSTS` (los mismos valores que en Eclipse-Web).
-4. **Entorno** `hostinger-estateos` (opcional: aprobación manual antes de publicar).
-5. **Activar:** variable `HOSTINGER_DEPLOY_ENABLED = true` y mergear a `main` (o «Run workflow»).
+Ya está configurado en el workflow: el servidor, el puerto y el usuario de Hostinger (los mismos, públicos, que
+usa el sitio de Eclipse) y, como valor por defecto, la carpeta `…/domains/eclipse-business.com/public_html/roofy`
+(donde Hostinger pone un subdominio nuevo). Lo que **no se puede hacer desde el repositorio** y queda de tu lado:
+
+1. **Secrets** (Settings → Secrets and variables → Actions → Secrets): `HOSTINGER_SSH_KEY` y
+   `HOSTINGER_KNOWN_HOSTS`, con los mismos valores que en Eclipse-Web. Los secrets son por repositorio y no se
+   pueden leer ni copiar desde acá.
+2. **La carpeta del subdominio tiene que existir.** Si el subdominio está creado en hPanel con otra carpeta, cargar
+   la variable `HOSTINGER_PATH`. Si la carpeta no existe, la publicación se detiene sin tocar nada.
+3. **Entorno** `hostinger-estateos` (opcional: aprobación manual antes de publicar).
+4. **Activar:** variable `HOSTINGER_DEPLOY_ENABLED = true` y «Run workflow» sobre `main` (o un push a `main`).
 
 ## Qué se probó y qué no
 

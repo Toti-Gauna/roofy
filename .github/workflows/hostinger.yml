@@ -57,12 +57,15 @@ jobs:
       name: hostinger-estateos
       url: https://roofy.eclipse-business.com
     env:
-      # Same server and user as the Eclipse site; the PATH is the SUBDOMAIN's folder, never the
-      # main site's public_html (the publish script refuses that one).
-      HOSTINGER_HOST: ${{ vars.HOSTINGER_HOST }}
-      HOSTINGER_PORT: ${{ vars.HOSTINGER_PORT }}
-      HOSTINGER_USER: ${{ vars.HOSTINGER_USER }}
-      HOSTINGER_PATH: ${{ vars.HOSTINGER_PATH }}
+      # Same server and user as the Eclipse site (public values, also in Eclipse-Web's workflow);
+      # a repository variable of the same name overrides each default. The PATH is the SUBDOMAIN's
+      # folder, never the main site's public_html (the publish script refuses that one). Hostinger
+      # puts a new subdomain in public_html/<name> by default; the script also refuses a folder that
+      # does not exist, so a wrong guess fails without touching anything.
+      HOSTINGER_HOST: ${{ vars.HOSTINGER_HOST || '185.239.210.183' }}
+      HOSTINGER_PORT: ${{ vars.HOSTINGER_PORT || '65002' }}
+      HOSTINGER_USER: ${{ vars.HOSTINGER_USER || 'u902414219' }}
+      HOSTINGER_PATH: ${{ vars.HOSTINGER_PATH || '/home/u902414219/domains/eclipse-business.com/public_html/roofy' }}
       RELEASE: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
