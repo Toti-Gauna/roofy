@@ -1,12 +1,11 @@
 import './shim';
 import './audio.js';
-import './recipes-music.js';
-import type { KineticD } from './shim';
+import { renderScore, type Note } from '../score/orquesta';
 
 /**
- * Kinetic Studio's sound on a trailer's GSAP timeline: `sfx` places a voice at a time (a zero-length callback,
- * as Kinetic's `D.sfx`), `score` places the whole music, and `renderAudio` plays every callback into an
- * OfflineAudioContext (seeded: same mix every run) and returns a 16-bit stereo WAV in base64.
+ * Kinetic Studio's sound on a trailer's GSAP timeline: `sfx` places an interface sound at a time (a zero-length
+ * callback, as Kinetic's `D.sfx`). `renderAudio` plays every callback into an OfflineAudioContext (seeded), mixes it
+ * under the film's music (../score: the orchestra) and returns a 16-bit stereo WAV in base64.
  */
 export type Sfx = (name: string, at: number, ...args: unknown[]) => void;
 
@@ -14,11 +13,6 @@ export function sfxOn(tl: gsap.core.Timeline): Sfx {
   return (name, at, ...args) => {
     tl.call(() => window.SFX?.play(tl.time() - at, name, args), undefined, at);
   };
-}
-
-export function score(tl: gsap.core.Timeline, music: unknown) {
-  const D: KineticD = { tl, sfx: sfxOn(tl) };
-  window.Trailer?.plugins.forEach((p) => p.done?.(D, { music }));
 }
 
 /** Every zero-length callback of the timeline with its absolute time, in order (Kinetic's `callbacks()`). */
@@ -71,8 +65,24 @@ function wavBase64(buffer: AudioBuffer): string {
   return btoa(out);
 }
 
-export async function renderAudio(tl: gsap.core.Timeline, seed = 1): Promise<string> {
+/** Which part of the mix to render: all of it, or one stem (to measure the balance). */
+export type Stem = 'mix' | 'music' | 'sfx';
+
+/** The interface sounds sit under the music: they punctuate, the music carries. */
+const SFX_LEVEL = 2.5;
+
+export async function renderAudio(tl: gsap.core.Timeline, music: readonly Note[], stem: Stem = 'mix', seed = 1): Promise<string> {
   if (!window.SFX) throw new Error('Kinetic audio not loaded');
-  const buffer = await window.SFX.render(tl.duration(), callbacks(tl), { sampleRate: 48_000, seed });
-  return wavBase64(buffer);
+  const dur = tl.duration();
+  const sr = 48_000;
+  const fx = stem === 'music' ? null : await window.SFX.render(dur, callbacks(tl), { sampleRate: sr, seed });
+  const mu = stem === 'sfx' ? null : await renderScore(music, dur, { sampleRate: sr });
+  const out = new AudioBuffer({ numberOfChannels: 2, length: Math.ceil(dur * sr), sampleRate: sr });
+  for (let c = 0; c < 2; c++) {
+    const d = out.getChannelData(c);
+    const a = mu?.getChannelData(c);
+    const b = fx?.getChannelData(Math.min(c, fx.numberOfChannels - 1));
+    for (let i = 0; i < d.length; i++) d[i] = (a?.[i] ?? 0) + SFX_LEVEL * (b?.[i] ?? 0);
+  }
+  return wavBase64(out);
 }

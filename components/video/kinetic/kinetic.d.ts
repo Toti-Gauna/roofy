@@ -1,3 +1,2 @@
-/* The vendored Kinetic scripts are side-effect modules (they install window.SFX and Trailer.music). */
+/* The vendored Kinetic engine is a side-effect module (it installs window.SFX). */
 declare module '*/kinetic/audio.js';
-declare module '*/kinetic/recipes-music.js';

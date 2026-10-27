@@ -20,10 +20,10 @@
           "durationSec": 56,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 5894752,
-          "sha256": "7b7ae72b173c7992c183176cff4be5aa805394fd45fcb13a9a782378b405236f",
-          "lufs": -16.1,
-          "truePeak": -1.5
+          "bytes": 5886094,
+          "sha256": "8339c8b1f678686242b0a3b735da1f287bbbc9e56798d99dd3ffd3ffb33876ec",
+          "lufs": -16,
+          "truePeak": -1.3
         },
         {
           "ratio": "9x16",
@@ -34,10 +34,10 @@
           "durationSec": 56,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 2936587,
-          "sha256": "2cdbca3f907346d5dd4bafbca54875c338e6df565987a6e40ec0984d0c167b50",
-          "lufs": -16.1,
-          "truePeak": -1.5
+          "bytes": 2929784,
+          "sha256": "777be32886757cd8dda8dcb099262da67f43cebe533b7a3deb6d82abe1fd0134",
+          "lufs": -16,
+          "truePeak": -1.2
         }
       ],
       "subtitles": {
@@ -55,7 +55,7 @@
       "consent": "No aplica: sin personas reales, voces ni material generado",
       "synthetic": false,
       "catalogVersion": "estateos-2026-10-27-v3",
-      "sourceHash": "f9cff27a72099a3b42a406f0213f01c3f15df4f1c30f013ddceaf53fed57a452",
+      "sourceHash": "6423f207b77ce691606db721ac0f5e9a1a1e4046c91a0357a79db8bffd0c5906",
       "approvedAt": null
     }
   ]

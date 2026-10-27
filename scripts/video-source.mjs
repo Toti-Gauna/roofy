@@ -19,7 +19,8 @@ export const STAGE_FILES = [
   'components/video/kinetic/score.ts',
   'components/video/kinetic/shim.ts',
   'components/video/kinetic/audio.js',
-  'components/video/kinetic/recipes-music.js',
+  'components/video/score/orquesta.ts',
+  'components/video/score/arreglo.ts',
   'components/demos/real-estate/data.ts',
 ];
 

@@ -1,14 +1,17 @@
 # Procedencia: motor de sonido de Kinetic Studio
 
-`audio.js` y `recipes-music.js` son copias **byte a byte** de `Toti-Gauna/kinetic-studio` en `30f1280`
-(`trailers/handy-anuncio/js/`, iguales a las de `trailers/handy-vertical/js/`). Son el sintetizador (voces, mezcla,
-render sin conexión con semilla) y los estilos de música a tempo de los tráileres de Handy.
+`audio.js` es copia **byte a byte** de `Toti-Gauna/kinetic-studio` en `30f1280` (`trailers/handy-anuncio/js/`, igual
+a la de `trailers/handy-vertical/js/`): el sintetizador de los sonidos de interfaz (barridos, toques, campanitas) con
+render sin conexión y semilla.
 
 | Archivo | sha256 |
 |---|---|
 | `audio.js` | `87c2d4fac4e6b8643e879b999cce5b969fdfe465d2243cb82096e109c8475da2` |
-| `recipes-music.js` | `25bae929e96976a3fed35241b49472cf2f2feb988026f6cb6262dc593edd395b` |
+
+La música ya no sale de Kinetic (`recipes-music.js` se quitó el 27/10/2026): Ignacio la escuchó sin alma (percusión y
+campanitas, sin melodía en los versos). La toca la orquesta propia de `../score/` (piano eléctrico, cuerdas, voz
+solista, bajo, arpegio, glockenspiel, batería), con una partitura por película.
 
 No se editan acá: si hay que cambiar algo, se cambia en Kinetic Studio y se vuelve a copiar (con su hash nuevo).
-`shim.ts` instala lo único del motor de Kinetic que estos dos archivos necesitan (`Trailer.plugin`) y `score.ts`
-programa la partitura en la línea de tiempo GSAP del tráiler y la renderiza sin conexión.
+`shim.ts` declara lo que el motor instala (`window.SFX`); `score.ts` pone los sonidos en la línea de tiempo GSAP y
+mezcla su render con el de la música.

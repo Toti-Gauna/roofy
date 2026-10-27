@@ -31,8 +31,6 @@ import {
 } from '../../ui/estate';
 import type { FilmCtx, Layout } from '../../film';
 import { box, center, fingerOut, flash, golpe, head, lupa, span, tag, tap } from '../../moves';
-import { score } from '../../kinetic/score';
-import { PARTITURA } from './partitura';
 import { CONTACT_DURATION, HEADS, HEAD_TIMES } from './script';
 import type { Ratio } from '../../timeline';
 
@@ -481,7 +479,6 @@ export function buildContact(c: FilmCtx) {
   flash(c, 52, 0.9);
   mark(c, '#final', 52, true);
 
-  score(tl, PARTITURA);
   tl.set({}, {}, CONTACT_DURATION);
 }
 

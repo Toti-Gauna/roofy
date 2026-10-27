@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { SUB, checkCues, minHold, toVtt, wrapCue, type Cue } from '@/components/video/timeline';
 import { CONTACT_DURATION, COVERS, GOLPES, HEADS, HEAD_TIMES, contactTexts } from '@/components/video/films/contact/script';
 import { PARTITURA } from '@/components/video/films/contact/partitura';
+import { arrange } from '@/components/video/score/arreglo';
 import { lockedFromFor } from '@/components/experience/lens';
 import type { EstateTab } from '@/components/demos/real-estate/data';
 
@@ -64,21 +65,39 @@ describe('P1 · Contact (lote V1, the Kinetic way: guía de motion §0)', () => 
     expect(Object.keys(COVERS)).toEqual(['web', 'chat', 'crm', 'setup']);
   });
 
-  it('keeps the tempo: 120 BPM, chapters and slams on the beat, the score covering the whole film', () => {
-    const bar = (60 / PARTITURA.bpm) * 4;
+  it('keeps the tempo: 120 BPM, sections on the bar, word slams and headlines on the beat', () => {
+    const beat = 60 / PARTITURA.bpm;
+    const bar = beat * 4;
     expect(PARTITURA.bpm).toBe(120);
-    const spans = PARTITURA.parts.filter((p) => 'to' in p && p.to !== undefined) as { from: number; to: number }[];
-    for (const p of PARTITURA.parts) expect(p.from % bar, `part at ${p.from}`).toBe(0);
-    // The spans tile 0 → the end with no gap and no overlap.
+    // The sections tile 0 → the end on bar lines, one chord per bar.
     let t = 0;
-    for (const p of [...spans].sort((a, b) => a.from - b.from)) {
-      expect(p.from, `gap or overlap at ${t}`).toBe(t);
-      t = p.to;
+    for (const sec of PARTITURA.sections) {
+      expect(sec.from, `gap or overlap at ${t}`).toBe(t);
+      expect(sec.from % bar, `${sec.style} at ${sec.from}`).toBe(0);
+      expect(sec.chords.length, `${sec.style} at ${sec.from}: one chord per bar`).toBe((sec.to - sec.from) / bar);
+      t = sec.to;
     }
     expect(t).toBe(CONTACT_DURATION);
-    const beat = 60 / PARTITURA.bpm;
     for (const g of GOLPES) for (const w of g.words) expect(w.at % beat, `${g.scene}/${w.id}`).toBe(0);
     for (const h of HEADS) expect(HEAD_TIMES[h][0] % beat, h).toBeLessThanOrEqual(0.12);
+  });
+
+  it('is music, not effects: a melody wherever the picture tells, a hit on every word slam, silence at the end', () => {
+    const notes = arrange(PARTITURA);
+    // Every section with images (not the open, not the builds) sings: the lead or the piano carries a line.
+    for (const sec of PARTITURA.sections.filter((x) => !['gancho', 'subida'].includes(x.style))) {
+      const sung = notes.filter((n) => (n.inst === 'lead' || n.inst === 'keys') && n.t >= sec.from && n.t < sec.to && n.midi! >= 72);
+      expect(sung.length, `${sec.style} at ${sec.from} has no melody`).toBeGreaterThan(3);
+    }
+    // Strings and bass hold the harmony under every second of the film but the last half second.
+    for (let s = 0; s < CONTACT_DURATION - 1; s++) {
+      expect(notes.some((n) => n.inst === 'strings' && n.t <= s + 0.01 && n.t + n.dur >= s + 0.5), `no strings at ${s} s`).toBe(true);
+    }
+    // Each word slam lands on a kick.
+    for (const g of GOLPES) for (const w of g.words) expect(notes.some((n) => n.inst === 'kick' && Math.abs(n.t - w.at) < 1e-6), `${g.scene}/${w.id} at ${w.at} s`).toBe(true);
+    // Nothing starts in the last half second; the held notes end before the last frame.
+    expect(notes.filter((n) => n.t > CONTACT_DURATION - 0.5)).toEqual([]);
+    for (const n of notes.filter((x) => ['strings', 'bass', 'lead'].includes(x.inst))) expect(n.t + n.dur, `${n.inst} at ${n.t}`).toBeLessThanOrEqual(CONTACT_DURATION - 0.3);
   });
 
   it('shows no plan price, quota or AI inside the video (the price lives next to the player)', () => {

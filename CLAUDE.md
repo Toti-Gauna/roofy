@@ -64,9 +64,11 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 
 - **Método Kinetic Studio (guía de motion §0, corrección de Ignacio del 27/10/2026):** nada se filma. Los componentes se
   reconstruyen para el video (`components/video/ui/`), la película es una línea de tiempo GSAP en pausa movida por `seek`
-  (`components/video/films/<plan>/`: `STORYBOARD.md`, `script.ts`, coreografía, `partitura.ts` a 120 BPM) y el sonido es el
-  motor de Kinetic (`components/video/kinetic/`). Escenario solo en dev (`app/[locale]/trailer/page.dev.tsx`), driver
-  `scripts/render-video.mjs`. Guía: `docs/video-factory.md`.
+  (`components/video/films/<plan>/`: `STORYBOARD.md`, `script.ts`, coreografía, `partitura.ts` a 120 BPM). Escenario solo
+  en dev (`app/[locale]/trailer/page.dev.tsx`), driver `scripts/render-video.mjs`. Guía: `docs/video-factory.md`.
+- **La música tiene que tener alma** (Ignacio, 27/10/2026): una composición con melodía, armonía y bajo, tocada por la
+  orquesta propia (`components/video/score/`); el motor de Kinetic (`components/video/kinetic/`) queda para los sonidos
+  de interfaz, por debajo de la música. Percusión y campanitas sin melodía no es música.
 - **Cada video explica TODO lo que su plan entrega**, un capítulo por entrega (Contact: web, chat guiado, CRM módulo por módulo,
   puesta en marcha con la marca) y nada de lo que no incluye: WhatsApp automático va en el video de Growth y la voz en el de
   Escalar. `tests/video.test.ts` lo comprueba contra la lente (`lockedFromFor`).

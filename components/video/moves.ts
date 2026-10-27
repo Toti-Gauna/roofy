@@ -37,12 +37,11 @@ export function golpe(c: FilmCtx, scene: string, slams: Slam[], { exit, end }: {
     tl.set(word, { scale: s.from === 'none' ? 1.08 : 1.4, autoAlpha: s.from === 'none' ? 1 : 0 }, 0);
     if (s.from !== 'none') {
       tl.to(panel, { xPercent: 0, yPercent: 0, duration: sweep, ease: 'power3.out' }, s.at - sweep);
-      sfx('whoosh', s.at - sweep, 0.35, 0.18);
+      sfx('whoosh', s.at - sweep, 0.35, 0.12);
     }
     tl.to(word, { autoAlpha: 1, duration: 0.08 }, s.at).to(word, { scale: 1, duration: 0.42, ease: 'expo.out' }, s.at);
     tl.to(word, { scale: 1.035, duration: 0.07, ease: 'power2.out' }, s.at + 0.5).to(word, { scale: 1, duration: 0.25, ease: 'power2.out' }, s.at + 0.57);
-    sfx('clap', s.at, 0.32);
-    if (i === 0) sfx('boom', s.at, 0.5);
+    // The hit itself is the music's (score/arreglo: every slam falls on a beat with a kick and a stab).
     // The word before a lower-half panel moves to the top half, so both read together.
     if (s.half && i > 0) {
       const prev = c.one(`${scene} ${slams[i - 1].panel} .tr-word`);

@@ -23,9 +23,16 @@ pobre como presentación, y no explicaba todo lo que el cliente recibe. Este cor
   dedo que toca, el destello, el borde que pasa.
 - **Storyboard antes de animar.** `films/<plan>/STORYBOARD.md`: un capítulo por cosa que el plan entrega, en el orden en
   que el cliente la usa, y nada de lo que el plan no incluye.
-- **Partitura a tempo.** 120 BPM (un compás = 2 s): cortes y golpes caen en el tiempo. La música y los efectos son el
-  motor de Kinetic (`components/video/kinetic/audio.js` y `recipes-music.js`, copias byte a byte con su procedencia en
-  `PROCEDENCIA.md`), mezclados sin conexión con semilla fija.
+- **Partitura a tempo, con alma.** 120 BPM (un compás = 2 s): cortes y golpes caen en el tiempo.
+  - La música es una composición por película: melodía, armonía, bajo y batería.
+  - La toca una orquesta propia (`components/video/score/orquesta.ts`): piano eléctrico, cuerdas, voz solista, bajo,
+    arpegio, glockenspiel y batería, con sala y eco.
+  - El arreglador (`score/arreglo.ts`) convierte cada sección (estilo, acordes, melodía) en notas.
+  - Los sonidos de interfaz son el motor de Kinetic (`kinetic/audio.js`, copia byte a byte, `PROCEDENCIA.md`), ≈ 9 dB
+    por debajo de la música.
+  - Todo se mezcla sin conexión, con semilla.
+  - El primer intento con los estilos de música de Kinetic sonaba a percusión y campanitas sin melodía: Ignacio lo
+    rechazó («no tiene alma»).
 - **Sin dependencias nuevas:** GSAP ya estaba en el stack; Chromium y Playwright preinstalados; `ffmpeg` y `ffprobe`.
 
 ## Archivos
@@ -37,7 +44,8 @@ pobre como presentación, y no explicaba todo lo que el cliente recibe. Este cor
 | `components/video/film.ts` | Los dos encuadres (16:9 y 9:16): dónde van etiqueta, titular, dispositivos y lupa |
 | `components/video/moves.ts` | Los movimientos del método |
 | `components/video/ui/` | Dispositivos, piezas de EstateOS reconstruidas y su CSS |
-| `components/video/kinetic/` | El motor de sonido de Kinetic y su adaptación (`score.ts`) |
+| `components/video/score/` | La orquesta (instrumentos, sala, mezcla) y el arreglador (secciones → notas) |
+| `components/video/kinetic/` | Los sonidos de interfaz de Kinetic y la mezcla final con la música (`score.ts`) |
 | `components/video/films/contact/` | P1: `STORYBOARD.md`, `script.ts` (tiempos y palabras), `ContactFilm.tsx` (coreografía), `partitura.ts` |
 | `components/video/timeline.ts` | Reglas de lectura y de subtítulos, WebVTT, formatos (puro, con pruebas) |
 | `scripts/render-video.mjs` | El driver: cuadros → H.264, audio → −16 LUFS, poster, subtítulos, manifest, `--stills` |
@@ -71,7 +79,8 @@ ventanas vacías entre módulos del CRM (ahora el corte es en el tiempo), el ded
 
 ## Reglas que la fábrica hace cumplir
 
-- `tests/video.test.ts`: cada titular se sostiene lo necesario (1,2 s por línea de ≤ 6 palabras, ≤ 2,2 palabras/s) en
+- `tests/video.test.ts`: la música es música (cada sección con imágenes tiene melodía, hay armonía debajo de
+  cada segundo, cada golpe de palabra cae en un bombo, silencio en el último medio segundo); cada titular se sostiene lo necesario (1,2 s por línea de ≤ 6 palabras, ≤ 2,2 palabras/s) en
   los tres idiomas; los subtítulos entran en 2 líneas de ≤ 42 caracteres a ≤ 15 car/s; **la película muestra cada área que
   Contact abre y ninguna que no incluye** (contra `lockedFromFor` de la lente); la partitura cubre la película a 120 BPM
   y golpes y titulares caen en el tiempo; ningún texto del video tiene precios del plan ni «IA».

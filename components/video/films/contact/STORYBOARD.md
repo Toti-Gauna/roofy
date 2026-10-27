@@ -60,24 +60,33 @@ en marcha → Contact, el producto base completo*.
 | 48–52 | golpe `resumen` | Una palabra por segundo: «Tu web.» · «Tu CRM.» · «Chat guiado.» · «Tu marca.» | |
 | 52–56 | `final` | Destello. Noche: glifo 1/6, «EstateOS», «Contact», «Producto base completo». Desde 55 todo queda quieto (el poster) | |
 
-## Música (120 BPM)
+## Música (120 BPM) — partitura propia, con alma
 
-| tiempo | parte | |
+Primer intento: los estilos de Kinetic. Ignacio lo escuchó «sin música, sin alma»: había percusión y campanitas, pero los
+versos no tenían melodía y el colchón estaba casi mudo.
+
+Ahora toca la orquesta propia (`components/video/score/`): piano eléctrico, cuerdas, una voz solista, bajo, arpegio,
+glockenspiel y batería. El motor de Kinetic queda solo para los sonidos de interfaz.
+
+- **Tonalidad y armonía:** Re mayor, la progresión de canción D – A – Bm – G (I – V – vi – IV). El arranque va en Bm – G
+  (el problema) y la puesta en marcha sube a Bm – G – D – A.
+- **El gancho es el motivo de la marca:** seis notas, una por fase del eclipse (Re Mi Fa# La Si Re), que suben a la octava
+  y contestan bajando.
+  - En la revelación de la marca lo toca el piano, una vez.
+  - En el estribillo del CRM lo canta la voz, doblada por el glockenspiel.
+  - En el cierre firma con él.
+
+| tiempo | parte | qué suena |
 |---|---|---|
-| 0 | golpe (Bm) | el tráiler arranca pegando |
-| 0–4 | latido (Bm – G) | el problema |
-| 4 | golpe (D) | la marca |
-| 4–6 | coro (D) con el motivo | |
-| 6–18 | verso (D – A – Bm – G), con respuesta | la web y el chat |
-| 18–20 | subida (A) | «Y del otro lado, tu CRM.» |
-| 20 | golpe (D) · DROP | |
-| 20–34 | coro (D – A – Bm – G) | el CRM |
-| 34–36 | subida (A) | «Y lo ponemos en marcha.» |
-| 36 | golpe (D) | |
-| 36–48 | verso lleno | la marca |
-| 48–52 | quiebre (G) con el motivo | el resumen |
-| 52 | golpe (D) | |
-| 52–54 | coro lleno (D) | |
-| 54–56 | final (D) con la firma | nada suena después de 56 |
+| 0–4 | gancho (Bm – G) | Un acorde grave, bombo y sub en cada palabra; las cuerdas crecen debajo; un riser y un platillo al revés llevan a la marca |
+| 4–6 | marca (D) | Impacto y platillo; el acorde se abre en las cuerdas; el piano toca el motivo |
+| 6–18 | verso (D A Bm G D A) | El piano acompaña en síncopa, bajo sostenido, batería liviana (bombo, palmas suaves, shaker); la voz canta la melodía del verso |
+| 18–20 | subida (A) | Redoble que se acelera, riser, bajo en pedal; la última semicorchea queda en silencio |
+| 20–34 | estribillo (D A Bm G D A G) | Bombo en negras con bombeo, palmas, hats, bajo en corcheas, arpegio; la voz canta el gancho con el glockenspiel; el último compás sube |
+| 34–36 | subida (A) | Igual que la anterior, hacia la puesta en marcha |
+| 36–48 | verso alto (Bm G D A Bm G) | Batería más llena, piano en corcheas, las cuerdas doblan la melodía (más aguda) |
+| 48–52 | quiebre (G – A) | Sin batería: en cada palabra, un bombo, un sub y el acorde en el piano; el piano canta una nota por palabra y sube a la sensible; platillo al revés hacia el final |
+| 52–56 | final (D) | Impacto, el acorde completo sostenido, la firma de seis notas en la voz y el glockenspiel; todo calla antes del último cuadro |
 
-Efectos: un barrido por panel, una palmada por palabra, un toque por dedo, una campanita por tarjeta que sale.
+Efectos de interfaz, ≈ 9 dB por debajo de la música: un barrido por panel, un toque por dedo, una campanita (en la tonalidad)
+por tarjeta que sale. Los golpes de palabra ya no llevan palma propia: el golpe lo da la música.

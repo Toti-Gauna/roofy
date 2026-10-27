@@ -4,7 +4,9 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useTranslations } from 'next-intl';
 import { planInfo } from '@/lib/plans';
-import { renderAudio, sfxOn } from './kinetic/score';
+import { renderAudio, sfxOn, type Stem } from './kinetic/score';
+import { arrange } from './score/arreglo';
+import { PARTITURA } from './films/contact/partitura';
 import { LAYOUTS, type FilmCtx } from './film';
 import { ContactFilm, buildContact } from './films/contact/ContactFilm';
 import { CONTACT_DURATION, contactTexts } from './films/contact/script';
@@ -18,8 +20,8 @@ export interface TrailerApi {
   height: number;
   /** Shows the frame at `t` seconds (events suppressed: no sound while scrubbing). */
   seek(t: number): void;
-  /** The whole score, mixed offline by Kinetic's engine: 16-bit stereo WAV in base64. */
-  renderAudio(): Promise<string>;
+  /** The music (the orchestra) and the interface sounds (Kinetic's engine), mixed offline: 16-bit stereo WAV in base64. */
+  renderAudio(stem?: Stem): Promise<string>;
   /** The on-screen words as WebVTT in this page's language, and the rules they break. */
   subtitles(): { vtt: string; problems: string[] };
 }
@@ -66,7 +68,7 @@ export function FilmStage({ film, ratio }: { film: 'contact'; ratio: Ratio }) {
       seek: (t) => {
         tl.seek(Math.min(t, tl.duration()), true);
       },
-      renderAudio: () => renderAudio(tl),
+      renderAudio: (stem) => renderAudio(tl, arrange(PARTITURA), stem),
       subtitles: () => {
         const cues = texts().map((x) => ({ start: x.at * 1000, end: x.end * 1000, text: x.text }));
         return { vtt: toVtt(cues), problems: checkCues(cues) };
