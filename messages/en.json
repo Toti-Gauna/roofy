@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "EstateOS · site in progress",
-    "description": "EstateOS, by Eclipse, for real estate agencies. We are building this site."
+    "title": "EstateOS · real estate demo",
+    "description": "EstateOS, by Eclipse, for real estate agencies. Try the Lumen Propiedades demo with fictional data."
   },
   "languages": {
     "label": "Language",
@@ -11,39 +11,734 @@
   },
   "home": {
     "name": "EstateOS",
-    "status": "In progress",
-    "lead": "We are building this site. Until it is ready, the real estate demo stays on the Eclipse site.",
     "back": "Back to Eclipse"
-  },
-  "link": {
-    "title": "Link test",
-    "intro": "This is what this site received from Eclipse. It is a technical test and will be removed.",
-    "language": "Language",
-    "currency": "Currency",
-    "view": "View",
-    "area": "Area",
-    "none": "—",
-    "currencies": {
-      "ARS": "Argentine pesos (ARS)",
-      "BRL": "Brazilian reais (BRL)",
-      "USD": "US dollars (USD)"
-    },
-    "views": {
-      "entrada": "Entrance",
-      "guia": "Guided",
-      "branding": "Branding",
-      "intelligence": "Intelligence",
-      "academy": "Academy"
-    },
-    "areas": {
-      "recepcion": "Front desk",
-      "administracion": "Administration",
-      "ventas": "Sales",
-      "marketing": "Marketing"
-    }
   },
   "notFound": {
     "title": "We could not find that page",
     "back": "Go to the home page"
+  },
+  "demoKit": {
+    "shell": {
+      "collapse": "Collapse menu",
+      "expand": "Expand menu",
+      "more": "More",
+      "menu": "Menu",
+      "close": "Close"
+    },
+    "chat": {
+      "typing": "typing…",
+      "online": "online",
+      "read": "Read",
+      "replies": "Quick replies",
+      "typingLabel": "{name} is typing",
+      "composer": "Type a message"
+    },
+    "voice": {
+      "incoming": "Incoming call",
+      "answering": "{agent} is about to pick up",
+      "answeredBy": "{agent} on the line",
+      "working": "{agent} is checking the schedule",
+      "ended": "Call ended",
+      "waiting": "No calls right now",
+      "caller": "Caller",
+      "action": "Action",
+      "duration": "Duration {time}",
+      "transcript": "Live transcript",
+      "open": "View call",
+      "missed": "Missed call"
+    },
+    "browser": {
+      "address": "Address"
+    },
+    "feed": {
+      "now": "Now"
+    },
+    "game": {
+      "level": "Level {n}",
+      "toNext": "Progress to level {n}",
+      "streak": "{count, plural, one {day streak} other {day streak}}",
+      "done": "done",
+      "pending": "pending",
+      "earned": "Earned",
+      "progress": "{pct}% complete",
+      "rank": "Rank {n}"
+    },
+    "sim": {
+      "title": "Simulation",
+      "note": "Actions are simulated with demo data; nothing is sent.",
+      "play": "Simulate: {label}",
+      "playing": "Simulating: {label}",
+      "skip": "Skip to the end",
+      "reset": "Restart",
+      "resetAll": "Restart the demo",
+      "counter": "Event {current} of {total}",
+      "counterIdle": "{total} events to simulate",
+      "events": "Simulated events",
+      "close": "Close",
+      "landed": "Done: {label}. {counter}.",
+      "state": {
+        "done": "Done",
+        "playing": "Simulating",
+        "next": "Next",
+        "pending": "Pending"
+      }
+    },
+    "calendar": {
+      "prevDay": "Previous day",
+      "nextDay": "Next day",
+      "prevWeek": "Previous week",
+      "nextWeek": "Next week",
+      "today": "Today",
+      "view": "View",
+      "day": "Day",
+      "week": "Week"
+    },
+    "kanban": {
+      "hint": "Drag a card to another column or use its Move button.",
+      "moveCard": "Move “{card}”",
+      "moveTo": "Move to {column}",
+      "moved": "“{card}” moved to {column}."
+    }
+  },
+  "demoRealEstate": {
+    "slotLong": "{day} at {time}",
+    "zones": {
+      "centro": "Downtown",
+      "arboleda": "La Arboleda",
+      "ribera": "La Ribera",
+      "colinas": "Las Colinas",
+      "parque": "Parque Norte"
+    },
+    "features": {
+      "balcony": "Balcony",
+      "garage": "Garage",
+      "garden": "Garden",
+      "pool": "Pool",
+      "river": "River view",
+      "terrace": "Terrace",
+      "credit": "Mortgage-ready",
+      "light": "Bright",
+      "patio": "Patio"
+    },
+    "listing": {
+      "price": "USD {amount}",
+      "baths": "{count, plural, one {# bath} other {# baths}}",
+      "area": "{count} m²",
+      "title": "{kind} in {zone}",
+      "inquiries": "{count, plural, one {# inquiry} other {# inquiries}}",
+      "rooms": "{beds, select, other {{rooms} rooms}}",
+      "roomsShort": "{beds, select, other {{rooms} rooms}}",
+      "fees": "HOA USD {amount}",
+      "noFees": "No HOA fees",
+      "visits": "{count, plural, one {# viewing} other {# viewings}}",
+      "days": "{count} days listed",
+      "available": "Available",
+      "reserved": "Reserved",
+      "photo": "Facade of {street}, illustration",
+      "photoN": "Front of {street}, illustration {n} of {total}"
+    },
+    "listings": {
+      "title": "Listings",
+      "sub": "{count} live on the website",
+      "caption": "Listings on the website",
+      "cols": {
+        "property": "Property",
+        "price": "Price",
+        "area": "Area",
+        "inquiries": "Inquiries",
+        "visits": "Viewings",
+        "status": "Status"
+      }
+    },
+    "people": {
+      "tomas": "Tomás Bauer",
+      "lucia": "Lucía Ferrer",
+      "martin": "Martín Gil",
+      "valeria": "Valeria Sosa",
+      "diego": "Diego Ramos",
+      "carolina": "Carolina Méndez",
+      "carolinaFirst": "Carolina",
+      "julia": "Julia Ríos",
+      "juliaFirst": "Julia",
+      "marcos": "Marcos Vidal",
+      "andres": "Andrés Paz",
+      "pablo": "Pablo Núñez",
+      "sofia": "Sofía Arce",
+      "you": "You",
+      "marcosFirst": "Marcos"
+    },
+    "stages": {
+      "new": "New",
+      "qualified": "Qualified",
+      "visit": "Viewing",
+      "reserve": "Reserved"
+    },
+    "chat": {
+      "subtitle": "Lumi · replies instantly",
+      "subtitleOff": "Out of hours",
+      "label": "{business} website chat with {name}",
+      "composer": "Type your question",
+      "open": "Chat",
+      "close": "Close the chat",
+      "expand": "Open the website chat",
+      "as": "You are {name}: pick her answers.",
+      "answeredIn": "{seconds} s",
+      "ai": "AI",
+      "steps": {
+        "ask": "Hi, is the 3-room apartment on {street} still available? Can I see it this week?",
+        "hi": "Hi {name}! Yes, it's available. Two quick questions and I'll send you viewing times.",
+        "pay": "How are you planning to pay?",
+        "budget": "What's your budget, at most?",
+        "fits_cash": "It fits: it's listed at USD {price}, and paying cash leaves room to negotiate.",
+        "fits_credit": "It fits: it's listed at USD {price} and it's mortgage-ready.",
+        "fits_sell": "It fits: it's listed at USD {price}. We can value your place for free, too.",
+        "alt": "That one is USD {price}. Four blocks away I have a very similar one for USD {altPrice}:",
+        "slots": "{advisor}, our agent, can show it to you. What works best?",
+        "booked": "Done, {name}: viewing on {slot} with {advisor}. I'll send you the location on WhatsApp.",
+        "crm": "Lead qualified · details and viewing saved to the CRM",
+        "wait": "Office closed · no one answers",
+        "opens": "Friday 9:00 AM · the office opens",
+        "human": "Hi {name}! Sorry for the wait, we just opened. Yes, it's still available. When would you like to see it?",
+        "lost": "Thanks, but I already booked a viewing with another agency.",
+        "lostNote": "Lead lost · first reply {late} later"
+      },
+      "replies": {
+        "cash": "Cash",
+        "credit": "With a mortgage",
+        "sell": "Selling my apartment",
+        "low": "Up to USD 150,000",
+        "mid": "USD 150,000 to 200,000",
+        "high": "Over USD 200,000"
+      }
+    },
+    "inbox": {
+      "title": "Inquiries",
+      "list": "Conversations",
+      "previews": {
+        "lucia": "Can I see the townhouse on Saturday?",
+        "valeria": "Does the duplex have parking for two cars?",
+        "diego": "I saw the sign on Los Aromos. Price?",
+        "andres": "Is the loft on Mitre mortgage-ready?"
+      },
+      "transcript": "Transcript",
+      "simulate": "Pick {name}'s answer",
+      "extract": {
+        "pay": "Financing → {value}",
+        "budget": "Budget → {value}",
+        "visit": "Viewing → {value}",
+        "crm": "Stage → {value}"
+      },
+      "botLabel": "Lumi · AI",
+      "humanLabel": "{name} · team",
+      "noReply": "No reply",
+      "channel": "Conversation channel",
+      "emptyTitle": "No one has written yet.",
+      "emptyBody": "Tap “Simulate” above: at 11:40 PM Carolina's inquiry arrives and Lumi takes it."
+    },
+    "lead": {
+      "title": "Lead file",
+      "pending": "Pending",
+      "score": "Intent",
+      "seeks": "Wants",
+      "budget": "Budget",
+      "next": "Next step",
+      "scoreOf": "/ 100",
+      "seeksValue": "{kind} · {rooms} · {zone}",
+      "pay": "Financing",
+      "visit": "Viewing",
+      "source": "Source",
+      "nextSteps": {
+        "qualify": "Lumi is qualifying",
+        "book": "Offer viewing times",
+        "visit": "Viewing with {advisor}",
+        "follow": "WhatsApp follow-up",
+        "reserve": "Deposit with {advisor} tomorrow 10 AM",
+        "similar": "Waiting on the options",
+        "think": "Reminder on Tuesday",
+        "call": "Call first thing",
+        "lost": "Lost: we answered too late"
+      },
+      "stageTrack": "Lead stage: {stage}"
+    },
+    "nav": {
+      "today": "Today",
+      "inbox": "Inquiries",
+      "pipeline": "Pipeline",
+      "visits": "Viewings",
+      "followups": "Follow-ups",
+      "listings": "Listings",
+      "site": "Website",
+      "groupAuto": "Automations",
+      "groupShop": "Storefront"
+    },
+    "top": {
+      "closed": "Office closed · Lumi on duty",
+      "open": "Office open",
+      "off": "Assistant off",
+      "buyer": "Buyer",
+      "buyerLabel": "See what the buyer sees on their phone",
+      "date": "{date} · {time}"
+    },
+    "bot": {
+      "name": "Lumi",
+      "title": "Lumi · AI assistant",
+      "on": "Answers 24/7 on the site and WhatsApp",
+      "offShort": "Off: inquiries wait",
+      "switch": "24/7 assistant",
+      "hint": "Turn it off: the demo goes back to 11:40 PM and you simulate the same night without the assistant.",
+      "hintOff": "Turn it on: the demo goes back to 11:40 PM and the inquiry is answered in seconds."
+    },
+    "kinds": {
+      "apartment": "Apartment",
+      "duplex": "Duplex",
+      "house": "House",
+      "loft": "Loft",
+      "ph": "Townhouse"
+    },
+    "sources": {
+      "web": "Website",
+      "whatsapp": "WhatsApp",
+      "portal": "Listing sites",
+      "sign": "Sign",
+      "site": "Online booking"
+    },
+    "pay": {
+      "cash": "Cash",
+      "credit": "Mortgage",
+      "sell": "Selling their place"
+    },
+    "budget": {
+      "low": "Up to USD 150k",
+      "mid": "USD 150–200k",
+      "high": "Over USD 200k"
+    },
+    "slot": "{day} · {time}",
+    "follow": {
+      "steps": {
+        "how": "Hi {name}, how did you like the apartment on {street}? If you liked it, I can hold it for you for 72 h, free.",
+        "reserved": "Done: it's on hold until Monday at 7 PM. {advisor} will call you tomorrow at 10 about the deposit.",
+        "reservedNote": "Reservation saved · {street} is now Reserved",
+        "similarList": "Here are two similar ones nearby:",
+        "similarNote": "Follow-up: 2 options sent",
+        "later": "Sure, no rush. I'll write on Tuesday with news and two similar options.",
+        "laterNote": "Reminder scheduled · Tuesday 13"
+      },
+      "replies": {
+        "reserve": "I want to reserve it",
+        "similar": "See similar ones",
+        "think": "I'll think about it"
+      },
+      "label": "{business} WhatsApp with {name}",
+      "composer": "Message"
+    },
+    "buyer": {
+      "app": "WhatsApp",
+      "now": "now",
+      "push": "How did you like the apartment on {street}?",
+      "openPush": "Open the WhatsApp message",
+      "backToSite": "Site",
+      "backToApp": "Back to the app",
+      "jump": "{date} · after the viewing",
+      "you": "You, on the website",
+      "openThread": "Open WhatsApp"
+    },
+    "time": {
+      "late": "{hours} h {minutes} min",
+      "seconds": "{seconds} s",
+      "minutes": "{minutes} min"
+    },
+    "notes": {
+      "base": "{listing}",
+      "waiting": "No reply · {wait}",
+      "lost": "Lost · {wait} without a reply",
+      "answered": "Answered in 4 s · qualifying",
+      "qualified": "{budget} · {pay}",
+      "booked": "Viewing {slot}",
+      "visited": "Viewing done · follow-up",
+      "reserved": "Reserved {street}",
+      "similar": "Got 2 similar options",
+      "think": "Thinking it over · reminder Tuesday",
+      "you": "Your viewing · {slot}",
+      "youNew": "Your inquiry · Lumi is qualifying you",
+      "youQualified": "{budget} · wants {listing}",
+      "moved": "Moved by you"
+    },
+    "today": {
+      "kicker": "Today · {date}",
+      "headline": "Office closed. <em>Lumi is on.</em>",
+      "headlineOff": "Office closed. No one answers.",
+      "headlineJump": "The viewing is over. Lumi follows up.",
+      "key": "of inquiries answered in under 1 minute",
+      "keyOf": "{fast} of {total} this week",
+      "keyWaiting": "1 inquiry waiting · {wait}",
+      "avg": "First reply",
+      "avgHint": "Weekly average",
+      "visits": "Viewings booked",
+      "visitsHint": "This week",
+      "afterHours": "After hours",
+      "afterHoursHint": "{count} of {total} inquiries",
+      "reserves": "Reservations",
+      "reservesHint": "This week",
+      "now": "Now",
+      "nowEmpty": "Nothing yet. Simulate the 11:40 PM inquiry.",
+      "pipeline": "Pipeline",
+      "openPipeline": "Open pipeline",
+      "openInbox": "Open conversation",
+      "sources": "Inquiries by source",
+      "sourcesLabel": "The website brings the most inquiries: {count} of {total} this week.",
+      "activity": "Activity",
+      "headlineReserved": "Reserved. <em>Without opening the office.</em>",
+      "headlineOpens": "9:00 AM: the office opens. The inquiry waited all night.",
+      "headlineLost": "{late} later, <em>the lead was gone.</em>"
+    },
+    "pipeline": {
+      "title": "Pipeline",
+      "label": "Sales pipeline: {count} leads",
+      "value": "USD {amount}",
+      "empty": "No leads",
+      "note": "Lumi moves the cards as it qualifies and books. So can you: drag them or use “Move”."
+    },
+    "visits": {
+      "title": "Viewings",
+      "free": "Free",
+      "freeLabel": "{day}, {time}: free, book a viewing",
+      "next": "Next viewing",
+      "nextEmpty": "No new viewings tonight",
+      "reminder": "WhatsApp reminder 2 h before",
+      "withAdvisor": "with {advisor}",
+      "hint": "Tap a free time to book a viewing.",
+      "what": {
+        "visit": "Viewing",
+        "appraisal": "Valuation",
+        "openHouse": "Open house",
+        "signing": "Reservation signing"
+      },
+      "you": "Your viewing",
+      "done": "Done",
+      "booked": "Viewing booked: {slot}",
+      "legendLive": "Booked by Lumi",
+      "freeLabelWith": "{time} with {advisor}: free, book a viewing",
+      "dayLabel": "Viewings on {day}, by agent",
+      "weekLabel": "Viewings this week, {from} to {to}",
+      "summary": "{day} · {count, plural, =0 {no viewings} one {# viewing} other {# viewings}}",
+      "summaryPast": "{day} · {count, plural, =0 {no viewings} one {# viewing done} other {# viewings done}}",
+      "weekSummary": "{count, plural, one {# viewing} other {# viewings}} this week · tap a free time to book",
+      "closed": "{day} · no viewings that day",
+      "hintLaptop": "Switch between week and day, browse past and future weeks, and tap a free time to book.",
+      "hintPast": "Past day: read only.",
+      "bookTitle": "Book a viewing",
+      "property": "Property",
+      "confirm": "Book viewing",
+      "cancel": "Cancel",
+      "localNote": "Demo viewing: it only stays on this screen."
+    },
+    "followups": {
+      "title": "Follow-ups",
+      "sequence": "After every viewing",
+      "sequenceSub": "On WhatsApp, with the visitor's name and the property.",
+      "for": "Now with {name}",
+      "steps": {
+        "confirm": {
+          "when": "When booked",
+          "what": "Confirmation and location"
+        },
+        "remind": {
+          "when": "2 h before",
+          "what": "Viewing reminder"
+        },
+        "after": {
+          "when": "Right after",
+          "what": "How was it? + reserve"
+        },
+        "similar": {
+          "when": "+3 days, no reply",
+          "what": "Two similar options"
+        },
+        "news": {
+          "when": "+7 days",
+          "what": "Price updates"
+        }
+      },
+      "status": {
+        "sent": "Sent",
+        "scheduled": "Scheduled",
+        "skipped": "Not needed",
+        "waiting": "On hold"
+      },
+      "preview": "What the buyer sees",
+      "previewEmpty": "The message goes out on its own when the viewing ends.",
+      "stats": "{sent} follow-ups this week · {pct} answered"
+    },
+    "site": {
+      "nav": {
+        "all": "Properties ({count})"
+      },
+      "kicker": "Real estate · La Arboleda and around",
+      "title": "Homes with good light, <em>in plain sight.</em>",
+      "body": "Search, check the floor plan and book a viewing at any hour.",
+      "search": {
+        "zone": "Area",
+        "zoneAll": "All",
+        "rooms": "Rooms",
+        "roomsAny": "Any",
+        "roomsMin": "{count}+",
+        "results": "{count, plural, one {# property} other {# properties}}",
+        "label": "Search properties",
+        "price": "Price",
+        "priceAny": "Any",
+        "priceMax": "Up to USD {amount}",
+        "none": "Nothing with those filters. Try another area or a higher budget."
+      },
+      "crumbs": "Buy · {zone}",
+      "back": "Results",
+      "gallery": "Photo {n} of {total}",
+      "features": "Features",
+      "map": "Approximate location",
+      "plan": "Floor plan",
+      "planRooms": {
+        "living": "Living",
+        "bed": "Bed",
+        "kitchen": "Kitchen",
+        "bath": "Bath",
+        "balcony": "Balcony"
+      },
+      "ask": "Ask",
+      "book": "Book a viewing",
+      "booking": {
+        "title": "Book your viewing",
+        "day": "Day",
+        "time": "Time",
+        "none": "No free times",
+        "confirm": "Confirm viewing",
+        "booked": "Viewing booked",
+        "bookedBody": "{slot} · {street}. The confirmation arrives on WhatsApp.",
+        "again": "Book another",
+        "pickDay": "Pick a day",
+        "seeAgenda": "See it in the calendar",
+        "note": "Demo viewing: nothing is sent."
+      },
+      "url": "Website address",
+      "prevPhoto": "Previous photo",
+      "nextPhoto": "Next photo",
+      "viewSub": "{url} · search, open a property, book a viewing or chat with Lumi"
+    },
+    "toast": {
+      "inquiry": "New inquiry · 11:40 PM",
+      "answered": "Answered in 4 s",
+      "qualified": "Lead qualified",
+      "booked": "Viewing booked",
+      "followSent": "Follow-up sent",
+      "reserved": "Reservation",
+      "similar": "Options sent",
+      "think": "Reminder scheduled",
+      "waiting": "Unanswered inquiry",
+      "lost": "Lead lost",
+      "you": "Your viewing"
+    },
+    "feed": {
+      "pastPortal": "{name} came from a listing site · answered in 7 s",
+      "pastWhatsApp": "{name} asked on WhatsApp · answered in 5 s",
+      "pastFollow": "Viewing reminder sent to {name}",
+      "inquiry": "{name} asked about {street} on the website",
+      "answered": "Lumi replied in 4 s",
+      "qualified": "{name} qualified: {budget}, {pay}",
+      "booked": "Viewing booked: {slot} with {advisor}",
+      "visited": "Viewing done at {street}",
+      "followSent": "WhatsApp follow-up to {name}",
+      "reserved": "{name} reserved {street}",
+      "similar": "{name} got two similar options",
+      "think": "{name} is thinking: reminder on Tuesday",
+      "waiting": "No one replied: the office is closed",
+      "opens": "The office opens",
+      "human": "{advisor} replied {late} later",
+      "lost": "{name} went with another agency",
+      "you": "You booked a viewing: {slot}",
+      "youLead": "Your inquiry is in the CRM: {listing}"
+    },
+    "sim": {
+      "inquiry": "An inquiry arrives at 11:40 PM",
+      "qualify": "Lumi qualifies Carolina",
+      "visit": "Lumi books the viewing",
+      "followup": "Follow-up after the viewing",
+      "reply": "Carolina answers the follow-up",
+      "note": "Inquiries, viewings and messages are simulated with demo data; nothing is sent.",
+      "off": {
+        "inquiry": "An inquiry arrives at 11:40 PM",
+        "qualify": "The night goes by unanswered",
+        "visit": "The office opens: Julia replies",
+        "followup": "Carolina answers",
+        "reply": "The lead is lost"
+      }
+    },
+    "own": {
+      "label": "Your chat with Lumi on the {business} website",
+      "steps": {
+        "hi": "Hi! I'm Lumi, Lumen's assistant. What are you looking for?",
+        "pay": "How are you planning to pay?",
+        "budget": "What's your budget, at most?",
+        "match_two": "For 2 rooms, take a look at this loft on {street}. Want to see it?",
+        "match_three": "I have one that fits: {street}. Want to see it?",
+        "match_house": "Take a look at this house on {street}, with a garden and a pool. Want to see it?",
+        "booked": "Done: viewing on {slot} with {advisor}. The confirmation arrives on WhatsApp.",
+        "note": "Lead qualified · details and viewing saved to the CRM",
+        "later": "Sure. I'll message you on WhatsApp if the price drops or something similar comes in.",
+        "laterNote": "Lead qualified · follow-up scheduled"
+      },
+      "replies": {
+        "two": "2 rooms",
+        "three": "3 rooms",
+        "house": "House with a garden",
+        "later": "Not now"
+      }
+    }
+  },
+  "sound": {
+    "toggle": "Sound",
+    "turnOn": "Turn on sound and music",
+    "turnOff": "Mute"
+  },
+  "tour": {
+    "label": "Guide",
+    "labelFor": "{name} guide",
+    "next": "Next",
+    "prev": "Back",
+    "done": "Done",
+    "skip": "Skip",
+    "close": "Close the guide",
+    "progress": "Step {current} of {total}",
+    "help": "Help",
+    "withGuide": "Take the guided tour",
+    "onMyOwn": "Explore on my own",
+    "replay": "Replay the guide",
+    "dontShowAgain": "Don't show this again",
+    "tagDesktop": "Desktop view",
+    "tagMobile": "Phone view",
+    "tagBoth": "Both views"
+  },
+  "common": {
+    "demo": "Demo",
+    "preview": "Preview",
+    "close": "Close",
+    "open": "Open",
+    "back": "Back",
+    "from": "from",
+    "to": "to",
+    "perMonth": "/mo",
+    "perYear": "/yr",
+    "monthly": "Monthly",
+    "annual": "Yearly",
+    "included": "Included",
+    "none": "None",
+    "copy": "Copy",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "whatsapp": "WhatsApp",
+    "approxPrefix": "≈",
+    "sections": "sections"
+  },
+  "demoTours": {
+    "realEstate": {
+      "sim": {
+        "title": "You decide what happens tonight",
+        "body": "Nothing moves on its own. Tap “Simulate” and follow the 11:40 PM inquiry: reply, qualification, viewing and follow-up. Switch the assistant off to see the same night without it."
+      },
+      "chat": {
+        "title": "Every inquiry, answered in seconds",
+        "body": "Lumi replies at any hour, asks how they'll pay and their budget, and leaves the lead file ready. You can answer for Carolina."
+      },
+      "site": {
+        "title": "Your website searches and books",
+        "body": "Filters by area, rooms and price, a listing page with the floor plan and “Book a viewing”. Book one: it shows up in the calendar and the pipeline."
+      },
+      "pipeline": {
+        "title": "A pipeline that sorts itself",
+        "body": "Each lead goes from New to Qualified, Viewing and Reserved as Lumi moves forward. Drag a card or use “Move” to sort it by hand."
+      },
+      "visits": {
+        "title": "Viewings without the back-and-forth",
+        "body": "Both agents in one calendar. Switch between week and day, browse past and future weeks and tap a free time to book."
+      },
+      "followups": {
+        "title": "A follow-up after every viewing",
+        "body": "Confirmation, reminder and “how did you like it?” on WhatsApp, with the property and their name. That is how a viewing turns into a reservation."
+      }
+    }
+  },
+  "experience": {
+    "entry": {
+      "title": "How would you like to see it?",
+      "guide": {
+        "name": "Take the guided tour",
+        "text": "We show you what matters, step by step."
+      },
+      "own": {
+        "name": "Explore on my own",
+        "text": "Tap and try everything, at your pace."
+      },
+      "eyebrow": "EstateOS · Lumen Propiedades demo",
+      "note": "Demo with fictional data. Nothing is sent."
+    },
+    "stage": {
+      "label": "EstateOS demo",
+      "exit": "Back",
+      "plan": "Plan",
+      "allPlans": "All plans",
+      "planMenu": "Choose a plan",
+      "phone": "Phone",
+      "desktop": "Desktop",
+      "showPhone": "Show phone",
+      "hidePhone": "Hide phone",
+      "showDesktop": "Show desktop",
+      "phoneLabel": "{business} phone: interactive demo",
+      "desktopLabel": "{business} desktop: interactive demo",
+      "draft": "Demo in progress: it does not show everything this plan includes yet.",
+      "fictional": "Demo · fictional data",
+      "barLabel": "Demo controls",
+      "guideStart": "Start the guide",
+      "proposal": "proposal"
+    },
+    "locked": {
+      "from": "From {plan}",
+      "price": "USD {price}/month",
+      "body": "{area} is part of {plan} and the plans above it.",
+      "seePlan": "See the {plan} demo"
+    },
+    "plans": {
+      "contact": {
+        "tagline": "The complete base product"
+      },
+      "growth": {
+        "tagline": "Growth and owner follow-up"
+      },
+      "escalar": {
+        "tagline": "Sales team coordination"
+      },
+      "hipergrowth": {
+        "tagline": "Decide with data"
+      },
+      "deluxe": {
+        "tagline": "New services"
+      },
+      "partner": {
+        "tagline": "Several branches and portfolios"
+      }
+    },
+    "video": {
+      "open": "Watch the video",
+      "close": "Close",
+      "transcript": "Transcript",
+      "label": "{plan} video",
+      "general": "EstateOS video"
+    }
+  },
+  "demoShowcase": {
+    "laptopLabel": "{business}: interactive demo, desktop version",
+    "phoneLabel": "{business}: interactive demo, mobile version",
+    "desktop": "Desktop",
+    "mobile": "Phone",
+    "viewsLabel": "{business} demo: choose a view",
+    "panHint": "Swipe to see it all",
+    "loading": "Loading the {business} demo…"
   }
 }
