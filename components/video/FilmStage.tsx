@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { planInfo } from '@/lib/plans';
 import { renderAudio, sfxOn, type Stem } from './kinetic/score';
 import { arrange } from './score/arreglo';
@@ -10,6 +10,7 @@ import { PARTITURA } from './films/contact/partitura';
 import { LAYOUTS, type FilmCtx } from './film';
 import { ContactFilm, buildContact } from './films/contact/ContactFilm';
 import { CONTACT_DURATION, contactTexts } from './films/contact/script';
+import { priceLines } from './price';
 import { checkCues, toVtt, type Ratio } from './timeline';
 import './ui/trailer.css';
 
@@ -38,6 +39,7 @@ export function FilmStage({ film, ratio }: { film: 'contact'; ratio: Ratio }) {
   const tc = useTranslations('video.contact');
   const tv = useTranslations('video');
   const tx = useTranslations('experience');
+  const locale = useLocale();
   const L = LAYOUTS[ratio];
 
   useLayoutEffect(() => {
@@ -60,7 +62,9 @@ export function FilmStage({ film, ratio }: { film: 'contact'; ratio: Ratio }) {
       if (film === 'contact') buildContact(c);
     }, el);
     tl.seek(0, true);
-    const texts = () => contactTexts((k) => tc(k), tx('plans.contact.tagline'), tv('brand'), planInfo('contact').name);
+    // The subtitles carry the two amounts; the rate's date stays on screen only (it would read too fast).
+    const price = priceLines((k, v) => tv(`price.${k}`, v), locale, planInfo('contact').priceUsdMonthly).slice(0, 2).join(' · ');
+    const texts = () => contactTexts((k) => tc(k), tx('plans.contact.tagline'), tv('brand'), planInfo('contact').name, price);
     window.trailer = {
       duration: CONTACT_DURATION,
       width: L.W,
@@ -84,7 +88,7 @@ export function FilmStage({ film, ratio }: { film: 'contact'; ratio: Ratio }) {
       delete window.trailer;
       delete document.documentElement.dataset.trailer;
     };
-  }, [film, L, tc, tv, tx]);
+  }, [film, L, tc, tv, tx, locale]);
 
   useEffect(() => {
     document.body.style.margin = '0';

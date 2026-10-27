@@ -7,7 +7,7 @@
       "plan": "contact",
       "version": 1,
       "lang": "es",
-      "durationSec": 56,
+      "durationSec": 58,
       "src": "/videos/contact/contact-v1-es-16x9.mp4",
       "poster": "/videos/contact/contact-v1-es-16x9.webp",
       "files": [
@@ -17,13 +17,13 @@
           "poster": "/videos/contact/contact-v1-es-16x9.webp",
           "width": 1920,
           "height": 1080,
-          "durationSec": 56,
+          "durationSec": 58,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 5886094,
-          "sha256": "8339c8b1f678686242b0a3b735da1f287bbbc9e56798d99dd3ffd3ffb33876ec",
+          "bytes": 5975850,
+          "sha256": "3eb3237231ae6e42d1380725517d1112d73190f08fddcf146fa49c332482b131",
           "lufs": -16,
-          "truePeak": -1.3
+          "truePeak": -1.1
         },
         {
           "ratio": "9x16",
@@ -31,13 +31,13 @@
           "poster": "/videos/contact/contact-v1-es-9x16.webp",
           "width": 720,
           "height": 1280,
-          "durationSec": 56,
+          "durationSec": 58,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 2929784,
-          "sha256": "777be32886757cd8dda8dcb099262da67f43cebe533b7a3deb6d82abe1fd0134",
+          "bytes": 2989095,
+          "sha256": "09436dc69f4d8254a725ff1cf3b8b6f41676b99657dc2010dfb0b6c48a0069b2",
           "lufs": -16,
-          "truePeak": -1.2
+          "truePeak": -1.4
         }
       ],
       "subtitles": {
@@ -46,16 +46,16 @@
         "pt": "/videos/contact/contact-v1-pt.vtt"
       },
       "transcript": {
-        "es": "Video de 56 segundos, sin locución; los textos están en pantalla. Arranca con palabras sobre paneles de color: «¿Consultas por todos lados? ¿Planillas que nadie sigue?». Aparece EstateOS · Contact. 1 · Tu web: «Una web profesional.» La web de Lumen Propiedades (Demo), con buscador y propiedades; tres propiedades salen grandes de la pantalla. «Cada propiedad, con su ficha. Te piden visitas desde ahí.» En la ficha de Olmos 1420 un toque pide una visita para el viernes 9 a las 18:30 y queda agendada. 2 · Chat guiado: «Un chat guiado, siempre.» En el celular, Carolina pregunta por Olmos 1420; el chat le contesta con botones y ella elige «Con crédito hipotecario». «La consulta llega completa»: sale del teléfono como una tarjeta con su nombre, la propiedad y cómo paga. «Y del otro lado, tu CRM.» 3 · CRM completo, módulo por módulo: «Todas tus consultas, juntas» (las de la semana por canal: sitio web, WhatsApp, portales y cartel); «Cada contacto, su historia»; «Cada oportunidad, su estado» (la tarjeta de Carolina pasa de Nuevo a Calificado); «La agenda del equipo» (su visita cae el viernes a las 18:30); «Tareas y recordatorios» (se tildan); «Tu cartera, ordenada»; «Roles para tu equipo» (administradora y asesor, con sus permisos). «Y lo ponemos en marcha.» 4 · Puesta en marcha: «Tu marca, en todo» (logo, paleta y tipografía); «De plantilla a tu marca» (la web pasa de la plantilla base a la marca de Lumen); «Revisamos tus redes» (biografía, portada, destacados y llamado a la acción, cada uno con su versión nueva); «Hooks, videos y una guía» (seis ideas de publicación, tres videos de ejemplo y la guía operativa). Cierre: «Tu web. Tu CRM. Chat guiado. Tu marca.» y EstateOS · Contact · Producto base completo. Todos los datos son ficticios.",
-        "en": "A 56-second video with no voice-over; the words are on screen (in Spanish, with subtitles). It opens with words on coloured panels: “Inquiries from everywhere? Spreadsheets nobody follows?”. EstateOS · Contact appears. 1 · Your website: “A professional website.” Lumen Propiedades’ site (Demo), with search and listings; three listings come out of the screen, large. “Every listing, with its page. Viewings booked right there.” On the Olmos 1420 page a tap asks for a viewing on Friday 9 at 18:30 and it is booked. 2 · Guided chat: “Guided chat, always on.” On a phone, Carolina asks about Olmos 1420; the chat answers with buttons and she picks “With a mortgage”. “The inquiry arrives complete”: it leaves the phone as a card with her name, the listing and how she pays. “And behind it all, your CRM.” 3 · Complete CRM, area by area: “All your inquiries, together” (the week’s, by channel: website, WhatsApp, portals and sign); “Every contact, its history”; “Every deal, its stage” (Carolina’s card moves from New to Qualified); “Your team’s calendar” (her viewing lands on Friday at 18:30); “Tasks and reminders” (ticked off); “Your listings, organized”; “Roles for your team” (admin and agent, with their permissions). “And we set it all up.” 4 · Setup: “Your brand, everywhere” (logo, palette and type); “From template to your brand” (the site goes from the base template to Lumen’s brand); “We review your socials” (bio, cover, highlights and call to action, each with its new version); “Hooks, videos and a guide” (six post ideas, three example videos and the operating guide). Closing: “Your website. Your CRM. Guided chat. Your brand.” and EstateOS · Contact · The complete base product. All data is fictional.",
-        "pt": "Vídeo de 56 segundos, sem locução; os textos estão na tela (em espanhol, com legendas). Começa com palavras sobre painéis coloridos: “Consultas por todo lado? Planilhas que ninguém segue?”. Aparece EstateOS · Contact. 1 · Seu site: “Um site profissional.” O site da Lumen Propiedades (Demo), com busca e imóveis; três imóveis saem grandes da tela. “Cada imóvel, com sua página. Pedem visitas ali mesmo.” Na página de Olmos 1420 um toque pede uma visita para sexta, dia 9, às 18:30 e ela fica agendada. 2 · Chat guiado: “Um chat guiado, sempre.” No celular, Carolina pergunta por Olmos 1420; o chat responde com botões e ela escolhe “Com financiamento”. “A consulta chega completa”: sai do telefone como um cartão com o nome dela, o imóvel e como vai pagar. “E do outro lado, o seu CRM.” 3 · CRM completo, área por área: “Todas as consultas, juntas” (as da semana por canal: site, WhatsApp, portais e placa); “Cada contato, sua história”; “Cada negócio, sua etapa” (o cartão de Carolina passa de Novo a Qualificado); “A agenda da equipe” (a visita cai na sexta às 18:30); “Tarefas e lembretes” (vão sendo marcadas); “Sua carteira, organizada”; “Papéis para sua equipe” (administradora e corretor, com suas permissões). “E colocamos tudo no ar.” 4 · Implantação: “Sua marca, em tudo” (logo, paleta e tipografia); “Do modelo à sua marca” (o site passa do modelo base à marca da Lumen); “Revisamos suas redes” (bio, capa, destaques e chamada para ação, cada um com sua nova versão); “Hooks, vídeos e um guia” (seis ideias de post, três vídeos de exemplo e o guia operacional). Fechamento: “Seu site. Seu CRM. Chat guiado. Sua marca.” e EstateOS · Contact · Produto base completo. Todos os dados são fictícios."
+        "es": "Video de 58 segundos, sin locución; los textos están en pantalla. Arranca con palabras sobre paneles de color: «¿Consultas por todos lados? ¿Planillas que nadie sigue?». Aparece EstateOS · Contact. 1 · Tu web: «Una web profesional.» La web de Lumen Propiedades (Demo), con buscador y propiedades; tres propiedades salen grandes de la pantalla. «Cada propiedad, con su ficha. Te piden visitas desde ahí.» En la ficha de Olmos 1420 un toque pide una visita para el viernes 9 a las 18:30 y queda agendada. 2 · Chat guiado: «Un chat guiado, siempre.» En el celular, Carolina pregunta por Olmos 1420; el chat le contesta con botones y ella elige «Con crédito hipotecario». «La consulta llega completa»: sale del teléfono como una tarjeta con su nombre, la propiedad y cómo paga. «Y del otro lado, tu CRM.» 3 · CRM completo, módulo por módulo: «Todas tus consultas, juntas» (las de la semana por canal: sitio web, WhatsApp, portales y cartel); «Cada contacto, su historia»; «Cada oportunidad, su estado» (la tarjeta de Carolina pasa de Nuevo a Calificado); «La agenda del equipo» (su visita cae el viernes a las 18:30); «Tareas y recordatorios» (se tildan); «Tu cartera, ordenada»; «Roles para tu equipo» (administradora y asesor, con sus permisos). «Y lo ponemos en marcha.» 4 · Puesta en marcha: «Tu marca, en todo» (logo, paleta y tipografía); «De plantilla a tu marca» (la web pasa de la plantilla base a la marca de Lumen); «Revisamos tus redes» (biografía, portada, destacados y llamado a la acción, cada uno con su versión nueva); «Hooks, videos y una guía» (seis ideas de publicación, tres videos de ejemplo y la guía operativa). Cierre: «Tu web. Tu CRM. Chat guiado. Tu marca.» y EstateOS · Contact · Producto base completo. Al final, el precio: $ 47.000 por mes, USD 30 por mes, al dólar MEP del 27/10/2026. Todos los datos son ficticios.",
+        "en": "A 58-second video with no voice-over; the words are on screen (in Spanish, with subtitles). It opens with words on coloured panels: “Inquiries from everywhere? Spreadsheets nobody follows?”. EstateOS · Contact appears. 1 · Your website: “A professional website.” Lumen Propiedades’ site (Demo), with search and listings; three listings come out of the screen, large. “Every listing, with its page. Viewings booked right there.” On the Olmos 1420 page a tap asks for a viewing on Friday 9 at 18:30 and it is booked. 2 · Guided chat: “Guided chat, always on.” On a phone, Carolina asks about Olmos 1420; the chat answers with buttons and she picks “With a mortgage”. “The inquiry arrives complete”: it leaves the phone as a card with her name, the listing and how she pays. “And behind it all, your CRM.” 3 · Complete CRM, area by area: “All your inquiries, together” (the week’s, by channel: website, WhatsApp, portals and sign); “Every contact, its history”; “Every deal, its stage” (Carolina’s card moves from New to Qualified); “Your team’s calendar” (her viewing lands on Friday at 18:30); “Tasks and reminders” (ticked off); “Your listings, organized”; “Roles for your team” (admin and agent, with their permissions). “And we set it all up.” 4 · Setup: “Your brand, everywhere” (logo, palette and type); “From template to your brand” (the site goes from the base template to Lumen’s brand); “We review your socials” (bio, cover, highlights and call to action, each with its new version); “Hooks, videos and a guide” (six post ideas, three example videos and the operating guide). Closing: “Your website. Your CRM. Guided chat. Your brand.” and EstateOS · Contact · The complete base product. Last, the price: ARS 47,000 a month, USD 30 a month, at the MEP dollar rate of 10/27/2026. All data is fictional.",
+        "pt": "Vídeo de 58 segundos, sem locução; os textos estão na tela (em espanhol, com legendas). Começa com palavras sobre painéis coloridos: “Consultas por todo lado? Planilhas que ninguém segue?”. Aparece EstateOS · Contact. 1 · Seu site: “Um site profissional.” O site da Lumen Propiedades (Demo), com busca e imóveis; três imóveis saem grandes da tela. “Cada imóvel, com sua página. Pedem visitas ali mesmo.” Na página de Olmos 1420 um toque pede uma visita para sexta, dia 9, às 18:30 e ela fica agendada. 2 · Chat guiado: “Um chat guiado, sempre.” No celular, Carolina pergunta por Olmos 1420; o chat responde com botões e ela escolhe “Com financiamento”. “A consulta chega completa”: sai do telefone como um cartão com o nome dela, o imóvel e como vai pagar. “E do outro lado, o seu CRM.” 3 · CRM completo, área por área: “Todas as consultas, juntas” (as da semana por canal: site, WhatsApp, portais e placa); “Cada contato, sua história”; “Cada negócio, sua etapa” (o cartão de Carolina passa de Novo a Qualificado); “A agenda da equipe” (a visita cai na sexta às 18:30); “Tarefas e lembretes” (vão sendo marcadas); “Sua carteira, organizada”; “Papéis para sua equipe” (administradora e corretor, com suas permissões). “E colocamos tudo no ar.” 4 · Implantação: “Sua marca, em tudo” (logo, paleta e tipografia); “Do modelo à sua marca” (o site passa do modelo base à marca da Lumen); “Revisamos suas redes” (bio, capa, destaques e chamada para ação, cada um com sua nova versão); “Hooks, vídeos e um guia” (seis ideias de post, três vídeos de exemplo e o guia operacional). Fechamento: “Seu site. Seu CRM. Chat guiado. Sua marca.” e EstateOS · Contact · Produto base completo. No fim, o preço: ARS 47.000 por mês, USD 30 por mês, ao dólar MEP de 27/10/2026. Todos os dados são fictícios."
       },
       "sourceType": "render",
       "license": "Eclipse (render propio: componentes reconstruidos de la demo, tipografías OFL del sitio, música y efectos sintetizados por el motor de Kinetic Studio)",
       "consent": "No aplica: sin personas reales, voces ni material generado",
       "synthetic": false,
       "catalogVersion": "estateos-2026-10-27-v3",
-      "sourceHash": "6423f207b77ce691606db721ac0f5e9a1a1e4046c91a0357a79db8bffd0c5906",
+      "sourceHash": "cc85ab1916a35696458f2be56d375de70972b914ed9152fad233dc9855edf28e",
       "approvedAt": null
     }
   ]

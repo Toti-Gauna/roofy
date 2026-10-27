@@ -1193,6 +1193,12 @@
         "inquiry": "Consulta nova",
         "channels": "Consultas da semana"
       }
+    },
+    "price": {
+      "ars": "ARS {amount}/mês",
+      "brl": "R$ {amount}/mês",
+      "usd": "USD {amount}/mês",
+      "rate": "Dólar MEP de {date}"
     }
   }
 }

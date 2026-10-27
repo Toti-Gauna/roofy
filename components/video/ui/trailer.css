@@ -1381,6 +1381,45 @@
   letter-spacing: 0.02em;
   color: #9a97a6;
 }
+/* The price at the close: local currency large, the dollar below, the rate's date small (Ignacio, 27/10/2026). */
+.tr-mark-price {
+  position: relative;
+  margin-top: 14px;
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.tr-mark-price::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 420px;
+  height: 1px;
+  margin-left: -210px;
+  background: rgb(236 232 225 / 0.28);
+  transform: scaleX(var(--rule, 1));
+}
+.tr-mark-local {
+  font-size: 104px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #ece8e1;
+}
+.tr-mark-usd {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  color: #c9c5bd;
+}
+.tr-mark-rate {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: #8a8794;
+}
 .tr-flash {
   position: absolute;
   inset: 0;

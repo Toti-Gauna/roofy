@@ -1193,6 +1193,12 @@
         "inquiry": "New inquiry",
         "channels": "This week's inquiries"
       }
+    },
+    "price": {
+      "ars": "ARS {amount}/month",
+      "brl": "BRL {amount}/month",
+      "usd": "USD {amount}/month",
+      "rate": "MEP dollar rate, {date}"
     }
   }
 }

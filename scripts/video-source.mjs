@@ -22,6 +22,8 @@ export const STAGE_FILES = [
   'components/video/score/orquesta.ts',
   'components/video/score/arreglo.ts',
   'components/demos/real-estate/data.ts',
+  'components/video/price.ts',
+  'content/video-rates.json',
 ];
 
 /** The film's folder, every file in a stable order. */
@@ -37,7 +39,7 @@ export function sourceHash(root, film) {
   for (const file of [...filmFiles(root, film), ...STAGE_FILES]) hash.update(readFileSync(join(root, file)));
   for (const locale of ['es', 'en', 'pt']) {
     const m = JSON.parse(readFileSync(join(root, 'messages', `${locale}.json`), 'utf8'));
-    hash.update(JSON.stringify({ seal: m.video.seal, brand: m.video.brand, film: m.video[film], plan: m.experience.plans[film], demo: m.demoRealEstate }));
+    hash.update(JSON.stringify({ seal: m.video.seal, brand: m.video.brand, film: m.video[film], price: m.video.price, plan: m.experience.plans[film], demo: m.demoRealEstate }));
   }
   return hash.digest('hex');
 }

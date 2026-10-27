@@ -1,6 +1,6 @@
 # EstateOS · Contact — storyboard del tráiler (V1, segundo corte)
 
-Duración **56 s** · **120 BPM** (1 compás = 2 s, grilla de semicorcheas de 0,125 s) · 16:9 (1920×1080) y 9:16 (1080×1920),
+Duración **58 s** · **120 BPM** (1 compás = 2 s, grilla de semicorcheas de 0,125 s) · 16:9 (1920×1080) y 9:16 (1080×1920),
 la misma película armada para cada formato · español rioplatense con voseo (inglés y portugués, mismos tiempos).
 
 Público: dueños de inmobiliarias que miran sin sonido. Nadie habla: el tráiler tiene que explicar **todo lo que recibe quien
@@ -16,8 +16,9 @@ en marcha → Contact, el producto base completo*.
 - **Fuera de este video:**
   - El WhatsApp automático va en el video de Growth y el agente de voz en el de Escalar.
   - El portal del propietario, los mapas, Intelligence y el asistente quedan para sus planes.
-- **Sin precios ni cupos** del plan dentro del video (el precio está en el HTML al lado del reproductor). Los precios que se ven
-  son de las propiedades ficticias de Lumen.
+- **El precio del plan, solo en el cierre** (Ignacio, 27/10/2026): en pesos, con el dólar abajo y la fecha de la cotización
+  (dólar MEP del 27/10/2026, `content/video-rates.json`). Ningún cupo. Los otros precios que se ven son de las propiedades
+  ficticias de Lumen.
 - **Todo sale de la demo de Lumen:**
   - Personas, inmuebles, zonas, horarios y textos de la interfaz salen de `data.ts` y `demoRealEstate`.
   - Lo que cuenta el tráiler está en `video.contact`.
@@ -58,7 +59,7 @@ en marcha → Contact, el producto base completo*.
 | 34–36 | golpe `marcha` | «Y lo ponemos» / «en marcha.» | |
 | 36–48 | `marca-cliente` (capítulo 4 · Puesta en marcha) | 36–39: el kit de marca se arma (logo, paleta, tipografía). 39–42: la web pasa de la plantilla base a la marca (un borde que pasa). 42–45: la auditoría de dos perfiles (biografía, portada, destacados, botón de contacto) se tilda. 45–48: hooks, videos de ejemplo y la guía operativa en abanico | «Tu marca, en todo.» · «De plantilla a tu marca.» · «Revisamos tus redes.» · «Hooks, videos y una guía.» |
 | 48–52 | golpe `resumen` | Una palabra por segundo: «Tu web.» · «Tu CRM.» · «Chat guiado.» · «Tu marca.» | |
-| 52–56 | `final` | Destello. Noche: glifo 1/6, «EstateOS», «Contact», «Producto base completo». Desde 55 todo queda quieto (el poster) | |
+| 52–58 | `final` | Destello. Noche: glifo 1/6, «EstateOS», «Contact», «Producto base completo»; a 55,25 entra el precio: «$ 47.000/mes», debajo «USD 30/mes» y «Dólar MEP del 27/10/2026» (el poster) | |
 
 ## Música (120 BPM) — partitura propia, con alma
 
@@ -86,7 +87,7 @@ glockenspiel y batería. El motor de Kinetic queda solo para los sonidos de inte
 | 34–36 | subida (A) | Igual que la anterior, hacia la puesta en marcha |
 | 36–48 | verso alto (Bm G D A Bm G) | Batería más llena, piano en corcheas, las cuerdas doblan la melodía (más aguda) |
 | 48–52 | quiebre (G – A) | Sin batería: en cada palabra, un bombo, un sub y el acorde en el piano; el piano canta una nota por palabra y sube a la sensible; platillo al revés hacia el final |
-| 52–56 | final (D) | Impacto, el acorde completo sostenido, la firma de seis notas en la voz y el glockenspiel; todo calla antes del último cuadro |
+| 52–58 | final (D) | Impacto, el acorde completo sostenido, la firma de seis notas en la voz y el glockenspiel; el Re vuelve a sonar cuando entra el precio (55,25); todo calla antes del último cuadro |
 
 Efectos de interfaz, ≈ 9 dB por debajo de la música: un barrido por panel, un toque por dedo, una campanita (en la tonalidad)
 por tarjeta que sale. Los golpes de palabra ya no llevan palma propia: el golpe lo da la música.
