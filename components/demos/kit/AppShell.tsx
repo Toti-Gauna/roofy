@@ -331,7 +331,7 @@ export function AppShell(props: AppShellProps) {
   const mode = theme?.mode ?? 'light';
   const brand = <BrandName business={business} logo={logo} logoStyle={logoStyle} />;
   const simBar = sim ? (
-    <SimBar store={sim.store} label={sim.label} note={sim.note} tour={sim.tour} variant={screen} active={on} announce={sim.announce ?? true} />
+    <SimBar store={sim.store} label={sim.label} note={sim.note} tour={sim.tour} limit={sim.limit} variant={screen} active={on} announce={sim.announce ?? true} />
   ) : null;
   const rootAttrs = {
     ref: setRoot,

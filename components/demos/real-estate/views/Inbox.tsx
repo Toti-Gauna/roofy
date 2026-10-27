@@ -211,7 +211,7 @@ function ConvoList() {
   const lastText = typeof last?.text === 'string' ? last.text : '';
   const rows = BASE_LEADS.filter((l) => ['andres', 'valeria', 'lucia', 'diego'].includes(l.id))
     .sort((a, b) => b.day * 1440 + b.min - (a.day * 1440 + a.min))
-    .map((l) => ({ id: l.id, name: x.person(l.id), preview: t(`inbox.previews.${l.id}`), time: x.fmt.time(l.min), secs: l.responseSec, Icon: SOURCE_ICON[l.source] }));
+    .map((l) => ({ id: l.id, name: x.person(l.id), preview: t(`inbox.previews.${l.id}`), time: x.fmt.time(l.min), secs: l.responseSec, source: l.source, Icon: SOURCE_ICON[l.source] }));
   const LiveIcon = SOURCE_ICON.web;
   return (
     <nav className="re-convos" aria-label={t('inbox.list')}>
@@ -239,9 +239,8 @@ function ConvoList() {
                 <span className="demo-num shrink-0 text-[0.6em] text-[var(--demo-muted)]">{r.time}</span>
               </span>
               <span className="block truncate text-[0.64em] text-[var(--demo-muted)]">{r.preview}</span>
-              <span className="re-convo-meta">
-                {t('chat.ai')} · {t('chat.answeredIn', { seconds: r.secs })}
-              </span>
+              {/* Only the site's guided chat answers on its own (D20); other channels show where they came from. */}
+              <span className="re-convo-meta">{r.source === 'web' ? `${t('chat.ai')} · ${t('chat.answeredIn', { seconds: r.secs })}` : t(`sources.${r.source}`)}</span>
             </span>
           </li>
         ))}

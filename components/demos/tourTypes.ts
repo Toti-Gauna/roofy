@@ -9,4 +9,6 @@
 export interface DemoTourStep {
   id: string;
   view: 'laptop' | 'phone' | 'both';
+  /** roofy: copy key when it differs from `id` (same target, other words — e.g. a plan's own version). */
+  copy?: string;
 }

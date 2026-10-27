@@ -16,6 +16,11 @@ export interface SimConfig {
   note?: string;
   /** `data-tour` id of the bar (guide step), e.g. "sim". */
   tour?: string;
+  /**
+   * Only the first `limit` beats are offered (roofy: a plan whose demo ends earlier, e.g. Contact ends
+   * with the visit booked; the follow-up beats belong to Growth). Default: all.
+   */
+  limit?: number;
 }
 
 /**
@@ -30,6 +35,7 @@ export function SimBar({
   label,
   note,
   tour,
+  limit,
   variant,
   active = true,
   announce = true,
@@ -43,22 +49,24 @@ export function SimBar({
   const t = useTranslations('demoKit.sim');
   const { play } = useSound();
   const snap = useStoreSnapshot(store);
-  const beats = store.beats ?? [];
+  const beats = (store.beats ?? []).slice(0, limit ?? Infinity);
   const uid = useId();
   const panelId = `${uid}-panel`;
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
 
-  const reached = snap.beat ?? -1;
+  // A story that went past the offered beats (the plan changed) reads as finished here.
+  const reached = Math.min(snap.beat ?? -1, beats.length - 1);
   const seg = snap.segment ?? null;
   const playing = !!snap.playing && !!seg;
-  const upcoming = nextBeat(store, snap);
+  const next = nextBeat(store, snap);
+  const upcoming = next && beats.some((b) => b.id === next.id) ? next : null;
   const total = beats.length;
   const done = !playing && reached >= total - 1;
   const current = playing ? seg.beat + 1 : reached + 1;
   const progress = playing ? Math.min(1, Math.max(0, (snap.t - seg.from) / Math.max(1, seg.to - seg.from))) : 0;
-  const playingLabel = playing ? label(beats[seg.beat].id) : '';
+  const playingLabel = playing ? label((store.beats ?? [])[seg.beat].id) : '';
   const counter = current === 0 ? t('counterIdle', { total }) : t('counter', { current, total });
   const noteText = note ?? t('note');
 

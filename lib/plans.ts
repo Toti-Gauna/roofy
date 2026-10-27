@@ -52,7 +52,8 @@ export function capabilityFromPlan(capabilityId: string): PlanId | null {
  * `built` as its areas land. While `draft`, the stage says so.
  */
 export const PLAN_DEMO_STATUS: Record<PlanId, 'built' | 'draft'> = {
-  contact: 'draft',
+  // Lote 3.6: web, complete CRM, guided chat and brand setup are all on screen.
+  contact: 'built',
   growth: 'draft',
   escalar: 'draft',
   hipergrowth: 'draft',

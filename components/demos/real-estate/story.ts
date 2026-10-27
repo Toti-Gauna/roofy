@@ -38,6 +38,7 @@ import {
   dayEndFor,
   isOpenDay,
   type AdvisorId,
+  type BaseTask,
   type BudgetId,
   type ListingId,
   type PayId,
@@ -74,15 +75,35 @@ export interface EstateState {
   own: { at: number; picks: Record<string, ChatPick> } | null;
   /** Pipeline cards the visitor moved (column + story time). */
   moved: Record<string, { column: Stage; at: number }>;
+  /** CRM (lote 3.6): tasks the visitor completed (story time), tasks they added, notes and who the account is seen as. */
+  tasksDone: Record<string, Clock>;
+  tasksAdded: AddedTask[];
+  notes: ContactNote[];
+  viewAs: AdvisorId;
 }
 
-const fresh = (botOff = false): EstateState => ({ botOff, picks: {}, followPicks: {}, mine: [], own: null, moved: {} });
+const fresh = (botOff = false): EstateState => ({ botOff, picks: {}, followPicks: {}, mine: [], own: null, moved: {}, tasksDone: {}, tasksAdded: [], notes: [], viewAs: 'julia' });
 
 export type EstateStore = DemoStore<EstateState>;
 
 /** Module-level (stable) factory for usePairedStore. Beats: no autoplay; "Reiniciar" keeps the assistant switch. */
 export function createEstateStore(paired: boolean): EstateStore {
   return createDemoStore<EstateState>(fresh(), { beats: BEATS, paired, reset: (s) => fresh(s.botOff) });
+}
+
+/** A task the visitor added in the CRM (local demo data). */
+export interface AddedTask extends Omit<BaseTask, 'id'> {
+  id: string;
+  at: number;
+}
+/** A note the visitor wrote on a contact (local demo data: never sent anywhere). */
+export interface ContactNote {
+  id: string;
+  person: PersonId | 'you';
+  text: string;
+  by: AdvisorId;
+  /** When it was written (the story's clock). */
+  clock: Clock;
 }
 
 /** State updates (use with `store.update(...)`; `t` is the store's story time). */
@@ -113,6 +134,18 @@ export const act = {
     else delete moved[id];
     return { ...s, moved };
   },
+  /** Mark a task done (or open again: «Deshacer»). */
+  toggleTask: (id: string, clock: Clock) => (s: EstateState): EstateState => {
+    const tasksDone = { ...s.tasksDone };
+    if (id in tasksDone) delete tasksDone[id];
+    else tasksDone[id] = clock;
+    return { ...s, tasksDone };
+  },
+  addTask: (task: Omit<AddedTask, 'at'>) => (s: EstateState, t: number): EstateState => ({ ...s, tasksAdded: [...s.tasksAdded, { ...task, at: t }] }),
+  removeTask: (id: string) => (s: EstateState): EstateState => ({ ...s, tasksAdded: s.tasksAdded.filter((x) => x.id !== id) }),
+  addNote: (note: ContactNote) => (s: EstateState): EstateState => ({ ...s, notes: [...s.notes, note] }),
+  removeNote: (id: string) => (s: EstateState): EstateState => ({ ...s, notes: s.notes.filter((n) => n.id !== id) }),
+  viewAs: (advisor: AdvisorId) => (s: EstateState): EstateState => ({ ...s, viewAs: advisor }),
   /** «Deshacer» a visit the visitor booked. */
   unbook: (day: number, start: number) => (s: EstateState): EstateState => ({ ...s, mine: s.mine.filter((m) => !(m.day === day && m.start === start)) }),
 };

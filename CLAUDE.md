@@ -51,6 +51,15 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   el plan en pantalla.
 - La demo de Lumen es una copia de Eclipse-Web: `docs/procedencia-lumen.md` dice qué cambió.
 
+## Demos por plan
+
+- **Contact (lote 3.6, `built`):** web, CRM completo (Contactos con historial, Tareas, Equipo con dos roles y «Ver como»), chat
+  guiado (D20) y puesta en marcha de marca (área «Marca»). La historia termina con la visita agendada (`beatLimitFor`); su guía es
+  `contactTour`. Qué muestra: `docs/demo-contact.md`.
+- El chat del sitio es **guiado** (botones, guion fijo) en todas las vistas: ningún plan vende un asistente con IA en el sitio.
+  No escribas «IA»/«AI» en los textos de la demo (`tests/contact.test.ts`).
+- Las áreas nuevas de cada plan se mapean a su capacidad en `components/experience/lens.ts` (`TAB_CAPABILITY`, `BEAT_CAPABILITY`).
+
 ## Interacción premium (lote 3.5b, D34)
 
 Toda demo de EstateOS usa el kit de `components/demos/kit` (`pace.ts`, `pacer.ts`, `interaction.tsx`): el asistente

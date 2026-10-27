@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ArrowLeft, Bath, CalendarCheck, CalendarDays, Check, ChevronLeft, ChevronRight, MessageCircle, Ruler, Square, X } from 'lucide-react';
+import { ArrowLeft, Bath, CalendarCheck, CalendarDays, Check, ChevronLeft, ChevronRight, Link2, MessageCircle, Ruler, Square, X } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
 import { BrowserFrame, Button, ChatPeek, ChatWidget, DemoBadge, Glint, PushBanner, Seal, SimError, SiteSection, Skeleton, useConfirm, useSimulatedLoad } from '../../kit';
 import { ASKED, CAL_DAYS, LISTINGS, SITE_TIMES, SITE_URL, listingById, listingPath, type ListingId, type Scene, type ZoneId } from '../data';
@@ -250,10 +250,37 @@ function ListingSkeleton({ compact }: { compact: boolean }) {
   );
 }
 
-function ListingPage({ id, compact, back, onAsk, onSeeAgenda }: { id: ListingId; compact: boolean; back: () => void; onAsk?: () => void; onSeeAgenda?: (day: number) => void }) {
+function ListingPage({
+  id,
+  compact,
+  back,
+  open,
+  onAsk,
+  onSeeAgenda,
+}: {
+  id: ListingId;
+  compact: boolean;
+  back: () => void;
+  /** Opens another listing (the «Similares» block). */
+  open: (id: ListingId) => void;
+  onAsk?: () => void;
+  onSeeAgenda?: (day: number) => void;
+}) {
   const t = useTranslations('demoRealEstate');
-  const { view } = useEstate();
+  const { view, active } = useEstate();
   const x = useEstateText();
+  const confirm = useConfirm();
+  const { play } = useSound();
+  const similar = LISTINGS.filter((o) => o.id !== id && (o.zone === listingById(id).zone || o.rooms === listingById(id).rooms)).slice(0, 2);
+  const share = async () => {
+    try {
+      await navigator.clipboard?.writeText(`https://${listingPath(id)}`);
+    } catch {
+      // Clipboard blocked: the address is in the bar above.
+    }
+    if (active) play('select');
+    confirm({ text: t('site.shared'), icon: Link2 });
+  };
   const l = listingById(id);
   const reserved = view.outcome === 'reserve' && view.outcomeAt !== null && view.t >= view.outcomeAt && view.listing === id;
   const [booking, setBooking] = useState(!compact);
@@ -306,6 +333,7 @@ function ListingPage({ id, compact, back, onAsk, onSeeAgenda }: { id: ListingId;
             <li key={f}>{t(`features.${f}`)}</li>
           ))}
         </ul>
+        <p className="re-listing-desc">{t(`listing.desc.${id}`)}</p>
         <div className="re-listing-actions">
           <Button icon={CalendarCheck} onClick={() => setBooking(true)} aria-expanded={booking} data-tour="site">
             {t('site.book')}
@@ -336,6 +364,80 @@ function ListingPage({ id, compact, back, onAsk, onSeeAgenda }: { id: ListingId;
           <MapBlock />
           <p className="mt-[0.4em] text-[0.66em] text-[var(--demo-muted)]">{x.zone(l.zone)}</p>
         </figure>
+        <section className="re-block" aria-label={t('site.details')}>
+          <p className="re-label">{t('site.details')}</p>
+          <dl className="re-details">
+            <div>
+              <dt>{t('site.detail.kind')}</dt>
+              <dd>{x.kind(id)}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.rooms')}</dt>
+              <dd>{x.rooms(id)}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.area')}</dt>
+              <dd className="demo-num">{t('listing.area', { count: l.area })}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.baths')}</dt>
+              <dd className="demo-num">{l.baths}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.age')}</dt>
+              <dd>{l.age ? t('site.detail.years', { count: l.age }) : t('site.detail.new')}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.facing')}</dt>
+              <dd>{t(`site.facing.${l.facing}`)}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.fees')}</dt>
+              <dd className="demo-num">{l.fees ? t('listing.fees', { amount: l.fees }) : t('listing.noFees')}</dd>
+            </div>
+            <div>
+              <dt>{t('site.detail.credit')}</dt>
+              <dd>{l.features.includes('credit') ? t('site.detail.yes') : t('site.detail.no')}</dd>
+            </div>
+          </dl>
+        </section>
+        <section className="re-block re-agent" aria-label={t('site.agent')}>
+          <p className="re-label">{t('site.agent')}</p>
+          <p className="re-agent-name">{t('people.marcos')}</p>
+          <p className="text-[0.66em] text-[var(--demo-muted)]">{t('site.agentRole')}</p>
+          <div className="flex flex-wrap gap-[0.4em]">
+            {onAsk ? (
+              <Button variant="secondary" icon={MessageCircle} onClick={onAsk}>
+                {t('site.ask')}
+              </Button>
+            ) : null}
+            <Button variant="ghost" icon={Link2} onClick={share}>
+              {t('site.share')}
+            </Button>
+          </div>
+        </section>
+        {similar.length ? (
+          <section className="re-block re-similar" aria-label={t('site.similar')}>
+            <p className="re-label">{t('site.similar')}</p>
+            <ul>
+              {similar.map((o) => (
+                <li key={o.id}>
+                  <button type="button" className="re-similar-item" onClick={() => open(o.id)}>
+                    <span className="re-similar-img">
+                      <Facade listing={o} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-[0.74em] font-semibold">{o.street}</span>
+                      <span className="block truncate text-[0.64em] text-[var(--demo-muted)]">
+                        {x.price(o.price)} · {x.rooms(o.id, true)}
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </div>
     </div>
   );
@@ -380,7 +482,7 @@ function PublicSite({
       ) : loading ? (
         <ListingSkeleton compact={compact} />
       ) : (
-        <ListingPage key={page.id} id={page.id} compact={compact} back={() => setPage({ name: 'home' })} onAsk={onAsk} onSeeAgenda={onSeeAgenda} />
+        <ListingPage key={page.id} id={page.id} compact={compact} back={() => setPage({ name: 'home' })} open={(id) => setPage({ name: 'listing', id })} onAsk={onAsk} onSeeAgenda={onSeeAgenda} />
       )}
     </div>
   );

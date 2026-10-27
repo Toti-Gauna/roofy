@@ -149,7 +149,15 @@
       "available": "Available",
       "reserved": "Reserved",
       "photo": "Facade of {street}, illustration",
-      "photoN": "Front of {street}, illustration {n} of {total}"
+      "photoN": "Front of {street}, illustration {n} of {total}",
+      "desc": {
+        "olmos": "A two-bedroom flat on a high floor with a front balcony and morning light. Separate kitchen, bedrooms at the back and a well-kept building two blocks from the park.",
+        "ceibo": "A two-bedroom flat in a nineties building, with a balcony and roomy spaces. Mortgage-eligible, with low building fees.",
+        "ribera": "A duplex with its own terrace facing the river, a garage and three bedrooms. Double-height living room and a grill on the terrace.",
+        "colinas": "A house on its own lot with a garden and pool, three bedrooms and a barbecue house. Quiet street, minutes from the highway.",
+        "parque": "A front-facing PH with no building fees, a patio and lots of light. Two bedrooms and room to extend on the roof.",
+        "loft": "A brand-new loft downtown with big windows and double height. Good to live in or to rent out; mortgage-eligible."
+      }
     },
     "listings": {
       "title": "Listings",
@@ -197,7 +205,7 @@
       "expand": "Open the website chat",
       "as": "You are {name}: pick her answers.",
       "answeredIn": "{seconds} s",
-      "ai": "AI",
+      "ai": "Guided chat",
       "steps": {
         "ask": "Hi, is the 3-room apartment on {street} still available? Can I see it this week?",
         "hi": "Hi {name}! Yes, it's available. Two quick questions and I'll send you viewing times.",
@@ -242,7 +250,7 @@
         "visit": "Viewing → {value}",
         "crm": "Stage → {value}"
       },
-      "botLabel": "Lumi · AI",
+      "botLabel": "Lumi · guided chat",
       "humanLabel": "{name} · team",
       "noReply": "No reply",
       "channel": "Conversation channel",
@@ -284,7 +292,12 @@
       "listings": "Listings",
       "site": "Website",
       "groupAuto": "Automations",
-      "groupShop": "Storefront"
+      "groupShop": "Storefront",
+      "contacts": "Contacts",
+      "tasks": "Tasks",
+      "brand": "Brand",
+      "team": "Team",
+      "groupAccount": "Account"
     },
     "top": {
       "closed": "Office closed · Lumi on duty",
@@ -296,11 +309,11 @@
     },
     "bot": {
       "name": "Lumi",
-      "title": "Lumi · AI assistant",
-      "on": "Answers 24/7 on the site and WhatsApp",
+      "title": "Lumi · guided chat",
+      "on": "Answers 24/7 on the site, with buttons",
       "offShort": "Off: inquiries wait",
-      "switch": "24/7 assistant",
-      "hint": "Turn it off: the demo goes back to 11:40 PM and you simulate the same night without the assistant.",
+      "switch": "24/7 guided chat",
+      "hint": "Turn it off: the demo goes back to 11:40 PM and you simulate the same night without the chat.",
       "hintOff": "Turn it on: the demo goes back to 11:40 PM and the inquiry is answered in seconds."
     },
     "kinds": {
@@ -404,7 +417,8 @@
       "activity": "Activity",
       "headlineReserved": "Reserved. <em>Without opening the office.</em>",
       "headlineOpens": "9:00 AM: the office opens. The inquiry waited all night.",
-      "headlineLost": "{late} later, <em>the lead was gone.</em>"
+      "headlineLost": "{late} later, <em>the lead was gone.</em>",
+      "keySite": "of website inquiries answered in under 1 minute"
     },
     "pipeline": {
       "title": "Pipeline",
@@ -539,7 +553,37 @@
       "url": "Website address",
       "prevPhoto": "Previous photo",
       "nextPhoto": "Next photo",
-      "viewSub": "{url} · search, open a property, book a viewing or chat with Lumi"
+      "viewSub": "{url} · search, open a property, book a viewing or chat with Lumi",
+      "shared": "Listing link copied",
+      "details": "Details",
+      "detail": {
+        "kind": "Type",
+        "rooms": "Rooms",
+        "area": "Area",
+        "baths": "Bathrooms",
+        "age": "Age",
+        "years": "{count, plural, one {# year} other {# years}}",
+        "new": "Brand new",
+        "facing": "Facing",
+        "fees": "Building fees",
+        "credit": "Mortgage-eligible",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "facing": {
+        "N": "North",
+        "NE": "Northeast",
+        "E": "East",
+        "SE": "Southeast",
+        "S": "South",
+        "SO": "Southwest",
+        "O": "West",
+        "NO": "Northwest"
+      },
+      "agent": "Your agent",
+      "agentRole": "Lumen Propiedades agent · answers Monday to Saturday",
+      "share": "Share listing",
+      "similar": "Similar"
     },
     "toast": {
       "inquiry": "New inquiry · 11:40 PM",
@@ -592,7 +636,7 @@
     "own": {
       "label": "Your chat with Lumi on the {business} website",
       "steps": {
-        "hi": "Hi! I'm Lumi, Lumen's assistant. What are you looking for?",
+        "hi": "Hi! I'm Lumi, Lumen's chat. Pick an option and I'll help: what are you looking for?",
         "pay": "How are you planning to pay?",
         "budget": "What's your budget, at most?",
         "match_two": "For 2 rooms, take a look at this loft on {street}. Want to see it?",
@@ -612,6 +656,327 @@
     },
     "confirm": {
       "moved": "{name} moved to {stage}"
+    },
+    "tasks": {
+      "title": "Tasks",
+      "sub": "What needs doing, by day and by person. One tap marks it done.",
+      "filter": "Show",
+      "open": "{count} open",
+      "doneTab": "{count} done",
+      "done": "done",
+      "seeContact": "See contact",
+      "owner": "Owner: {name}",
+      "doneToast": "Task done",
+      "addedToast": "Task added",
+      "emptyOpen": "Nothing left to do.",
+      "emptyOpenBody": "Add a task or play the inquiry simulation.",
+      "emptyDone": "Nothing done yet.",
+      "emptyDoneBody": "Tick a task's box to mark it done.",
+      "kinds": {
+        "call": {
+          "title": "Call {name}",
+          "short": "Call"
+        },
+        "send": {
+          "title": "Send {street}'s listing to {name}",
+          "short": "Send listing"
+        },
+        "confirm": {
+          "title": "Confirm the viewing with {name}",
+          "short": "Confirm viewing"
+        },
+        "docs": {
+          "title": "Ask {name} for the paperwork",
+          "short": "Ask for paperwork"
+        }
+      },
+      "new": {
+        "title": "New task",
+        "kind": "What to do",
+        "contact": "With whom",
+        "day": "Day",
+        "time": "Time",
+        "save": "Add task",
+        "cancel": "Cancel"
+      }
+    },
+    "contacts": {
+      "title": "Contacts",
+      "sub": "{count, plural, one {# contact} other {# contacts}} with the full story: where they came from, what they want, what was done and what's next.",
+      "caption": "Lumen Propiedades contacts",
+      "cols": {
+        "name": "Contact",
+        "stage": "Stage",
+        "listing": "Property",
+        "score": "Intent",
+        "owner": "Owner"
+      },
+      "empty": "No contacts to show yet.",
+      "emptyBody": "When someone asks through the website, they show up here with their file.",
+      "lost": "Lost",
+      "back": "Contacts",
+      "since": "First contact: {when}",
+      "phone": "Phone",
+      "email": "Email",
+      "owner": "Owner",
+      "copyPhone": "Copy phone",
+      "copied": "Phone copied",
+      "visits": "Viewings",
+      "noVisits": "No viewings booked.",
+      "tasks": "Tasks",
+      "noTasks": "No open tasks.",
+      "history": "History",
+      "noteLabel": "Note about the contact",
+      "notePlaceholder": "Write a note for the team (it stays in this demo, nothing is sent).",
+      "addNote": "Save note",
+      "noteSaved": "Note saved",
+      "noteBy": "Note by {name}: "
+    },
+    "history": {
+      "inquiry": "Asked about {street} · {source}",
+      "answered": "The guided chat answered in {seconds} s",
+      "qualified": "Qualified: {pay} · {budget}",
+      "booked": "Viewing booked: {slot}",
+      "reserved": "Reserved {street}",
+      "moved": "Moved by hand to {stage}",
+      "taskDone": "Task done: {task}"
+    },
+    "team": {
+      "title": "Team",
+      "sub": "Who works on the account and what each one can do. Two roles: the owner and the agent.",
+      "roles": {
+        "admin": "Owner",
+        "advisor": "Agent"
+      },
+      "load": "{contacts} contacts · {tasks} open tasks",
+      "seeing": "Seeing the account this way",
+      "viewAs": "View as {name}",
+      "yes": "Yes",
+      "no": "No",
+      "own": "Their own only",
+      "permsTitle": "Permissions by role",
+      "perm": "Permission",
+      "perms": {
+        "seeAll": "See contacts and inquiries",
+        "reassign": "Reassign contacts",
+        "listings": "Add and edit properties",
+        "site": "Change the website and brand",
+        "users": "Invite and remove people",
+        "export": "Export contacts"
+      },
+      "inviteTitle": "Invitations",
+      "invite": "Invite",
+      "inviteOwnerOnly": "Only the owner invites people.",
+      "invited": "Invitation created",
+      "email": "Email",
+      "emailPlaceholder": "name@lumenpropiedades.demo",
+      "role": "Role",
+      "send": "Create invitation",
+      "cancel": "Cancel",
+      "pending": "pending",
+      "inviteNote": "Demo: the invitation stays on this screen; no email is sent.",
+      "banner": "You're viewing the account as {name} · {role}",
+      "back": "Back to {name}"
+    },
+    "brand": {
+      "title": "Brand",
+      "sub": "The setup the plan includes: your brand on the website, the listings and social. Bounded; anything beyond it is quoted separately.",
+      "deliverables": "Setup deliverables",
+      "items": {
+        "diagnosis": {
+          "name": "Review",
+          "text": "What the agency shows today and what to fix first."
+        },
+        "identity": {
+          "name": "Refined identity",
+          "text": "Existing logo refined, palette, type and templates."
+        },
+        "site": {
+          "name": "Website and listings in your brand",
+          "text": "The site and every listing go out in your colors and logo."
+        },
+        "profiles": {
+          "name": "Two profiles audited",
+          "text": "Bio, cover, highlights and call to action."
+        },
+        "library": {
+          "name": "12 hooks and 6 example videos",
+          "text": "Ideas and scripts to reuse, not exclusive ads."
+        },
+        "guide": {
+          "name": "Operating guide",
+          "text": "How the team uses the product, step by step."
+        }
+      },
+      "kit": "Brand kit",
+      "swatches": {
+        "stone": "Stone",
+        "ink": "Ink",
+        "cobalt": "Cobalt",
+        "sand": "Sand"
+      },
+      "typeDisplay": "Homes with good light",
+      "typeBody": "Headlines in an editorial serif; text and data in a clear sans. Plenty of white space and thin rules.",
+      "applied": "Your brand on the website",
+      "before": "Base template",
+      "after": "With your brand",
+      "baseName": "Your agency",
+      "navSample": "Buy · Rent · Valuation",
+      "ctaSample": "Book a viewing",
+      "afterNote": "This is Lumen's website after the setup: same product, its identity.",
+      "beforeNote": "The template any agency starts with, before its brand is applied.",
+      "profiles": "Profile audit",
+      "auditCaption": "Audit: {profile}",
+      "auditItem": "What was reviewed",
+      "auditBefore": "Before",
+      "auditAfter": "After",
+      "auditItems": {
+        "bio": "Bio",
+        "cover": "Cover",
+        "highlights": "Highlights",
+        "cta": "Call to action"
+      },
+      "profile": {
+        "main": {
+          "name": "Main profile",
+          "handle": "@lumen.propiedades",
+          "bio": {
+            "before": "“Real estate agency. DM for inquiries.”",
+            "after": "“Homes and flats in La Arboleda and Ribera. Instant answers from our website.”"
+          },
+          "cover": {
+            "before": "A night photo of the shop window, no logo.",
+            "after": "Olmos 1420's façade in the brand palette."
+          },
+          "highlights": {
+            "before": "Three old, unnamed highlights.",
+            "after": "Buy · Sell · Mortgage · Neighborhoods."
+          },
+          "cta": {
+            "before": "“Send us a message.”",
+            "after": "A link to the website's listings with the guided chat."
+          }
+        },
+        "second": {
+          "name": "Second profile",
+          "handle": "@lumen.tasaciones",
+          "bio": {
+            "before": "No bio.",
+            "after": "“We value your property with neighborhood data. Book from the website.”"
+          },
+          "cover": {
+            "before": "A stock photo of a key.",
+            "after": "A floor plan in the brand's type."
+          },
+          "highlights": {
+            "before": "None.",
+            "after": "Valuations · How to sell · Questions."
+          },
+          "cta": {
+            "before": "None.",
+            "after": "“Request a valuation” with a link to the site."
+          }
+        }
+      },
+      "library": "Content library",
+      "hooks": "{count} hooks",
+      "hookTags": {
+        "buy": "Buy",
+        "sell": "Sell",
+        "credit": "Mortgage",
+        "zone": "Area",
+        "visit": "Viewing",
+        "team": "Team"
+      },
+      "hook": {
+        "h1": "Three things nobody tells you before buying your first two-bedroom.",
+        "h2": "Is USD 150,000 enough in La Arboleda? We did the math.",
+        "h3": "The mistake that keeps a house on the market for six months.",
+        "h4": "How a PH is valued: what the appraiser looks at first.",
+        "h5": "Mortgages: what they ask for, and in what order.",
+        "h6": "What changes when you buy with a mortgage instead of cash.",
+        "h7": "A Saturday in Ribera: three places to know before you move.",
+        "h8": "La Arboleda in one minute: light, transport and prices.",
+        "h9": "What to check on a 30-minute viewing (and what not to).",
+        "h10": "We visited Olmos 1420 at its brightest hour.",
+        "h11": "This is how we answer an inquiry at 11:40 PM.",
+        "h12": "Who answers when you write to Lumen."
+      },
+      "copyHook": "Copy the hook “{hook}”",
+      "hookCopied": "Hook copied",
+      "videos": "{count} example videos",
+      "seconds": "{seconds} s",
+      "formats": {
+        "vertical": "Vertical 9:16",
+        "square": "Square 1:1"
+      },
+      "video": {
+        "v1": {
+          "title": "Olmos 1420, from the door to the balcony",
+          "a": "Façade shot with the address on screen.",
+          "b": "Short walk-through: living room, kitchen, balcony.",
+          "c": "Close on the listing's price and “Book your viewing”."
+        },
+        "v2": {
+          "title": "Two-bedrooms you can buy with a mortgage",
+          "a": "A direct question: “Can you do it with a mortgage?”",
+          "b": "Ceibo 655 in three shots with the key facts.",
+          "c": "Close: “Ask through the website chat”."
+        },
+        "v3": {
+          "title": "A PH with a patio, explained",
+          "a": "What a PH is and why it has no building fees.",
+          "b": "Laprida 1735: patio, light and plan.",
+          "c": "Close on the neighborhood and the listing link."
+        },
+        "v4": {
+          "title": "A house with a garden: what weighs in a valuation",
+          "a": "Three things an appraiser checks.",
+          "b": "Los Aromos 88 as the example.",
+          "c": "Close: “Request your valuation”."
+        },
+        "v5": {
+          "title": "A brand-new loft downtown",
+          "a": "Before and after the afternoon light.",
+          "b": "Mitre 402: size and price.",
+          "c": "Close on the viewing calendar."
+        },
+        "v6": {
+          "title": "A duplex facing the river",
+          "a": "The terrace at sunset.",
+          "b": "Paseo del Río 210: garage and terrace.",
+          "c": "Close: “Book a Saturday viewing”."
+        }
+      },
+      "videosNote": "Examples to shoot with your team. Monthly video and tour production is part of Growth.",
+      "guide": "Operating guide",
+      "chapters": {
+        "inquiry": {
+          "name": "Answer an inquiry",
+          "text": "What to read in the file before replying, and when to call."
+        },
+        "listing": {
+          "name": "Add a property",
+          "text": "Photos, plan, facts and description: the order that works."
+        },
+        "pipeline": {
+          "name": "Move the pipeline",
+          "text": "What each stage means and when to move to the next."
+        },
+        "visits": {
+          "name": "Book viewings",
+          "text": "Times, confirmation and what to do when someone doesn't show."
+        },
+        "tasks": {
+          "name": "Work with tasks",
+          "text": "One task per next step, with a day and an owner."
+        },
+        "publish": {
+          "name": "Post on social",
+          "text": "How to use the hooks and example videos every week."
+        }
+      },
+      "readOnly": "You're viewing the account as an agent: the brand is shown, but only the owner can change it."
     }
   },
   "sound": {
@@ -663,11 +1028,11 @@
     "realEstate": {
       "sim": {
         "title": "You decide what happens tonight",
-        "body": "Nothing moves on its own. Tap “Simulate” and follow the 11:40 PM inquiry: reply, qualification, viewing and follow-up. Switch the assistant off to see the same night without it."
+        "body": "Nothing moves on its own. Tap “Simulate” and follow the 11:40 PM inquiry: reply, qualification, viewing and follow-up. Switch the guided chat off to see the same night without it."
       },
       "chat": {
         "title": "Every inquiry, answered in seconds",
-        "body": "Lumi replies at any hour, asks how they'll pay and their budget, and leaves the lead file ready. You can answer for Carolina."
+        "body": "The guided chat replies at any hour: with buttons it asks how they'll pay and their budget, and leaves the lead file ready. You can answer for Carolina."
       },
       "site": {
         "title": "Your website searches and books",
@@ -684,6 +1049,18 @@
       "followups": {
         "title": "A follow-up after every viewing",
         "body": "Confirmation, reminder and “how did you like it?” on WhatsApp, with the property and their name. That is how a viewing turns into a reservation."
+      },
+      "contacts": {
+        "title": "Every contact, with their whole story",
+        "body": "Where they came from, what they want, their viewings, their tasks and everything that happened, in one file. Leave a note or add a task: it goes into the history."
+      },
+      "brand": {
+        "title": "Your brand, from the setup",
+        "body": "Included in the plan: a refined identity, the website and listings in your brand, two audited profiles, 12 hooks, 6 example videos and the operating guide. Compare “Base template” and “With your brand”."
+      },
+      "simContact": {
+        "title": "You decide what happens tonight",
+        "body": "Nothing moves on its own. Tap “Simulate” and follow the 11:40 PM inquiry: the guided chat answers, the lead is qualified and it ends with a viewing in the calendar."
       }
     }
   },
