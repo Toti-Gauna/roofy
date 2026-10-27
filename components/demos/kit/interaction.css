@@ -1,0 +1,266 @@
+/*
+ * Premium interaction kit (lote 3.5b, D34 — guía de motion §12). Colors come from the demo's theme
+ * (--demo-*), sizes in em (demos scale with their screen). Motion: transform / opacity / clip-path only;
+ * reduced motion keeps every state still.
+ */
+
+/* ---- Thinking ------------------------------------------------------- */
+.demo-think {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.78em;
+  line-height: 1.3;
+  color: var(--demo-muted);
+}
+.demo-think-orb {
+  position: relative;
+  flex: none;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 999px;
+  background: var(--demo-accent);
+  animation: demo-think-pulse 1.1s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+/* A soft halo around the orb (opacity only). */
+.demo-think-orb::after {
+  content: '';
+  position: absolute;
+  inset: -0.32em;
+  border-radius: inherit;
+  background: var(--demo-accent);
+  opacity: 0.16;
+}
+@keyframes demo-think-pulse {
+  from {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.demo-msg-thinking {
+  padding-block: 0.55em;
+}
+
+/* ---- Writing ------------------------------------------------------- */
+.demo-write {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  white-space: inherit;
+  cursor: pointer;
+}
+.demo-write:focus-visible {
+  outline: 2px solid var(--demo-accent);
+  outline-offset: 0.25em;
+  border-radius: 0.2em;
+}
+.demo-write-caret {
+  display: inline-block;
+  width: 0.12em;
+  height: 1em;
+  margin-left: 0.08em;
+  vertical-align: -0.12em;
+  background: currentColor;
+  opacity: 0.55;
+}
+.demo-write-reveal {
+  display: block;
+}
+
+/* ---- Seal ------------------------------------------------------------ */
+.demo-seal {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12em 0.55em;
+  border: 1px solid var(--demo-line-strong, var(--demo-line));
+  border-radius: 999px;
+  font-size: 0.58em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--demo-muted);
+}
+
+/* ---- Confirmation (bottom of the view) ------------------------------- */
+.demo-confirm-host {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  bottom: 1em;
+  width: max-content;
+  max-width: calc(100% - 2em);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.demo-confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.45em 0.5em 0.45em 0.85em;
+  border-radius: 999px;
+  background: var(--demo-ink);
+  color: var(--demo-bg);
+  box-shadow: var(--demo-shadow-lg);
+  font-size: 0.78em;
+  pointer-events: auto;
+  animation: demo-confirm-in 0.32s var(--demo-ease) both;
+}
+.demo-confirm-icon {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  color: var(--demo-ok, currentColor);
+}
+.demo-confirm-text {
+  min-width: 0;
+  font-weight: 500;
+}
+.demo-confirm-undo {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 2.2em;
+  padding: 0 0.8em;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.12);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.demo-confirm-undo svg {
+  width: 1em;
+  height: 1em;
+}
+.demo-confirm-undo:focus-visible {
+  outline: 2px solid var(--demo-bg);
+  outline-offset: 2px;
+}
+@keyframes demo-confirm-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+}
+
+/* ---- Success glint (once) -------------------------------------------- */
+.demo-glint {
+  position: absolute;
+  z-index: 2;
+  top: -0.35em;
+  right: -0.35em;
+  width: 1.3em;
+  height: 1.3em;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 46%, currentColor 46% 54%, transparent 54%),
+    linear-gradient(0deg, transparent 46%, currentColor 46% 54%, transparent 54%);
+  color: var(--demo-accent);
+  -webkit-mask: radial-gradient(circle, #000 0 18%, rgb(0 0 0 / 0.75) 30%, transparent 70%);
+  mask: radial-gradient(circle, #000 0 18%, rgb(0 0 0 / 0.75) 30%, transparent 70%);
+  opacity: 0;
+  animation: demo-glint 0.76s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes demo-glint {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.1) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(90deg);
+  }
+}
+
+/* ---- Skeleton -------------------------------------------------------- */
+.demo-skel {
+  display: block;
+  border-radius: var(--demo-radius-sm, 0.4em);
+  background: var(--demo-sunken, rgb(0 0 0 / 0.06));
+}
+
+/* ---- Simulated error ------------------------------------------------- */
+.demo-simerror {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35em 0.55em;
+  align-items: start;
+  padding: 0.65em 0.75em;
+  border: 1px solid var(--demo-bad);
+  border-radius: var(--demo-radius-sm, 0.4em);
+  background: var(--demo-surface);
+  animation: demo-confirm-in 0.28s var(--demo-ease) both;
+}
+.demo-simerror-icon {
+  width: 1.05em;
+  height: 1.05em;
+  margin-top: 0.1em;
+  color: var(--demo-bad);
+}
+.demo-simerror-text {
+  margin: 0;
+  font-size: 0.74em;
+  line-height: 1.45;
+}
+.demo-simerror-action {
+  grid-column: 2;
+}
+
+/* ---- Empty ----------------------------------------------------------- */
+.demo-empty {
+  display: grid;
+  gap: 0.45em;
+  justify-items: start;
+}
+.demo-empty-body {
+  margin: 0;
+  font-size: 0.74em;
+  line-height: 1.5;
+  color: var(--demo-muted);
+}
+.demo-empty-action {
+  margin-top: 0.3em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-think-orb,
+  .demo-confirm,
+  .demo-simerror {
+    animation: none;
+  }
+  .demo-glint {
+    display: none;
+  }
+}
+
+/* A card that lands after its message was written fades in (opacity only). */
+.demo-msg-card-in {
+  animation: demo-card-in 0.24s ease-out both;
+}
+@keyframes demo-card-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-msg-card-in {
+    animation: none;
+  }
+}

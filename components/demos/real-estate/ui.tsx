@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   BadgeCheck,
@@ -175,38 +175,18 @@ const TOASTED: EstateEvent['kind'][] = ['inquiry', 'qualified', 'booked', 'follo
 
 /**
  * Toasts (decorative: the Announcer speaks). Story events show while their beat plays (every
- * beat ends after they leave); the visitor's own bookings show for a few seconds after their click.
+ * beat ends after they leave). The visitor's own bookings are confirmed by the kit's notice (with
+ * «Deshacer», lote 3.5b) where they booked, or by Lumi's answer in the chat: never twice.
  */
 export function EstateToasts({ placement }: { placement: 'top' | 'bottom-right' }) {
   const { view, reduced, recent } = useEstate();
   const text = useEventText();
   const t = useTranslations('demoRealEstate.toast');
-  // The visitor's bookings made while this view is on screen (a local timer started by their click).
-  const ids = view.events
-    .filter((e) => e.kind === 'you')
-    .map((e) => e.id)
-    .join('|');
-  const known = useRef<Set<string> | null>(null);
-  const timers = useRef<number[]>([]);
-  const [own, setOwn] = useState<string[]>([]);
-  useEffect(() => {
-    const now = ids ? ids.split('|') : [];
-    const before = known.current;
-    known.current = new Set(now);
-    const added = before ? now.filter((id) => !before.has(id)) : [];
-    if (!added.length) return;
-    setOwn((r) => [...r, ...added]);
-    timers.current.push(window.setTimeout(() => setOwn((r) => r.filter((x) => !added.includes(x))), 3400));
-  }, [ids]);
-  useEffect(() => {
-    const list = timers.current;
-    return () => list.forEach((id) => window.clearTimeout(id));
-  }, []);
   if (reduced) return null;
   const items: ToastItem[] = view.events
-    .filter((e) => (e.kind === 'you' ? own.includes(e.id) : !e.mine && TOASTED.includes(e.kind) && recent(e.at, 3200)))
+    .filter((e) => !e.mine && TOASTED.includes(e.kind) && recent(e.at, 3200))
     .slice(-2)
-    .map((e) => ({ id: e.id, ...EVENT_ICON[e.kind], title: t(e.kind as 'inquiry'), body: text(e), leaving: e.kind !== 'you' && view.t - e.at >= 2700 }));
+    .map((e) => ({ id: e.id, ...EVENT_ICON[e.kind], title: t(e.kind as 'inquiry'), body: text(e), leaving: view.t - e.at >= 2700 }));
   return <ToastStack items={items} placement={placement} className="re-toasts" />;
 }
 

@@ -106,6 +106,15 @@ export const act = {
     own: { at: s.own?.at ?? t, picks: { ...(s.own?.picks ?? {}), [step]: { reply, at: 0 } } },
   }),
   moveCard: (id: string, column: Stage) => (s: EstateState, t: number): EstateState => ({ ...s, moved: { ...s.moved, [id]: { column, at: t } } }),
+  /** «Deshacer» a move: back to the card's previous manual move, or to none. */
+  restoreMove: (id: string, prev: { column: Stage; at: number } | undefined) => (s: EstateState): EstateState => {
+    const moved = { ...s.moved };
+    if (prev) moved[id] = prev;
+    else delete moved[id];
+    return { ...s, moved };
+  },
+  /** «Deshacer» a visit the visitor booked. */
+  unbook: (day: number, start: number) => (s: EstateState): EstateState => ({ ...s, mine: s.mine.filter((m) => !(m.day === day && m.start === start)) }),
 };
 
 /* ------------------------------------------------------------------ */

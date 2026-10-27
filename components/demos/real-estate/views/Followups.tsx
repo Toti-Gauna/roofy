@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Check, Clock3, Minus, Send } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
-import { ChatWidget, type ChatRun } from '../../kit';
+import { ChatWidget, Seal, type ChatRun } from '../../kit';
 import { CHAT_SLOTS, VISIT_MIN, WEEK } from '../data';
 import { act } from '../story';
 import { useEstate } from '../context';
@@ -45,6 +45,8 @@ export function FollowThread({ className = '', announce: announceProp }: { class
       avatar={<LumenMark />}
       label={t('follow.label', { business, name: t('people.carolina') })}
       announce={announceProp ?? announce}
+      seal={<Seal kind="scripted" />}
+      paceKey="follow"
       stamp={(at) => stamp(start + at)}
       onPick={pick}
       composer={t('follow.composer')}

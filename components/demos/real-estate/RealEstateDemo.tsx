@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNod
 import { useTranslations } from 'next-intl';
 import { Building2, CalendarDays, Columns3, Globe, House, MessagesSquare, Send, Smartphone } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
-import { AppShell, contentToTop, revealInDemo, Avatar, Switch, useBeatFocus, usePairedStore, useStory, type NavItem, type ShellLayout } from '../kit';
+import { AppShell, ConfirmProvider, ConfirmToast, PaceScopeProvider, contentToTop, revealInDemo, Avatar, Switch, useBeatFocus, usePairedStore, useStory, type NavItem, type ShellLayout } from '../kit';
 import type { DemoProps } from '../types';
 import { ADVISORS, BEAT_FOCUS, LUMEN, CHAT_SLOTS, LUMEN_THEME, TODAY, type EstateBeatId, type EstateSpot } from './data';
 import { SPOTS } from './focus';
@@ -160,9 +160,14 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
   if (buyerPhone) {
     return (
       <EstateProvider value={ctx}>
-        <AppShell screen="phone" chrome="bare" theme={LUMEN_THEME} business={business} logo={<LumenMark />} active={active} rootRef={rootRef} statusTime={clock} sim={sim}>
-          <BuyerPhone key={snap.loop} />
-        </AppShell>
+        <PaceScopeProvider value={store}>
+          <ConfirmProvider>
+            <AppShell screen="phone" chrome="bare" theme={LUMEN_THEME} business={business} logo={<LumenMark />} active={active} rootRef={rootRef} statusTime={clock} sim={sim}>
+              <BuyerPhone key={snap.loop} />
+              <ConfirmToast />
+            </AppShell>
+          </ConfirmProvider>
+        </PaceScopeProvider>
       </EstateProvider>
     );
   }
@@ -198,55 +203,64 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
 
   return (
     <EstateProvider value={ctx}>
-      <AppShell
-        screen={screen}
-        theme={LUMEN_THEME}
-        business={business}
-        logo={<LumenMark />}
-        nav={nav}
-        current={tab}
-        onNavigate={(id) => {
-          if (id === 'visits') setVisitsDay(TODAY + 1);
-          setTab(id as EstateTab);
-        }}
-        title={
-          screen === 'laptop' ? (
-            <>
-              <p className="re-toptitle">{t(`nav.${tab}`)}</p>
-              <p className="re-topdate demo-num">{t('top.date', { date: x.day(view.clock.day, 'long'), time: clock })}</p>
-            </>
-          ) : undefined
-        }
-        headerRight={headerRight}
-        sidebarFooter={<SidebarFooter />}
-        layout={LAYOUT}
-        phoneNav="top"
-        active={active}
-        rootRef={rootRef}
-        statusTime={clock}
-        sim={sim}
-        overlay={
-          screen === 'phone' ? (
-            <BuyerPhone
-              key={snap.loop}
-              onClose={() => {
-                setBuyerOpen(false);
-                if (active) play('close');
-              }}
-            />
-          ) : undefined
-        }
-        overlayOpen={buyerOpen}
-        overlayOrigin={['80%', '4%']}
-      >
-        <div className="re" data-screen={screen} data-tab={tab}>
-          <EstateToasts placement={screen === 'phone' ? 'top' : 'bottom-right'} />
-          <div key={tab} className="demo-view re-view">
-            {lockedFrom ? <LockedArea tab={tab} from={lockedFrom} /> : <View />}
-          </div>
-          <Announcer />
-        </div>
-      </AppShell>
+      <PaceScopeProvider value={store}>
+        <ConfirmProvider>
+          <AppShell
+            screen={screen}
+            theme={LUMEN_THEME}
+            business={business}
+            logo={<LumenMark />}
+            nav={nav}
+            current={tab}
+            onNavigate={(id) => {
+              if (id === 'visits') setVisitsDay(TODAY + 1);
+              setTab(id as EstateTab);
+            }}
+            title={
+              screen === 'laptop' ? (
+                <>
+                  <p className="re-toptitle">{t(`nav.${tab}`)}</p>
+                  <p className="re-topdate demo-num">{t('top.date', { date: x.day(view.clock.day, 'long'), time: clock })}</p>
+                </>
+              ) : undefined
+            }
+            headerRight={headerRight}
+            sidebarFooter={<SidebarFooter />}
+            layout={LAYOUT}
+            phoneNav="top"
+            active={active}
+            rootRef={rootRef}
+            statusTime={clock}
+            sim={sim}
+            overlay={
+              screen === 'phone' ? (
+                <>
+                  <BuyerPhone
+                    key={snap.loop}
+                    onClose={() => {
+                      setBuyerOpen(false);
+                      if (active) play('close');
+                    }}
+                  />
+                  {/* The confirmation shows on the layer on top (one host at a time). */}
+                  {buyerOpen ? <ConfirmToast /> : null}
+                </>
+              ) : undefined
+            }
+            overlayOpen={buyerOpen}
+            overlayOrigin={['80%', '4%']}
+          >
+            <div className="re" data-screen={screen} data-tab={tab}>
+              <EstateToasts placement={screen === 'phone' ? 'top' : 'bottom-right'} />
+              <div key={tab} className="demo-view re-view">
+                {lockedFrom ? <LockedArea tab={tab} from={lockedFrom} /> : <View />}
+              </div>
+              <Announcer />
+              {buyerOpen ? null : <ConfirmToast />}
+            </div>
+          </AppShell>
+        </ConfirmProvider>
+      </PaceScopeProvider>
     </EstateProvider>
   );
 }

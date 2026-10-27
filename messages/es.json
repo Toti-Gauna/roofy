@@ -98,6 +98,20 @@
       "moveCard": "Mover «{card}»",
       "moveTo": "Mover a {column}",
       "moved": "«{card}» pasó a {column}."
+    },
+    "pace": {
+      "thinking": "Pensando la respuesta…",
+      "thinkingShort": "Pensando…",
+      "thinkingLabel": "{name} está pensando la respuesta",
+      "skip": "Mostrar la respuesta completa",
+      "loading": "Cargando la página…"
+    },
+    "seal": {
+      "scripted": "Demostración guionada",
+      "simulatedCall": "Llamada simulada"
+    },
+    "confirm": {
+      "undo": "Deshacer"
     }
   },
   "demoRealEstate": {
@@ -233,7 +247,8 @@
       "noReply": "Sin respuesta",
       "channel": "Canal de la conversación",
       "emptyTitle": "Todavía no escribió nadie.",
-      "emptyBody": "Tocá «Simular» arriba: a las 23:40 llega la consulta de Carolina y Lumi la atiende."
+      "emptyBody": "A las 23:40 llega la consulta de Carolina y Lumi la atiende.",
+      "emptyAction": "Simular la consulta"
     },
     "lead": {
       "title": "Ficha del lead",
@@ -515,7 +530,11 @@
         "again": "Agendar otra",
         "pickDay": "Elegí un día",
         "seeAgenda": "Ver en la agenda",
-        "note": "Visita de demostración: no se envía nada."
+        "note": "Visita de demostración: no se envía nada.",
+        "confirmed": "Visita agendada · {slot}",
+        "taken": "No hay lugar a las {time}. Probá {alt}.",
+        "takenDay": "Las {time} se ocupó y ese día no quedan horarios. Elegí otro día.",
+        "bookAlt": "Agendar {time}"
       },
       "url": "Dirección del sitio",
       "prevPhoto": "Foto anterior",
@@ -590,6 +609,9 @@
         "house": "Casa con jardín",
         "later": "Ahora no"
       }
+    },
+    "confirm": {
+      "moved": "{name} pasó a {stage}"
     }
   },
   "sound": {

@@ -2052,3 +2052,60 @@
   border: 0;
   border-radius: var(--demo-radius);
 }
+
+/* ---- Listing skeleton (lote 3.5b: the page's shape while it "loads", ≤ 600 ms) ---- */
+.re-listing-skel .re-skel-photo {
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+}
+.re-listing-skel[data-compact] .re-skel-photo {
+  margin: 0 calc(-1 * var(--site-pad));
+}
+.re-skel-body {
+  display: grid;
+  align-content: start;
+  gap: 0.7em;
+}
+.re-skel-line {
+  height: 0.8em;
+  width: 100%;
+}
+.re-skel-line--title {
+  height: 2em;
+  width: 80%;
+}
+.re-skel-line--price {
+  height: 1.1em;
+  width: 40%;
+}
+.re-skel-line--short {
+  width: 60%;
+}
+.re-skel-facts {
+  display: flex;
+  gap: 0.5em;
+}
+.re-skel-chip {
+  height: 1.6em;
+  width: 5em;
+  border-radius: 999px;
+}
+.re-skel-btn {
+  height: 2.6em;
+  width: 11em;
+  margin-top: 0.4em;
+}
+
+/* The dock's and the sheet's close button sit over the chat header: keep its text clear of it. */
+.re-dock .demo-chat-head,
+.re-sheet .demo-chat-head {
+  padding-right: 2.8em;
+}
+
+/* The transcript before the 23:40 inquiry: what to do, and the action (lote 3.5b). */
+.re-transcript-empty {
+  align-self: center;
+  max-width: 24em;
+  margin: auto;
+  padding: 1.6em;
+}
