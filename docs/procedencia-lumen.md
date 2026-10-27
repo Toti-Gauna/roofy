@@ -26,6 +26,14 @@ porta a mano mirando esta lista.
 | `components/demos/real-estate/views/Site.tsx` | Reserva optimista con aviso y «Deshacer», destello, error simulado si el horario se ocupó, esqueleto al abrir una ficha, sello y `paceKey` (3.5b). |
 | `components/demos/real-estate/views/Today.tsx` | Mover una tarjeta: aviso con «Deshacer» (3.5b). |
 | `components/demos/real-estate/views/Followups.tsx` | Sello y `paceKey` (3.5b). |
+| `components/demos/kit/SimBar.tsx`, `kit/AppShell.tsx` | `limit`: un plan ofrece solo los primeros beats (Contact termina en la visita) (3.6). |
+| `components/demos/tourTypes.ts`, `real-estate/tour.ts` | `copy` en un paso de la guía; guía propia de Contact (`contactTour`) (3.6). |
+| `components/demos/real-estate/data.ts` | Responsable de cada contacto, teléfonos ficticios (rango 5550), roles y permisos, tareas, antigüedad y orientación de cada propiedad, datos de la puesta en marcha de marca (3.6). |
+| `components/demos/real-estate/story.ts` | Estado y acciones del CRM: tareas hechas y agregadas, notas, «ver como» (3.6). |
+| `components/demos/real-estate/context.tsx` | `contact` y `openContact` (abrir una ficha desde cualquier área) (3.6). |
+| `components/demos/real-estate/RealEstateDemo.tsx` | Áreas nuevas (Contactos, Tareas, Marca, Equipo), grupo «Cuenta», aviso «Estás viendo la cuenta como…», límite de beats por plan (3.6). |
+| `components/demos/real-estate/views/Inbox.tsx`, `Today.tsx` | Chat guiado: solo las consultas del sitio dicen «respondida en N s»; en Contact el número clave cuenta el sitio (3.6). |
+| `components/demos/real-estate/views/Site.tsx` | Ficha completa: descripción, detalles, quién te atiende, compartir y similares (3.6). |
 
 ## Archivos nuevos (no existen en Eclipse-Web)
 
@@ -33,6 +41,8 @@ porta a mano mirando esta lista.
 - `components/demos/real-estate/LockedArea.tsx`: «Desde <plan> · USD <precio>/mes» y «Ver demo de <plan>».
 - `components/demos/kit/pace.ts`, `pacer.ts`, `interaction.tsx`, `interaction.css`: el kit de interacción premium (lote 3.5b,
   D34). Guía de uso: `docs/kit-interaccion.md`.
+- `components/demos/real-estate/crm.ts` y `views/{Contacts,Tasks,Team,Brand}.tsx`: el CRM completo y la puesta en marcha de
+  marca de Contact (lote 3.6). Qué muestra: `docs/demo-contact.md`.
 
 ## No se copió
 

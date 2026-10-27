@@ -19,3 +19,17 @@ export const tour: DemoTourStep[] = [
   { id: 'visits', view: 'both' },
   { id: 'followups', view: 'both' },
 ];
+
+/**
+ * Contact's guide (lote 3.6): what the base plan includes — the guided chat on the site, the complete CRM
+ * (contacts with their history, the pipeline) and the brand setup. No WhatsApp follow-ups (Growth).
+ * Targets: `contacts` and `brand` are the nav items of those areas (both views).
+ */
+export const contactTour: DemoTourStep[] = [
+  { id: 'sim', view: 'both', copy: 'simContact' },
+  { id: 'chat', view: 'both' },
+  { id: 'site', view: 'both' },
+  { id: 'contacts', view: 'both' },
+  { id: 'pipeline', view: 'both' },
+  { id: 'brand', view: 'both' },
+];

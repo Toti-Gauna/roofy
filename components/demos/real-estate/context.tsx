@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import type { EstateSpot, EstateTab } from './data';
+import type { EstateSpot, EstateTab, PersonId } from './data';
 import type { EstateState, EstateStore, EstateView } from './story';
 
 export type { EstateTab };
@@ -42,8 +42,11 @@ export interface EstateCtx {
   visitsDay: number;
   /** Phone: open the buyer's phone view (site + chat). */
   openBuyer: () => void;
-  /** Switch the 24/7 assistant on/off (the story restarts at 23:40 with the new setting). */
+  /** Switch the 24/7 guided chat on/off (the story restarts at 23:40 with the new setting). */
   toggleBot: () => void;
+  /** CRM (lote 3.6): the contact whose file is open, and how to open one (from anywhere: tasks, pipeline…). */
+  contact: PersonId | 'you' | null;
+  openContact: (id: PersonId | 'you' | null) => void;
 }
 
 const Ctx = createContext<EstateCtx | null>(null);

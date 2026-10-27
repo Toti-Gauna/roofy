@@ -10,24 +10,30 @@ import { act } from '../story';
 import { useEstate } from '../context';
 import { SOURCE_ICON, useCardNote, useEstateText, useFeedItems, waitedMinutes } from '../ui';
 import { LeadFile, useInquiry } from './Inbox';
+import { useLens } from '../lens';
 import { useFollow } from './Followups';
 
 /** The vertical's key number: inquiries answered in under a minute. */
 function KeyNumber({ size = 'lg' }: { size?: 'lg' | 'md' }) {
   const t = useTranslations('demoRealEstate.today');
   const { view, keySuffix } = useEstate();
+  const lens = useLens();
   const x = useEstateText();
   const k = view.kpis;
-  const pct = Math.round(k.fastPct * 100);
+  // Without WhatsApp automation (Contact), only the site's guided chat answers by itself: count the site.
+  const siteOnly = lens.lockedFrom('followups') !== null;
+  const total = siteOnly ? k.bySource.web : Math.round(k.fast / k.fastPct);
+  const fast = siteOnly ? total - (k.waiting ? 1 : 0) : k.fast;
+  const pct = siteOnly ? Math.round((fast / total) * 100) : Math.round(k.fastPct * 100);
   return (
     <div className="re-key" data-size={size} data-off={pct < 100 ? '' : undefined}>
       <p className="re-key-num demo-display">
         <Readout value={pct} rollDown />
         <span>{keySuffix}</span>
       </p>
-      <p className="re-key-label">{t('key')}</p>
+      <p className="re-key-label">{siteOnly ? t('keySite') : t('key')}</p>
       <p className="re-key-of demo-num">
-        {k.waiting ? t('keyWaiting', { wait: x.wait(waitedMinutes(view.clock)) }) : t('keyOf', { fast: k.fast, total: Math.round(k.fast / k.fastPct) })}
+        {k.waiting ? t('keyWaiting', { wait: x.wait(waitedMinutes(view.clock)) }) : t('keyOf', { fast, total })}
       </p>
     </div>
   );

@@ -79,16 +79,19 @@ export interface Listing {
   scene: Scene;
   /** Days on the market. */
   days: number;
+  /** Building age in years (0 = new) and the main façade's orientation. */
+  age: number;
+  facing: 'N' | 'NE' | 'E' | 'SE' | 'S' | 'SO' | 'O' | 'NO';
 }
 
 const L = (l: Listing) => l;
 export const LISTINGS: Listing[] = [
-  L({ id: 'olmos', kind: 'apartment', zone: 'arboleda', street: 'Olmos 1420', rooms: 3, beds: 2, baths: 1, area: 78, price: 168_000, fees: 95, features: ['balcony', 'credit', 'light'], inquiries: 11, visits: 4, facade: 'tower', scene: 'day', days: 12 }),
-  L({ id: 'ceibo', kind: 'apartment', zone: 'arboleda', street: 'Ceibo 655', rooms: 3, beds: 2, baths: 1, area: 71, price: 146_000, fees: 70, features: ['credit', 'balcony'], inquiries: 7, visits: 3, facade: 'midrise', scene: 'dusk', days: 26 }),
-  L({ id: 'ribera', kind: 'duplex', zone: 'ribera', street: 'Paseo del Río 210', rooms: 4, beds: 3, baths: 2, area: 132, price: 248_000, fees: 140, features: ['terrace', 'river', 'garage'], inquiries: 9, visits: 3, facade: 'duplex', scene: 'dusk', days: 18 }),
-  L({ id: 'colinas', kind: 'house', zone: 'colinas', street: 'Los Aromos 88', rooms: 5, beds: 3, baths: 3, area: 210, price: 320_000, fees: 0, features: ['garden', 'pool', 'garage'], inquiries: 6, visits: 2, facade: 'house', scene: 'day', days: 41 }),
-  L({ id: 'parque', kind: 'ph', zone: 'parque', street: 'Laprida 1735', rooms: 3, beds: 2, baths: 1, area: 84, price: 158_000, fees: 0, features: ['patio', 'credit'], inquiries: 8, visits: 2, facade: 'ph', scene: 'day', days: 9 }),
-  L({ id: 'loft', kind: 'loft', zone: 'centro', street: 'Mitre 402', rooms: 2, beds: 1, baths: 1, area: 58, price: 112_000, fees: 60, features: ['light', 'credit'], inquiries: 5, visits: 1, facade: 'loft', scene: 'night', days: 33 }),
+  L({ id: 'olmos', kind: 'apartment', zone: 'arboleda', street: 'Olmos 1420', rooms: 3, beds: 2, baths: 1, area: 78, price: 168_000, fees: 95, features: ['balcony', 'credit', 'light'], inquiries: 11, visits: 4, facade: 'tower', scene: 'day', days: 12, age: 8, facing: 'N' }),
+  L({ id: 'ceibo', kind: 'apartment', zone: 'arboleda', street: 'Ceibo 655', rooms: 3, beds: 2, baths: 1, area: 71, price: 146_000, fees: 70, features: ['credit', 'balcony'], inquiries: 7, visits: 3, facade: 'midrise', scene: 'dusk', days: 26, age: 22, facing: 'NE' }),
+  L({ id: 'ribera', kind: 'duplex', zone: 'ribera', street: 'Paseo del Río 210', rooms: 4, beds: 3, baths: 2, area: 132, price: 248_000, fees: 140, features: ['terrace', 'river', 'garage'], inquiries: 9, visits: 3, facade: 'duplex', scene: 'dusk', days: 18, age: 4, facing: 'E' }),
+  L({ id: 'colinas', kind: 'house', zone: 'colinas', street: 'Los Aromos 88', rooms: 5, beds: 3, baths: 3, area: 210, price: 320_000, fees: 0, features: ['garden', 'pool', 'garage'], inquiries: 6, visits: 2, facade: 'house', scene: 'day', days: 41, age: 15, facing: 'NO' }),
+  L({ id: 'parque', kind: 'ph', zone: 'parque', street: 'Laprida 1735', rooms: 3, beds: 2, baths: 1, area: 84, price: 158_000, fees: 0, features: ['patio', 'credit'], inquiries: 8, visits: 2, facade: 'ph', scene: 'day', days: 9, age: 60, facing: 'O' }),
+  L({ id: 'loft', kind: 'loft', zone: 'centro', street: 'Mitre 402', rooms: 2, beds: 1, baths: 1, area: 58, price: 112_000, fees: 60, features: ['light', 'credit'], inquiries: 5, visits: 1, facade: 'loft', scene: 'night', days: 33, age: 0, facing: 'S' }),
 ];
 export const listingById = (id: ListingId) => LISTINGS.find((l) => l.id === id)!;
 
@@ -147,6 +150,72 @@ export const BASE_LEADS: BaseLead[] = [
   lead({ id: 'pablo', source: 'portal', stage: 'visit', listing: 'ceibo', budget: 'low', pay: 'credit', score: 81, day: 1, min: 23 * 60 + 18, responseSec: 5 }),
   lead({ id: 'sofia', source: 'whatsapp', stage: 'visit', listing: 'parque', budget: 'mid', pay: 'cash', score: 84, day: 1, min: 10 * 60 + 30, responseSec: 3 }),
   lead({ id: 'martin', source: 'web', stage: 'reserve', listing: 'ribera', budget: 'high', pay: 'cash', score: 95, day: 0, min: 19 * 60 + 40, responseSec: 6 }),
+];
+
+/* ------------------------------------------------------------------ */
+/* CRM: owners, contact details, roles and tasks (lote 3.6, Contact)    */
+/* ------------------------------------------------------------------ */
+/** Who owns each contact (an advisor sees their own). Carolina's 23:40 inquiry goes to Julia, like her visit. */
+export const LEAD_ADVISOR: Record<PersonId, AdvisorId> = {
+  carolina: 'julia',
+  valeria: 'julia',
+  andres: 'marcos',
+  lucia: 'marcos',
+  diego: 'julia',
+  tomas: 'julia',
+  pablo: 'marcos',
+  sofia: 'marcos',
+  martin: 'julia',
+};
+/** The visitor's own lead (their site chat) is assigned like Marcos's visits. */
+export const OWN_ADVISOR: AdvisorId = 'marcos';
+
+/** Fictional phone numbers (the 5550 range, never a real line). Emails use the `.demo` domain. */
+export const CONTACT_PHONE: Record<PersonId | 'you', string> = {
+  carolina: '+54 9 11 5550-0142',
+  valeria: '+54 9 11 5550-0187',
+  andres: '+54 9 11 5550-0119',
+  lucia: '+54 9 11 5550-0163',
+  diego: '+54 9 11 5550-0128',
+  tomas: '+54 9 11 5550-0175',
+  pablo: '+54 9 11 5550-0131',
+  sofia: '+54 9 11 5550-0156',
+  martin: '+54 9 11 5550-0194',
+  you: '+54 9 11 5550-0100',
+};
+
+/** Basic roles (Contact): the owner administers; an advisor works their own contacts. */
+export type Role = 'admin' | 'advisor';
+export const ROLE_OF: Record<AdvisorId, Role> = { julia: 'admin', marcos: 'advisor' };
+export type Permission = 'seeAll' | 'reassign' | 'listings' | 'site' | 'users' | 'export';
+export const PERMISSIONS: Permission[] = ['seeAll', 'reassign', 'listings', 'site', 'users', 'export'];
+/** true · false · 'own' (only their own contacts). */
+export const ROLE_CAN: Record<Role, Record<Permission, boolean | 'own'>> = {
+  admin: { seeAll: true, reassign: true, listings: true, site: true, users: true, export: true },
+  advisor: { seeAll: 'own', reassign: false, listings: true, site: false, users: false, export: false },
+};
+
+export type TaskKind = 'call' | 'send' | 'confirm' | 'docs';
+export const TASK_KINDS: TaskKind[] = ['call', 'send', 'confirm', 'docs'];
+export interface BaseTask {
+  id: string;
+  kind: TaskKind;
+  person: PersonId | 'you';
+  /** The listing it is about (e.g. the one to send). */
+  listing: ListingId;
+  day: number;
+  min: number;
+  advisor: AdvisorId;
+}
+/** The open tasks at 23:40 (the CRM's to-do list for the next days). */
+export const BASE_TASKS: BaseTask[] = [
+  { id: 't-valeria', kind: 'call', person: 'valeria', listing: 'ribera', day: 4, min: 570, advisor: 'julia' },
+  { id: 't-andres', kind: 'send', person: 'andres', listing: 'loft', day: 4, min: 600, advisor: 'marcos' },
+  { id: 't-tomas', kind: 'call', person: 'tomas', listing: 'colinas', day: 4, min: 720, advisor: 'julia' },
+  { id: 't-pablo', kind: 'confirm', person: 'pablo', listing: 'ceibo', day: 4, min: 840, advisor: 'marcos' },
+  { id: 't-diego', kind: 'docs', person: 'diego', listing: 'colinas', day: 5, min: 600, advisor: 'julia' },
+  { id: 't-martin', kind: 'docs', person: 'martin', listing: 'ribera', day: 7, min: 540, advisor: 'julia' },
+  { id: 't-lucia', kind: 'confirm', person: 'lucia', listing: 'parque', day: 7, min: 900, advisor: 'marcos' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -256,7 +325,7 @@ export type EstateBeatId = (typeof BEATS)[number]['id'];
 /* Where each beat happens (v3c: a simulation takes every view there)   */
 /* ------------------------------------------------------------------ */
 /** Sections of the agency's workspace (laptop) and app (phone alone; "site" is the buyer button there). */
-export type EstateTab = 'today' | 'inbox' | 'pipeline' | 'visits' | 'followups' | 'listings' | 'site';
+export type EstateTab = 'today' | 'inbox' | 'contacts' | 'pipeline' | 'visits' | 'tasks' | 'followups' | 'listings' | 'site' | 'brand' | 'team';
 /** Elements a beat brings into view inside its section (see real-estate/focus.ts). */
 export type EstateSpot = 'transcript' | 'chat' | 'key' | 'calendar' | 'preview' | 'card';
 export interface EstateBeatTarget {
@@ -315,3 +384,54 @@ export const OFFICE_OPENS = { day: 4, min: 9 * 60 };
 export const HUMAN_REPLY_MIN = 9 * 60 + 12;
 /** Seconds the assistant took to answer each of its messages (shown under the bubble). */
 export const BOT_SECONDS: Record<string, number> = { hi: 4, pay: 2, budget: 3, fits: 5, alt: 6, slots: 3, booked: 4 };
+
+/* ------------------------------------------------------------------ */
+/* Brand setup (lote 3.6: the `setup_brand` deliverables Contact includes) */
+/* ------------------------------------------------------------------ */
+/** What the setup delivered, in order (copy: brand.items.<id>). */
+export const BRAND_DELIVERABLES = ['diagnosis', 'identity', 'site', 'profiles', 'library', 'guide'] as const;
+/** Lumen's palette as the brand kit shows it (the demo's own theme colors). */
+export const BRAND_SWATCHES = [
+  { id: 'stone', hex: LUMEN_THEME.bg },
+  { id: 'ink', hex: LUMEN_THEME.ink },
+  { id: 'cobalt', hex: LUMEN_THEME.accent },
+  { id: 'sand', hex: LUMEN_THEME.accent2 },
+] as const;
+/** The product's base template before the setup (neutral greys: what any agency gets out of the box). */
+export const BRAND_BASE = {
+  bg: '#F2F2F2',
+  surface: '#FFFFFF',
+  ink: '#2A2A2A',
+  muted: '#6E6E6E',
+  accent: '#4A4A4A',
+  accentInk: '#FFFFFF',
+  line: 'rgb(0 0 0 / 0.12)',
+} as const;
+/** The two profiles audited (copy: brand.profile.<id>.<item>.before|after). */
+export const PROFILE_ITEMS = ['bio', 'cover', 'highlights', 'cta'] as const;
+/** 12 hooks (copy: brand.hook.<id>), each with its theme. */
+export const BRAND_HOOKS = [
+  { id: 'h1', tag: 'buy' },
+  { id: 'h2', tag: 'buy' },
+  { id: 'h3', tag: 'sell' },
+  { id: 'h4', tag: 'sell' },
+  { id: 'h5', tag: 'credit' },
+  { id: 'h6', tag: 'credit' },
+  { id: 'h7', tag: 'zone' },
+  { id: 'h8', tag: 'zone' },
+  { id: 'h9', tag: 'visit' },
+  { id: 'h10', tag: 'visit' },
+  { id: 'h11', tag: 'team' },
+  { id: 'h12', tag: 'team' },
+] as const;
+/** 6 example videos (copy: brand.video.<id>.title|a|b|c): reusable examples, not exclusive ads. */
+export const BRAND_VIDEOS: { id: string; listing: ListingId; seconds: number; format: 'vertical' | 'square' }[] = [
+  { id: 'v1', listing: 'olmos', seconds: 20, format: 'vertical' },
+  { id: 'v2', listing: 'ceibo', seconds: 15, format: 'vertical' },
+  { id: 'v3', listing: 'parque', seconds: 25, format: 'square' },
+  { id: 'v4', listing: 'colinas', seconds: 30, format: 'vertical' },
+  { id: 'v5', listing: 'loft', seconds: 15, format: 'square' },
+  { id: 'v6', listing: 'ribera', seconds: 20, format: 'vertical' },
+];
+/** The operating guide's chapters (copy: brand.chapters.<id>). */
+export const GUIDE_CHAPTERS = ['inquiry', 'listing', 'pipeline', 'visits', 'tasks', 'publish'] as const;

@@ -46,10 +46,39 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   mismo): nunca se escribe un número en un componente. Qué área pide qué capacidad: `components/experience/lens.ts`.
 - `PLAN_DEMO_STATUS` (`lib/plans.ts`) dice la verdad sobre el avance: mientras un plan esté `draft`, el escenario avisa que la
   demo todavía no muestra todo lo que incluye. Cada lote 3.6–3.8d pasa su plan a `built`.
-- **Videos:** `content/estateos-videos.json` está vacío hasta que se rendericen (V1–V5). El botón «Ver el video» y el
-  reproductor (póster, transcripción en los tres idiomas, nunca autoplay, un medio a la vez) aparecen solo si hay un video para
-  el plan en pantalla.
+- **Videos:** `content/estateos-videos.json` tiene el de Contact (V1); V2–V5 suman los suyos. El botón «Ver el video» y el
+  reproductor (póster, 9:16 en pantallas verticales, sin sonido al empezar, subtítulos y transcripción en los tres idiomas, precio
+  al lado, nunca autoplay, un medio a la vez) aparecen solo si hay un video para el plan en pantalla.
 - La demo de Lumen es una copia de Eclipse-Web: `docs/procedencia-lumen.md` dice qué cambió.
+
+## Demos por plan
+
+- **Contact (lote 3.6, `built`):** web, CRM completo (Contactos con historial, Tareas, Equipo con dos roles y «Ver como»), chat
+  guiado (D20) y puesta en marcha de marca (área «Marca»). La historia termina con la visita agendada (`beatLimitFor`); su guía es
+  `contactTour`. Qué muestra: `docs/demo-contact.md`.
+- El chat del sitio es **guiado** (botones, guion fijo) en todas las vistas: ningún plan vende un asistente con IA en el sitio.
+  No escribas «IA»/«AI» en los textos de la demo (`tests/contact.test.ts`).
+- Las áreas nuevas de cada plan se mapean a su capacidad en `components/experience/lens.ts` (`TAB_CAPABILITY`, `BEAT_CAPABILITY`).
+
+## Videos (lote V1)
+
+- **Método Kinetic Studio (guía de motion §0, corrección de Ignacio del 27/10/2026):** nada se filma. Los componentes se
+  reconstruyen para el video (`components/video/ui/`), la película es una línea de tiempo GSAP en pausa movida por `seek`
+  (`components/video/films/<plan>/`: `STORYBOARD.md`, `script.ts`, coreografía, `partitura.ts` a 120 BPM). Escenario solo
+  en dev (`app/[locale]/trailer/page.dev.tsx`), driver `scripts/render-video.mjs`. Guía: `docs/video-factory.md`.
+- **La música tiene que tener alma** (Ignacio, 27/10/2026): una composición con melodía, armonía y bajo, tocada por la
+  orquesta propia (`components/video/score/`); el motor de Kinetic (`components/video/kinetic/`) queda para los sonidos
+  de interfaz, por debajo de la música. Percusión y campanitas sin melodía no es música.
+- **Cada video explica TODO lo que su plan entrega**, un capítulo por entrega (Contact: web, chat guiado, CRM módulo por módulo,
+  puesta en marcha con la marca) y nada de lo que no incluye: WhatsApp automático va en el video de Growth y la voz en el de
+  Escalar. `tests/video.test.ts` lo comprueba contra la lente (`lockedFromFor`).
+- Ningún precio ni cupo dentro del video; el sello «Demo · datos ficticios» en cada cuadro. El precio está en el HTML al lado del
+  reproductor.
+- `content/estateos-videos.json` es el registro y el manifest. Si cambia la película, el kit, los datos o textos de Lumen o
+  `video.*`, hay que volver a renderizar (`tests/videos.test.ts` compara el `sourceHash`) y la aprobación de Ignacio vuelve a `null`.
+- Antes de cada render completo: un cuadro por segundo en los dos formatos (`--stills --every=1`), revisado en hojas de contacto.
+- Mientras corre un render no edites `components/video/*` ni `messages/*`: el servidor de desarrollo recarga la página y el
+  render se corta.
 
 ## Interacción premium (lote 3.5b, D34)
 

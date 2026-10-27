@@ -15,7 +15,7 @@ export interface GuideCopy {
  */
 export function buildTourSteps(demo: string, steps: readonly DemoTourStep[], copy: GuideCopy): (TourStep & { view: ViewTag })[] {
   return steps.flatMap((step) => {
-    const base = `${demo}.${step.id}`;
+    const base = `${demo}.${step.copy ?? step.id}`;
     if (!copy.has(`${base}.title`) || !copy.has(`${base}.body`)) return [];
     return [
       {

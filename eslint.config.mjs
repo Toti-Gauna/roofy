@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored byte for byte from Kinetic Studio (see components/video/kinetic/PROCEDENCIA.md).
+    "components/video/kinetic/*.js",
+    ".render/**",
   ]),
 ]);
 

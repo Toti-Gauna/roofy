@@ -15,6 +15,8 @@ export interface Lens {
   lockedFrom: (tab: EstateTab) => PlanId | null;
   /** «Ver demo de <plan>»: switch the demo to that plan. */
   seePlan: (plan: PlanId) => void;
+  /** How many of the story's beats this plan shows (undefined: all). Contact ends with the visit booked. */
+  beatLimit?: number;
 }
 
 export const OPEN_LENS: Lens = { plan: null, lockedFrom: () => null, seePlan: () => {} };

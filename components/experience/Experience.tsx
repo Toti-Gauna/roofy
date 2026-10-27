@@ -9,7 +9,7 @@ import type { TourStep } from '@/components/ui/tour/types';
 import { SoundToggle } from '@/components/sound/SoundToggle';
 import { useSound } from '@/components/sound/SoundContext';
 import { LensProvider, type Lens } from '@/components/demos/real-estate/lens';
-import { tour } from '@/components/demos/real-estate/tour';
+import { contactTour, tour } from '@/components/demos/real-estate/tour';
 import { LUMEN } from '@/components/demos/real-estate/data';
 import { useIsClient } from '@/components/motion/useIsClient';
 import { parseHandoff, type Locale } from '@/lib/handoff';
@@ -21,7 +21,7 @@ import { Entry } from './Entry';
 import { PlanMenu } from './PlanMenu';
 import { VideoPlayer } from './VideoPlayer';
 import { buildTourSteps, type ViewTag } from './guide';
-import { lockedFromFor } from './lens';
+import { beatLimitFor, lockedFromFor } from './lens';
 import './experience.css';
 
 const RealEstateDemo = lazy(() => import('@/components/demos/real-estate/RealEstateDemo'));
@@ -86,6 +86,7 @@ export function Experience({ locale, nav }: { locale: Locale; nav: ReactNode }) 
     () => ({
       plan,
       lockedFrom: (tab) => lockedFromFor(plan, tab),
+      beatLimit: beatLimitFor(plan),
       seePlan: (next) => {
         play('select');
         setPlan(next);
@@ -97,12 +98,12 @@ export function Experience({ locale, nav }: { locale: Locale; nav: ReactNode }) 
   const copy = useTourCopy(tt('labelFor', { name: business }));
   const steps = useMemo(
     () =>
-      buildTourSteps('realEstate', tour, {
+      buildTourSteps('realEstate', plan === 'contact' ? contactTour : tour, {
         has: (key) => td.has(key as never),
         get: (key) => td(key as never),
         tag: (view: ViewTag) => tt(view === 'laptop' ? 'tagDesktop' : view === 'phone' ? 'tagMobile' : 'tagBoth'),
       }),
-    [td, tt],
+    [td, tt, plan],
   );
 
   const onStep = useCallback(

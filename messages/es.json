@@ -149,7 +149,15 @@
       "available": "Disponible",
       "reserved": "Reservada",
       "photo": "Fachada de {street}, ilustración",
-      "photoN": "Fachada de {street}, ilustración {n} de {total}"
+      "photoN": "Fachada de {street}, ilustración {n} de {total}",
+      "desc": {
+        "olmos": "Tres ambientes en piso alto con balcón al frente y luz de la mañana. Cocina separada, dormitorios al contrafrente y un edificio cuidado a dos cuadras del parque.",
+        "ceibo": "Departamento de tres ambientes en un edificio de los noventa, con balcón y ambientes amplios. Apto crédito y con expensas bajas.",
+        "ribera": "Dúplex con terraza propia frente al río, cochera y tres dormitorios. Living de doble altura y parrilla en la terraza.",
+        "colinas": "Casa en lote propio con jardín y pileta, tres dormitorios y quincho. Calle tranquila, a minutos del acceso.",
+        "parque": "PH al frente, sin expensas, con patio y mucha luz. Dos dormitorios y la posibilidad de ampliar en la terraza.",
+        "loft": "Loft a estrenar en el centro, con ventanales y doble altura. Ideal para vivir o invertir; apto crédito."
+      }
     },
     "listings": {
       "title": "Propiedades",
@@ -197,7 +205,7 @@
       "expand": "Abrir el chat del sitio",
       "as": "Vos sos {name}: elegí sus respuestas.",
       "answeredIn": "{seconds} s",
-      "ai": "IA",
+      "ai": "Chat guiado",
       "steps": {
         "ask": "Hola, ¿sigue disponible el 3 ambientes de {street}? ¿Se puede ver esta semana?",
         "hi": "¡Hola, {name}! Sí, está disponible. Te hago dos preguntas y te paso horarios de visita.",
@@ -242,7 +250,7 @@
         "visit": "Visita → {value}",
         "crm": "Etapa → {value}"
       },
-      "botLabel": "Lumi · IA",
+      "botLabel": "Lumi · chat guiado",
       "humanLabel": "{name} · equipo",
       "noReply": "Sin respuesta",
       "channel": "Canal de la conversación",
@@ -284,7 +292,12 @@
       "listings": "Propiedades",
       "site": "Sitio web",
       "groupAuto": "Automatizaciones",
-      "groupShop": "Vidriera"
+      "groupShop": "Vidriera",
+      "contacts": "Contactos",
+      "tasks": "Tareas",
+      "brand": "Marca",
+      "team": "Equipo",
+      "groupAccount": "Cuenta"
     },
     "top": {
       "closed": "Oficina cerrada · Lumi atiende",
@@ -296,11 +309,11 @@
     },
     "bot": {
       "name": "Lumi",
-      "title": "Lumi · asistente IA",
-      "on": "Responde 24/7 en el sitio y WhatsApp",
+      "title": "Lumi · chat guiado",
+      "on": "Responde 24/7 en el sitio, con botones",
       "offShort": "Apagado: las consultas esperan",
-      "switch": "Asistente 24/7",
-      "hint": "Apagalo: la demo vuelve a las 23:40 y simulás la misma noche sin asistente.",
+      "switch": "Chat guiado 24/7",
+      "hint": "Apagalo: la demo vuelve a las 23:40 y simulás la misma noche sin el chat.",
       "hintOff": "Prendelo: la demo vuelve a las 23:40 y la consulta se responde en segundos."
     },
     "kinds": {
@@ -404,7 +417,8 @@
       "activity": "Actividad",
       "headlineReserved": "Reservado. <em>Sin abrir la oficina.</em>",
       "headlineOpens": "9:00: abre la oficina. La consulta esperó toda la noche.",
-      "headlineLost": "{late} después, <em>el lead ya no estaba.</em>"
+      "headlineLost": "{late} después, <em>el lead ya no estaba.</em>",
+      "keySite": "de las consultas del sitio respondidas en menos de 1 minuto"
     },
     "pipeline": {
       "title": "Pipeline",
@@ -539,7 +553,37 @@
       "url": "Dirección del sitio",
       "prevPhoto": "Foto anterior",
       "nextPhoto": "Foto siguiente",
-      "viewSub": "{url} · buscá, abrí una propiedad, agendá una visita o chateá con Lumi"
+      "viewSub": "{url} · buscá, abrí una propiedad, agendá una visita o chateá con Lumi",
+      "shared": "Enlace de la ficha copiado",
+      "details": "Detalles",
+      "detail": {
+        "kind": "Tipo",
+        "rooms": "Ambientes",
+        "area": "Superficie",
+        "baths": "Baños",
+        "age": "Antigüedad",
+        "years": "{count, plural, one {# año} other {# años}}",
+        "new": "A estrenar",
+        "facing": "Orientación",
+        "fees": "Expensas",
+        "credit": "Apto crédito",
+        "yes": "Sí",
+        "no": "No"
+      },
+      "facing": {
+        "N": "Norte",
+        "NE": "Noreste",
+        "E": "Este",
+        "SE": "Sudeste",
+        "S": "Sur",
+        "SO": "Sudoeste",
+        "O": "Oeste",
+        "NO": "Noroeste"
+      },
+      "agent": "Te atiende",
+      "agentRole": "Asesor de Lumen Propiedades · responde de lunes a sábado",
+      "share": "Compartir ficha",
+      "similar": "Similares"
     },
     "toast": {
       "inquiry": "Consulta nueva · 23:40",
@@ -592,7 +636,7 @@
     "own": {
       "label": "Tu chat con Lumi en el sitio de {business}",
       "steps": {
-        "hi": "¡Hola! Soy Lumi, el asistente de Lumen. ¿Qué estás buscando?",
+        "hi": "¡Hola! Soy Lumi, el chat de Lumen. Elegí una opción y te ayudo: ¿qué estás buscando?",
         "pay": "¿Cómo pensás pagarlo?",
         "budget": "¿Hasta cuánto querés invertir?",
         "match_two": "Para 2 ambientes, mirá este loft en {street}. ¿Querés verlo?",
@@ -612,6 +656,327 @@
     },
     "confirm": {
       "moved": "{name} pasó a {stage}"
+    },
+    "tasks": {
+      "title": "Tareas",
+      "sub": "Lo que hay que hacer, por día y por persona. Se completan con un toque.",
+      "filter": "Mostrar",
+      "open": "{count, plural, one {# abierta} other {# abiertas}}",
+      "doneTab": "{count, plural, one {# hecha} other {# hechas}}",
+      "done": "hecha",
+      "seeContact": "Ver contacto",
+      "owner": "Responsable: {name}",
+      "doneToast": "Tarea completada",
+      "addedToast": "Tarea agregada",
+      "emptyOpen": "No queda nada pendiente.",
+      "emptyOpenBody": "Agregá una tarea o completá la simulación de la consulta.",
+      "emptyDone": "Todavía no completaste ninguna.",
+      "emptyDoneBody": "Tocá el casillero de una tarea para marcarla como hecha.",
+      "kinds": {
+        "call": {
+          "title": "Llamar a {name}",
+          "short": "Llamar"
+        },
+        "send": {
+          "title": "Enviar la ficha de {street} a {name}",
+          "short": "Enviar ficha"
+        },
+        "confirm": {
+          "title": "Confirmar la visita con {name}",
+          "short": "Confirmar visita"
+        },
+        "docs": {
+          "title": "Pedirle la documentación a {name}",
+          "short": "Pedir documentación"
+        }
+      },
+      "new": {
+        "title": "Nueva tarea",
+        "kind": "Qué hay que hacer",
+        "contact": "Con quién",
+        "day": "Día",
+        "time": "Hora",
+        "save": "Agregar tarea",
+        "cancel": "Cancelar"
+      }
+    },
+    "contacts": {
+      "title": "Contactos",
+      "sub": "{count, plural, one {# contacto} other {# contactos}} con su historia completa: de dónde llegó, qué busca, qué se hizo y qué sigue.",
+      "caption": "Contactos de Lumen Propiedades",
+      "cols": {
+        "name": "Contacto",
+        "stage": "Etapa",
+        "listing": "Propiedad",
+        "score": "Intención",
+        "owner": "Responsable"
+      },
+      "empty": "Todavía no hay contactos para mostrar.",
+      "emptyBody": "Cuando alguien consulta por el sitio, aparece acá con su ficha.",
+      "lost": "Perdido",
+      "back": "Contactos",
+      "since": "Primer contacto: {when}",
+      "phone": "Teléfono",
+      "email": "Email",
+      "owner": "Responsable",
+      "copyPhone": "Copiar teléfono",
+      "copied": "Teléfono copiado",
+      "visits": "Visitas",
+      "noVisits": "Sin visitas agendadas.",
+      "tasks": "Tareas",
+      "noTasks": "Sin tareas pendientes.",
+      "history": "Historial",
+      "noteLabel": "Nota sobre el contacto",
+      "notePlaceholder": "Escribí una nota para el equipo (queda en esta demo, no se envía).",
+      "addNote": "Guardar nota",
+      "noteSaved": "Nota guardada",
+      "noteBy": "Nota de {name}: "
+    },
+    "history": {
+      "inquiry": "Consultó por {street} · {source}",
+      "answered": "El chat guiado le respondió en {seconds} s",
+      "qualified": "Calificado: {pay} · {budget}",
+      "booked": "Visita agendada: {slot}",
+      "reserved": "Reservó {street}",
+      "moved": "Movido a mano a {stage}",
+      "taskDone": "Tarea completada: {task}"
+    },
+    "team": {
+      "title": "Equipo",
+      "sub": "Quién trabaja en la cuenta y qué puede hacer cada uno. Dos roles: quien administra y quien vende.",
+      "roles": {
+        "admin": "Administradora",
+        "advisor": "Asesor"
+      },
+      "load": "{contacts} contactos · {tasks} tareas abiertas",
+      "seeing": "Viendo la cuenta así",
+      "viewAs": "Ver como {name}",
+      "yes": "Sí",
+      "no": "No",
+      "own": "Solo los suyos",
+      "permsTitle": "Permisos por rol",
+      "perm": "Permiso",
+      "perms": {
+        "seeAll": "Ver contactos y consultas",
+        "reassign": "Reasignar contactos",
+        "listings": "Cargar y editar propiedades",
+        "site": "Cambiar el sitio y la marca",
+        "users": "Invitar y quitar personas",
+        "export": "Exportar contactos"
+      },
+      "inviteTitle": "Invitaciones",
+      "invite": "Invitar",
+      "inviteOwnerOnly": "Solo la administradora invita personas.",
+      "invited": "Invitación creada",
+      "email": "Email",
+      "emailPlaceholder": "nombre@lumenpropiedades.demo",
+      "role": "Rol",
+      "send": "Crear invitación",
+      "cancel": "Cancelar",
+      "pending": "pendiente",
+      "inviteNote": "Demo: la invitación queda en esta pantalla, no se envía ningún email.",
+      "banner": "Estás viendo la cuenta como {name} · {role}",
+      "back": "Volver a {name}"
+    },
+    "brand": {
+      "title": "Marca",
+      "sub": "La puesta en marcha que incluye el plan: tu marca en la web, las fichas y las redes. Acotada; lo que la exceda se cotiza aparte.",
+      "deliverables": "Entregables de la puesta en marcha",
+      "items": {
+        "diagnosis": {
+          "name": "Diagnóstico",
+          "text": "Qué se ve hoy de la inmobiliaria y qué hay que ordenar primero."
+        },
+        "identity": {
+          "name": "Identidad ajustada",
+          "text": "Logo existente ajustado, paleta, tipografía y plantillas."
+        },
+        "site": {
+          "name": "Web y fichas con tu marca",
+          "text": "El sitio y cada ficha salen con tus colores y tu logo."
+        },
+        "profiles": {
+          "name": "Dos perfiles auditados",
+          "text": "Biografía, portada, destacados y llamado a la acción."
+        },
+        "library": {
+          "name": "12 hooks y 6 videos de ejemplo",
+          "text": "Ideas y guiones para reutilizar, no anuncios exclusivos."
+        },
+        "guide": {
+          "name": "Guía operativa",
+          "text": "Cómo usa el equipo el producto, paso a paso."
+        }
+      },
+      "kit": "Kit de marca",
+      "swatches": {
+        "stone": "Piedra",
+        "ink": "Tinta",
+        "cobalt": "Cobalto",
+        "sand": "Arena"
+      },
+      "typeDisplay": "Casas con buena luz",
+      "typeBody": "Títulos con serif editorial; textos y datos con una sans clara. Mucho blanco y líneas finas.",
+      "applied": "Tu marca en la web",
+      "before": "Plantilla base",
+      "after": "Con tu marca",
+      "baseName": "Tu inmobiliaria",
+      "navSample": "Comprar · Alquilar · Tasar",
+      "ctaSample": "Agendar visita",
+      "afterNote": "Así sale el sitio de Lumen después de la puesta en marcha: mismo producto, su identidad.",
+      "beforeNote": "La plantilla con la que arranca cualquier inmobiliaria, antes de aplicar su marca.",
+      "profiles": "Auditoría de perfiles",
+      "auditCaption": "Auditoría: {profile}",
+      "auditItem": "Qué se revisó",
+      "auditBefore": "Antes",
+      "auditAfter": "Después",
+      "auditItems": {
+        "bio": "Biografía",
+        "cover": "Portada",
+        "highlights": "Destacados",
+        "cta": "Llamado a la acción"
+      },
+      "profile": {
+        "main": {
+          "name": "Perfil principal",
+          "handle": "@lumen.propiedades",
+          "bio": {
+            "before": "«Inmobiliaria. Consultas por privado.»",
+            "after": "«Casas y deptos en La Arboleda y Ribera. Te respondemos al instante desde el sitio.»"
+          },
+          "cover": {
+            "before": "Foto de la vidriera, de noche y sin logo.",
+            "after": "Fachada de Olmos 1420 con la paleta de la marca."
+          },
+          "highlights": {
+            "before": "Tres destacados viejos sin nombre.",
+            "after": "Comprar · Vender · Crédito · Barrios."
+          },
+          "cta": {
+            "before": "«Escribinos por mensaje».",
+            "after": "Enlace a las fichas del sitio con el chat guiado."
+          }
+        },
+        "second": {
+          "name": "Perfil secundario",
+          "handle": "@lumen.tasaciones",
+          "bio": {
+            "before": "Sin biografía.",
+            "after": "«Tasamos tu propiedad con datos del barrio. Pedí turno desde el sitio.»"
+          },
+          "cover": {
+            "before": "Imagen de stock de una llave.",
+            "after": "Plano de un PH con la tipografía de la marca."
+          },
+          "highlights": {
+            "before": "Ninguno.",
+            "after": "Tasaciones · Cómo vender · Preguntas."
+          },
+          "cta": {
+            "before": "Ninguno.",
+            "after": "«Pedí tu tasación» con enlace al sitio."
+          }
+        }
+      },
+      "library": "Biblioteca de contenido",
+      "hooks": "{count} hooks",
+      "hookTags": {
+        "buy": "Comprar",
+        "sell": "Vender",
+        "credit": "Crédito",
+        "zone": "Barrio",
+        "visit": "Visita",
+        "team": "Equipo"
+      },
+      "hook": {
+        "h1": "Tres cosas que nadie te dice antes de comprar tu primer 3 ambientes.",
+        "h2": "¿Alcanza con USD 150.000 en La Arboleda? Hicimos la cuenta.",
+        "h3": "El error que hace que una casa tarde seis meses en venderse.",
+        "h4": "Cómo se tasa un PH: lo que mira el tasador primero.",
+        "h5": "Crédito hipotecario: qué te piden y en qué orden.",
+        "h6": "Lo que cambia cuando comprás con crédito en lugar de contado.",
+        "h7": "Un sábado en Ribera: tres lugares para conocer antes de mudarte.",
+        "h8": "La Arboleda en un minuto: luz, transporte y precios.",
+        "h9": "Qué mirar en una visita de 30 minutos (y qué no).",
+        "h10": "Visitamos Olmos 1420 a la hora de más luz.",
+        "h11": "Así respondemos una consulta a las 23:40.",
+        "h12": "Quién te atiende cuando escribís a Lumen."
+      },
+      "copyHook": "Copiar el hook «{hook}»",
+      "hookCopied": "Hook copiado",
+      "videos": "{count} videos de ejemplo",
+      "seconds": "{seconds} s",
+      "formats": {
+        "vertical": "Vertical 9:16",
+        "square": "Cuadrado 1:1"
+      },
+      "video": {
+        "v1": {
+          "title": "Olmos 1420, de la puerta al balcón",
+          "a": "Plano de la fachada con la dirección en pantalla.",
+          "b": "Recorrido corto: living, cocina, balcón.",
+          "c": "Cierre con el precio en la ficha y «Agendá tu visita»."
+        },
+        "v2": {
+          "title": "Tres ambientes que entran con crédito",
+          "a": "Pregunta directa: «¿Te alcanza con crédito?»",
+          "b": "Ceibo 655 en tres planos con los datos clave.",
+          "c": "Cierre: «Consultá con el chat del sitio»."
+        },
+        "v3": {
+          "title": "Un PH con patio, explicado",
+          "a": "Qué es un PH y por qué tiene expensas cero.",
+          "b": "Laprida 1735: patio, luz y planta.",
+          "c": "Cierre con el barrio y el enlace a la ficha."
+        },
+        "v4": {
+          "title": "Casa con jardín: lo que pesa en la tasación",
+          "a": "Tres datos que mira un tasador.",
+          "b": "Los Aromos 88 como ejemplo.",
+          "c": "Cierre: «Pedí tu tasación»."
+        },
+        "v5": {
+          "title": "Un loft a estrenar en el centro",
+          "a": "Antes y después de la luz de la tarde.",
+          "b": "Mitre 402: metros y precio.",
+          "c": "Cierre con la agenda de visitas."
+        },
+        "v6": {
+          "title": "Dúplex frente al río",
+          "a": "Vista de la terraza al atardecer.",
+          "b": "Paseo del Río 210: cochera y terraza.",
+          "c": "Cierre: «Agendá una visita el sábado»."
+        }
+      },
+      "videosNote": "Ejemplos para grabar con tu equipo. La producción mensual de videos y tours es de Growth.",
+      "guide": "Guía operativa",
+      "chapters": {
+        "inquiry": {
+          "name": "Responder una consulta",
+          "text": "Qué ver en la ficha antes de contestar y cuándo llamar."
+        },
+        "listing": {
+          "name": "Cargar una propiedad",
+          "text": "Fotos, plano, datos y descripción: el orden que funciona."
+        },
+        "pipeline": {
+          "name": "Mover el pipeline",
+          "text": "Qué significa cada etapa y cuándo pasar a la siguiente."
+        },
+        "visits": {
+          "name": "Agendar visitas",
+          "text": "Horarios, confirmación y qué hacer si alguien no viene."
+        },
+        "tasks": {
+          "name": "Trabajar con tareas",
+          "text": "Una tarea por próximo paso, con día y responsable."
+        },
+        "publish": {
+          "name": "Publicar en redes",
+          "text": "Cómo usar los hooks y los videos de ejemplo cada semana."
+        }
+      },
+      "readOnly": "Estás viendo la cuenta como asesor: la marca se muestra pero solo la administradora la cambia."
     }
   },
   "sound": {
@@ -663,11 +1028,11 @@
     "realEstate": {
       "sim": {
         "title": "Vos decidís qué pasa esta noche",
-        "body": "Nada se mueve solo. Tocá «Simular» y seguí la consulta de las 23:40: respuesta, calificación, visita y seguimiento. Apagá el asistente para ver la misma noche sin él."
+        "body": "Nada se mueve solo. Tocá «Simular» y seguí la consulta de las 23:40: respuesta, calificación, visita y seguimiento. Apagá el chat guiado para ver la misma noche sin él."
       },
       "chat": {
         "title": "Cada consulta, respondida en segundos",
-        "body": "Lumi contesta a cualquier hora, pregunta cómo paga y cuánto invierte, y deja la ficha lista. Podés responder vos por Carolina."
+        "body": "El chat guiado responde a cualquier hora: con botones pregunta cómo pagás y cuánto querés invertir, y deja la ficha lista. Podés responder vos por Carolina."
       },
       "site": {
         "title": "Tu sitio busca y agenda",
@@ -684,6 +1049,18 @@
       "followups": {
         "title": "Seguimiento después de cada visita",
         "body": "Confirmación, recordatorio y «¿qué te pareció?» por WhatsApp, con la propiedad y el nombre. Así una visita termina en reserva."
+      },
+      "contacts": {
+        "title": "Cada contacto, con toda su historia",
+        "body": "De dónde llegó, qué busca, sus visitas, sus tareas y todo lo que pasó, en una ficha. Dejá una nota o agregá una tarea: queda en el historial."
+      },
+      "brand": {
+        "title": "Tu marca, desde la puesta en marcha",
+        "body": "Incluida en el plan: identidad ajustada, la web y las fichas con tu marca, dos perfiles auditados, 12 hooks, 6 videos de ejemplo y la guía operativa. Compará «Plantilla base» y «Con tu marca»."
+      },
+      "simContact": {
+        "title": "Vos decidís qué pasa esta noche",
+        "body": "Nada se mueve solo. Tocá «Simular» y seguí la consulta de las 23:40: el chat guiado responde, la consulta se califica y termina con una visita en la agenda."
       }
     }
   },
@@ -751,7 +1128,14 @@
       "close": "Cerrar",
       "transcript": "Transcripción",
       "label": "Video de {plan}",
-      "general": "Video de EstateOS"
+      "general": "Video de EstateOS",
+      "duration": "{seconds} s",
+      "back": "Ver la demo de {plan}",
+      "subtitles": {
+        "es": "Español",
+        "en": "Inglés",
+        "pt": "Portugués"
+      }
     }
   },
   "demoShowcase": {
@@ -762,5 +1146,53 @@
     "viewsLabel": "Demo de {business}: elegí la vista",
     "panHint": "Deslizá para ver todo",
     "loading": "Cargando la demo de {business}…"
+  },
+  "video": {
+    "seal": "Demo · datos ficticios",
+    "brand": "EstateOS",
+    "contact": {
+      "golpes": {
+        "g1": "¿Consultas por",
+        "g2": "todos lados?",
+        "g3": "¿Planillas que",
+        "g4": "nadie sigue?",
+        "g5": "Y del otro lado,",
+        "g6": "tu CRM.",
+        "g7": "Y lo ponemos",
+        "g8": "en marcha.",
+        "s1": "Tu web.",
+        "s2": "Tu CRM.",
+        "s3": "Chat guiado.",
+        "s4": "Tu marca."
+      },
+      "tags": {
+        "web": "Tu web",
+        "chat": "Chat guiado",
+        "crm": "CRM completo",
+        "setup": "Puesta en marcha"
+      },
+      "heads": {
+        "web1": "Una web profesional.",
+        "web2": "Cada propiedad, con su ficha.",
+        "web3": "Te piden visitas desde ahí.",
+        "chat1": "Un chat guiado, siempre.",
+        "chat2": "La consulta llega completa.",
+        "inbox": "Todas tus consultas, juntas.",
+        "contacts": "Cada contacto, su historia.",
+        "pipeline": "Cada oportunidad, su estado.",
+        "visits": "La agenda del equipo.",
+        "tasks": "Tareas y recordatorios.",
+        "listings": "Tu cartera, ordenada.",
+        "team": "Roles para tu equipo.",
+        "kit": "Tu marca, en todo.",
+        "applied": "De plantilla a tu marca.",
+        "profiles": "Revisamos tus redes.",
+        "library": "Hooks, videos y una guía."
+      },
+      "lupa": {
+        "inquiry": "Consulta nueva",
+        "channels": "Consultas de la semana"
+      }
+    }
   }
 }

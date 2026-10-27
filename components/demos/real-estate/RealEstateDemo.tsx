@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
-import { Building2, CalendarDays, Columns3, Globe, House, MessagesSquare, Send, Smartphone } from 'lucide-react';
+import { Building2, CalendarDays, Columns3, Globe, House, ListChecks, MessagesSquare, Palette, Send, ShieldCheck, Smartphone, Users } from 'lucide-react';
 import { useSound } from '@/components/sound/SoundContext';
 import { AppShell, ConfirmProvider, ConfirmToast, PaceScopeProvider, contentToTop, revealInDemo, Avatar, Switch, useBeatFocus, usePairedStore, useStory, type NavItem, type ShellLayout } from '../kit';
 import type { DemoProps } from '../types';
@@ -18,6 +18,10 @@ import { LaptopVisits, PhoneVisits } from './views/Visits';
 import { LaptopFollowups, PhoneFollowups } from './views/Followups';
 import { LaptopListings, PhoneListings } from './views/Listings';
 import { BuyerPhone, LaptopSite } from './views/Site';
+import { LaptopContacts, PhoneContacts } from './views/Contacts';
+import { LaptopTasks, PhoneTasks } from './views/Tasks';
+import { LaptopTeam, PhoneTeam, ViewingAs } from './views/Team';
+import { LaptopBrand, PhoneBrand } from './views/Brand';
 import { LockedArea } from './LockedArea';
 import { useLens } from './lens';
 import './real-estate.css';
@@ -25,20 +29,36 @@ import './real-estate.css';
 const VIEWS: Record<EstateTab, Record<DemoProps['screen'], () => ReactNode>> = {
   today: { phone: PhoneToday, laptop: LaptopToday },
   inbox: { phone: PhoneInbox, laptop: LaptopInbox },
+  contacts: { phone: PhoneContacts, laptop: LaptopContacts },
   pipeline: { phone: PhonePipeline, laptop: LaptopPipeline },
   visits: { phone: PhoneVisits, laptop: LaptopVisits },
+  tasks: { phone: PhoneTasks, laptop: LaptopTasks },
   followups: { phone: PhoneFollowups, laptop: LaptopFollowups },
   listings: { phone: PhoneListings, laptop: LaptopListings },
   // On the phone "Sitio web" opens the buyer's view (overlay) instead of a tab.
   site: { phone: PhoneInbox, laptop: LaptopSite },
+  brand: { phone: PhoneBrand, laptop: LaptopBrand },
+  team: { phone: PhoneTeam, laptop: LaptopTeam },
 };
 const ORDER: Record<DemoProps['screen'], EstateTab[]> = {
-  laptop: ['today', 'inbox', 'pipeline', 'visits', 'followups', 'listings', 'site'],
-  phone: ['inbox', 'pipeline', 'visits', 'today', 'followups', 'listings'],
+  laptop: ['today', 'inbox', 'contacts', 'pipeline', 'visits', 'tasks', 'followups', 'listings', 'site', 'brand', 'team'],
+  phone: ['inbox', 'pipeline', 'contacts', 'visits', 'tasks', 'today', 'followups', 'listings', 'brand', 'team'],
 };
-const ICONS = { today: House, inbox: MessagesSquare, pipeline: Columns3, visits: CalendarDays, followups: Send, listings: Building2, site: Globe };
+const ICONS: Record<EstateTab, typeof House> = {
+  today: House,
+  inbox: MessagesSquare,
+  contacts: Users,
+  pipeline: Columns3,
+  visits: CalendarDays,
+  tasks: ListChecks,
+  followups: Send,
+  listings: Building2,
+  site: Globe,
+  brand: Palette,
+  team: ShieldCheck,
+};
 /** Guide hooks on the nav items (both screens). */
-const TOUR: Partial<Record<EstateTab, string>> = { pipeline: 'pipeline', visits: 'visits', followups: 'followups', site: 'site' };
+const TOUR: Partial<Record<EstateTab, string>> = { contacts: 'contacts', pipeline: 'pipeline', visits: 'visits', followups: 'followups', site: 'site', brand: 'brand' };
 
 /**
  * Shell variant: an editorial back office — a full sidebar with labels only (no icons), thin
@@ -74,6 +94,7 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
   const [tab, setTab] = useState<EstateTab>(screen === 'phone' ? 'inbox' : 'today');
   const [visitsDay, setVisitsDay] = useState(4);
   const [buyerOpen, setBuyerOpen] = useState(false);
+  const [contact, setContact] = useState<EstateCtx['contact']>(null);
   const buyerPhone = screen === 'phone' && paired;
   const announce = screen === 'laptop' || !paired;
   const root = useRef<HTMLDivElement | null>(null);
@@ -111,6 +132,13 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus]);
 
+  // A plan whose story ends earlier (Contact): if the story already went past it, start over.
+  const beatLimit = lens.beatLimit;
+  useEffect(() => {
+    const beat = store.getSnapshot().beat ?? -1;
+    if (beatLimit !== undefined && beat >= beatLimit) store.reset?.();
+  }, [beatLimit, store]);
+
   const playing = !!snap.playing;
   const segFrom = snap.segment?.from ?? null;
   const ctx: EstateCtx = {
@@ -146,11 +174,20 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
       store.reset?.();
       if (active) play('toggle');
     },
+    contact,
+    openContact: (id) => {
+      setContact(id);
+      if (id) {
+        setBuyerOpen(false);
+        setTab('contacts');
+      }
+    },
   };
 
   const clock = x.clock(view.clock);
   const sim = {
     store,
+    limit: lens.beatLimit,
     label: (id: string) => t(view.botOff ? `sim.off.${id}` : `sim.${id}`),
     note: t('sim.note'),
     tour: 'sim',
@@ -178,10 +215,20 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
     icon: ICONS[id],
     tour: TOUR[id],
     badge: lens.lockedFrom(id) ? ('lock' as const) : undefined,
-    group: screen === 'laptop' ? (id === 'followups' ? t('nav.groupAuto') : id === 'listings' ? t('nav.groupShop') : undefined) : undefined,
+    group:
+      screen === 'laptop'
+        ? id === 'followups'
+          ? t('nav.groupAuto')
+          : id === 'listings'
+            ? t('nav.groupShop')
+            : id === 'brand'
+              ? t('nav.groupAccount')
+              : undefined
+        : undefined,
   }));
   const open = officeOpen(view.clock.day, view.clock.min);
-  const julia = ADVISORS[0];
+  // The account is seen as its owner, or as an advisor («Ver como», basic roles).
+  const julia = ADVISORS.find((a) => a.id === snap.state.viewAs) ?? ADVISORS[0];
   const View = VIEWS[tab][screen];
   const lockedFrom = lens.lockedFrom(tab);
 
@@ -252,6 +299,7 @@ export default function RealEstateDemo({ screen, active }: DemoProps) {
           >
             <div className="re" data-screen={screen} data-tab={tab}>
               <EstateToasts placement={screen === 'phone' ? 'top' : 'bottom-right'} />
+              <ViewingAs />
               <div key={tab} className="demo-view re-view">
                 {lockedFrom ? <LockedArea tab={tab} from={lockedFrom} /> : <View />}
               </div>
