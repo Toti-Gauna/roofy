@@ -83,7 +83,8 @@ ventanas vacías entre módulos del CRM (ahora el corte es en el tiempo), el ded
   cada segundo, cada golpe de palabra cae en un bombo, silencio en el último medio segundo); cada titular se sostiene lo necesario (1,2 s por línea de ≤ 6 palabras, ≤ 2,2 palabras/s) en
   los tres idiomas; los subtítulos entran en 2 líneas de ≤ 42 caracteres a ≤ 15 car/s; **la película muestra cada área que
   Contact abre y ninguna que no incluye** (contra `lockedFromFor` de la lente); la partitura cubre la película a 120 BPM
-  y golpes y titulares caen en el tiempo; ningún texto del video tiene precios del plan ni «IA».
+  y golpes y titulares caen en el tiempo; el único precio es el del cierre (en pesos con el dólar abajo, armado desde el
+  catálogo y la cotización fechada de `content/video-rates.json`; ninguna cifra escrita en los textos) y nada dice «IA».
 - `tests/videos.test.ts`: cada archivo del registro existe, pesa lo que dice y está dentro del peso objetivo; su
   `catalogVersion` es la vigente y su `sourceHash` coincide con el origen actual (la película, el kit, los datos y los
   textos de Lumen). Si algo cambia, la prueba falla hasta volver a renderizar (y `approvedAt` vuelve a `null`).
@@ -100,5 +101,5 @@ el reproductor se encienden solos cuando el visitante lee otro idioma que el de 
 - **Sonido casi determinista:** dos mezclas del mismo origen difieren en 1 bit en el 0,04 % de las muestras (≈ −96 dBFS,
   inaudible), por redondeo de coma flotante del `OfflineAudioContext`; el propio motor de Kinetic lo documenta. Por eso
   dos renders del mismo origen no dan el mismo sha256 del MP4: el manifest guarda el del archivo entregado.
-- **Peso:** 16:9 a CRF 20 y AAC 128 kb/s; 9:16 (720 × 1280) a CRF 24 y AAC 96 kb/s, para entrar en sus 3 MB con 56 s.
-- **Tiempo de render:** ≈ 2,5 min por formato de 56 s (1.680 cuadros) en este contenedor.
+- **Peso:** 16:9 a CRF 20 y AAC 128 kb/s; 9:16 (720 × 1280) a CRF 24 y AAC 96 kb/s, para entrar en sus 3 MB con 58 s.
+- **Tiempo de render:** ≈ 2,5 min por formato de 58 s (1.740 cuadros) en este contenedor.

@@ -5,7 +5,10 @@ import type { EstateTab } from '@/components/demos/real-estate/data';
  * product each chapter shows. Pure (no DOM, no React): the film reads it, the subtitles come from it, and
  * tests/video.test.ts checks it (reading times, the beat, everything Contact delivers and nothing it doesn't).
  */
-export const CONTACT_DURATION = 56;
+export const CONTACT_DURATION = 58;
+/** The price lands here, on an eighth of the score: the closing holds 52–58 s, the brand first, then the price long
+ *  enough to read (and its subtitle under 15 characters per second). */
+export const PRICE_AT = 55.25;
 
 export const HEADS = ['web1', 'web2', 'web3', 'chat1', 'chat2', 'inbox', 'contacts', 'pipeline', 'visits', 'tasks', 'listings', 'team', 'kit', 'applied', 'profiles', 'library'] as const;
 export type HeadId = (typeof HEADS)[number];
@@ -54,7 +57,7 @@ export interface FilmText {
 }
 
 /** The words on screen with their times. */
-export function contactTexts(tc: (k: string) => string, tagline: string, brand: string, plan: string): FilmText[] {
+export function contactTexts(tc: (k: string) => string, tagline: string, brand: string, plan: string, price: string): FilmText[] {
   const out: FilmText[] = [];
   for (const g of GOLPES) {
     // Pairs read together (a question in two floors); the summary goes word by word.
@@ -62,6 +65,7 @@ export function contactTexts(tc: (k: string) => string, tagline: string, brand: 
     else for (let i = 0; i < g.words.length; i += 2) out.push({ at: g.words[i].at, end: g.words[i + 2]?.at ?? g.words[i].at + 2, text: `${tc(`golpes.${g.words[i].id}`)} ${tc(`golpes.${g.words[i + 1].id}`)}` });
   }
   for (const h of HEADS) out.push({ at: HEAD_TIMES[h][0], end: HEAD_TIMES[h][1], text: tc(`heads.${h}`) });
-  out.push({ at: 52.3, end: CONTACT_DURATION, text: `${brand} · ${plan} · ${tagline}` });
+  out.push({ at: 52, end: PRICE_AT, text: `${brand} · ${plan} · ${tagline}` });
+  out.push({ at: PRICE_AT, end: CONTACT_DURATION, text: price });
   return out.sort((a, b) => a.at - b.at);
 }

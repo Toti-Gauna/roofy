@@ -72,8 +72,10 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 - **Cada video explica TODO lo que su plan entrega**, un capítulo por entrega (Contact: web, chat guiado, CRM módulo por módulo,
   puesta en marcha con la marca) y nada de lo que no incluye: WhatsApp automático va en el video de Growth y la voz en el de
   Escalar. `tests/video.test.ts` lo comprueba contra la lente (`lockedFromFor`).
-- Ningún precio ni cupo dentro del video; el sello «Demo · datos ficticios» en cada cuadro. El precio está en el HTML al lado del
-  reproductor.
+- **Precio solo en el cierre** (Ignacio, 27/10/2026): en pesos, con el dólar abajo y la fecha de la cotización
+  (`components/video/price.ts`). El monto sale del catálogo y la cotización de `content/video-rates.json`, fija y fechada: si se
+  actualiza, se vuelve a renderizar. Ningún otro precio ni cupo dentro del video. Sello «Demo · datos ficticios» en cada cuadro;
+  el precio sigue también en el HTML al lado del reproductor.
 - `content/estateos-videos.json` es el registro y el manifest. Si cambia la película, el kit, los datos o textos de Lumen o
   `video.*`, hay que volver a renderizar (`tests/videos.test.ts` compara el `sourceHash`) y la aprobación de Ignacio vuelve a `null`.
 - Antes de cada render completo: un cuadro por segundo en los dos formatos (`--stills --every=1`), revisado en hojas de contacto.

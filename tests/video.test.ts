@@ -5,6 +5,9 @@ import { CONTACT_DURATION, COVERS, GOLPES, HEADS, HEAD_TIMES, contactTexts } fro
 import { PARTITURA } from '@/components/video/films/contact/partitura';
 import { arrange } from '@/components/video/score/arreglo';
 import { lockedFromFor } from '@/components/experience/lens';
+import { planInfo } from '@/lib/plans';
+import { RATE_DATE, localAmount, priceLines } from '@/components/video/price';
+import rates from '@/content/video-rates.json';
 import type { EstateTab } from '@/components/demos/real-estate/data';
 
 type Tree = { [key: string]: Tree | string };
@@ -37,7 +40,8 @@ describe('P1 · Contact (lote V1, the Kinetic way: guía de motion §0)', () => 
   const textsFor = (locale: string) => {
     const m = load(locale);
     const tc = (k: string) => at(m, `video.contact.${k}`) ?? `MISSING video.contact.${k}`;
-    return contactTexts(tc, at(m, 'experience.plans.contact.tagline')!, at(m, 'video.brand')!, 'Contact');
+    const price = priceLines((k, v) => (at(m, `video.price.${k}`) ?? `MISSING video.price.${k}`).replace(/\{(\w+)\}/g, (_, x: string) => v[x]), locale, planInfo('contact').priceUsdMonthly);
+    return contactTexts(tc, at(m, 'experience.plans.contact.tagline')!, at(m, 'video.brand')!, 'Contact', price.slice(0, 2).join(' · '));
   };
 
   it.each(['es', 'en', 'pt'])('%s: every word on screen exists, is held long enough and makes valid subtitles', (locale) => {
@@ -100,12 +104,27 @@ describe('P1 · Contact (lote V1, the Kinetic way: guía de motion §0)', () => 
     for (const n of notes.filter((x) => ['strings', 'bass', 'lead'].includes(x.inst))) expect(n.t + n.dur, `${n.inst} at ${n.t}`).toBeLessThanOrEqual(CONTACT_DURATION - 0.3);
   });
 
-  it('shows no plan price, quota or AI inside the video (the price lives next to the player)', () => {
+  it('shows the price only at the close: from the catalog, in pesos with the dollar below and the rate\'s date', () => {
+    // Ignacio, 27/10/2026: the close shows the plan's price in pesos, the dollar below. No other line carries an amount.
     for (const locale of ['es', 'en', 'pt']) {
-      const words = strings(load(locale).video as Tree);
-      expect(words.filter((w) => /\b(USD|US\$|R\$|\$)\s?\d|\/mes|\/month|\/mês/i.test(w)), locale).toEqual([]);
+      const video = load(locale).video as Tree;
+      const { price, ...rest } = video;
+      const words = strings(rest as Tree);
+      expect(words.filter((w) => /\b(USD|ARS|BRL|US\$|R\$|\$)\s?\d|\/mes|\/month|\/mês/i.test(w)), locale).toEqual([]);
       expect(words.filter((w) => /\b(IA|AI)\b|inteligencia artificial|artificial intelligence/i.test(w)), locale).toEqual([]);
+      // The price templates take every number from code (catalog × dated rate): none is typed in the copy.
+      for (const line of strings(price as Tree)) expect(line.replace(/\{\w+\}/g, ''), `${locale}: ${line}`).not.toMatch(/\d/);
     }
+    const usd = planInfo('contact').priceUsdMonthly;
+    const ars = localAmount(usd, 'ARS')!;
+    expect(ars % 1000).toBe(0);
+    expect(Math.abs(ars - usd * rates.ARS)).toBeLessThanOrEqual(500);
+    const t = (k: string, v: Record<string, string>) => (at(load('es'), `video.price.${k}`) ?? '').replace(/\{(\w+)\}/g, (_, x: string) => v[x]);
+    const lines = priceLines(t, 'es', usd);
+    expect(lines).toHaveLength(3);
+    expect(lines[0]).toBe(`$ ${new Intl.NumberFormat('es-AR').format(ars)}/mes`);
+    expect(lines[1]).toBe(`USD ${usd}/mes`);
+    expect(lines[2]).toContain(RATE_DATE.split('-').reverse().join('/'));
   });
 
   it('every frame says it is a demo with fictional data', () => {

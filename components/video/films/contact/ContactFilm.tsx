@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { gsap } from 'gsap';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { PhaseGlyph } from '@/components/ui/PhaseGlyph';
 import { LUMEN, SITE_URL, listingPath } from '@/components/demos/real-estate/data';
 import { planInfo, planPhase } from '@/lib/plans';
@@ -31,7 +31,8 @@ import {
 } from '../../ui/estate';
 import type { FilmCtx, Layout } from '../../film';
 import { box, center, fingerOut, flash, golpe, head, lupa, span, tag, tap } from '../../moves';
-import { CONTACT_DURATION, HEADS, HEAD_TIMES } from './script';
+import { CONTACT_DURATION, HEADS, HEAD_TIMES, PRICE_AT } from './script';
+import { priceLines } from '../../price';
 import type { Ratio } from '../../timeline';
 
 /**
@@ -62,7 +63,20 @@ function Golpe({ id, panels }: { id: string; panels: { p: string; color: string;
   );
 }
 
-function Mark({ id, line }: { id: string; line?: string }) {
+/** The plan's price for the closing: local currency first, the dollar below, the rate's date (video/price.ts). */
+function Price() {
+  const t = useTranslations('video.price');
+  const [local, usd, rate] = priceLines((k, v) => t(k, v), useLocale(), planInfo('contact').priceUsdMonthly);
+  return (
+    <div className="tr-mark-price">
+      <p className="tr-mark-local">{local}</p>
+      {usd ? <p className="tr-mark-usd">{usd}</p> : null}
+      {rate ? <p className="tr-mark-rate">{rate}</p> : null}
+    </div>
+  );
+}
+
+function Mark({ id, line, price = false }: { id: string; line?: string; price?: boolean }) {
   const t = useTranslations('video');
   return (
     <section className="tr-scene tr-c-night" id={id} style={{ zIndex: 22 }}>
@@ -73,6 +87,7 @@ function Mark({ id, line }: { id: string; line?: string }) {
         <p className="tr-mark-word">{t('brand')}</p>
         <p className="tr-mark-plan">{planInfo('contact').name}</p>
         {line ? <p className="tr-mark-line">{line}</p> : null}
+        {price ? <Price /> : null}
       </div>
     </section>
   );
@@ -218,7 +233,7 @@ export function ContactFilm({ ratio, L }: { ratio: Ratio; L: Layout }) {
           { p: '4', color: 'sand', text: g('s4') },
         ]}
       />
-      <Mark id="final" line={tx('plans.contact.tagline')} />
+      <Mark id="final" line={tx('plans.contact.tagline')} price />
       <span hidden data-business={LUMEN.business} />
     </div>
   );
@@ -478,6 +493,7 @@ export function buildContact(c: FilmCtx) {
   /* 52–56 · final */
   flash(c, 52, 0.9);
   mark(c, '#final', 52, true);
+  price(c, '#final', PRICE_AT);
 
   tl.set({}, {}, CONTACT_DURATION);
 }
@@ -497,4 +513,15 @@ function mark(c: FilmCtx, scene: string, at: number, line = false) {
     const l = c.one(`${scene} .tr-mark-line`);
     tl.set(l, { autoAlpha: 0, y: 20 }, 0).to(l, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, at + 0.8);
   }
+}
+
+/** The price lands on its beat: the hairline draws, the local amount rises, the dollar and the rate follow. */
+function price(c: FilmCtx, scene: string, at: number) {
+  const { tl } = c;
+  const box = c.one(`${scene} .tr-mark-price`);
+  const parts = c.q(`${scene} .tr-mark-price > p`);
+  tl.set(box, { '--rule': 0 }, 0).to(box, { '--rule': 1, duration: 0.5, ease: 'expo.out' }, at);
+  tl.set(parts, { autoAlpha: 0, y: 30 }, 0);
+  parts.forEach((p, i) => tl.to(p, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' }, at + 0.1 + i * 0.18));
+  c.sfx('bell', at + 0.1, 1174.66, 0.06, 0.9);
 }

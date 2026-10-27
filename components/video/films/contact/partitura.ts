@@ -42,8 +42,8 @@ const VERSO2: Line = [
 /** The break: one note per word (48, 49, 50, 51), climbing to the leading tone; the D lands at 52. */
 const QUIEBRE: Line = [[0, 0, 83, 8, 0.75], [0, 8, 81, 8, 0.7], [1, 0, 81, 4, 0.75], [1, 4, 83, 4, 0.8], [1, 8, 85, 8, 0.85]];
 
-/** The signature: the six phases once more, the last one held to the end. */
-const FIRMA: Line = [[0, 0, 74, 2, 0.7], [0, 2, 76, 2, 0.72], [0, 4, 78, 2, 0.74], [0, 6, 81, 2, 0.76], [0, 8, 83, 2, 0.8], [0, 10, 86, 20, 0.85]];
+/** The signature: the six phases once more, the last one held; the D rings again when the price lands (55.25 s). */
+const FIRMA: Line = [[0, 0, 74, 2, 0.7], [0, 2, 76, 2, 0.72], [0, 4, 78, 2, 0.74], [0, 6, 81, 2, 0.76], [0, 8, 83, 2, 0.8], [0, 10, 86, 20, 0.85], [1, 10, 86, 12, 0.6]];
 
 export const PARTITURA: Score = {
   bpm: 120,
@@ -56,6 +56,6 @@ export const PARTITURA: Score = {
     { from: 34, to: 36, style: 'subida', chords: ['A'] },
     { from: 36, to: 48, style: 'verso2', chords: ['Bm', 'G', 'D', 'A', 'Bm', 'G'], melody: VERSO2 },
     { from: 48, to: 52, style: 'quiebre', chords: ['G', 'A'], melody: QUIEBRE },
-    { from: 52, to: 56, style: 'final', chords: ['D', 'D'], melody: FIRMA },
+    { from: 52, to: 58, style: 'final', chords: ['D', 'D', 'D'], melody: FIRMA },
   ],
 };
