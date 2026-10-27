@@ -1151,14 +1151,48 @@
     "seal": "Demo · fictional data",
     "brand": "EstateOS",
     "contact": {
-      "headline": "Office closed.",
-      "shots": {
-        "chat": "Guided chat: it answers with buttons, any time.",
-        "inbox": "The inquiry lands in the CRM, complete.",
-        "pipeline": "Every inquiry has a stage and a next step.",
-        "brand": "Your brand, built in from setup."
+      "golpes": {
+        "g1": "Inquiries from",
+        "g2": "everywhere?",
+        "g3": "Spreadsheets",
+        "g4": "nobody follows?",
+        "g5": "And behind it all,",
+        "g6": "your CRM.",
+        "g7": "And we set it",
+        "g8": "all up.",
+        "s1": "Your website.",
+        "s2": "Your CRM.",
+        "s3": "Guided chat.",
+        "s4": "Your brand."
       },
-      "close": "web · CRM · guided chat"
+      "tags": {
+        "web": "Your website",
+        "chat": "Guided chat",
+        "crm": "Complete CRM",
+        "setup": "Setup"
+      },
+      "heads": {
+        "web1": "A professional website.",
+        "web2": "Every listing, with its page.",
+        "web3": "Viewings booked right there.",
+        "chat1": "Guided chat, always on.",
+        "chat2": "The inquiry arrives complete.",
+        "inbox": "All your inquiries, together.",
+        "contacts": "Every contact, its history.",
+        "pipeline": "Every deal, its stage.",
+        "visits": "Your team's calendar.",
+        "tasks": "Tasks and reminders.",
+        "listings": "Your listings, organized.",
+        "team": "Roles for your team.",
+        "kit": "Your brand, everywhere.",
+        "applied": "From template to your brand.",
+        "profiles": "We review your socials.",
+        "library": "Hooks, videos and a guide."
+      },
+      "lupa": {
+        "inquiry": "New inquiry",
+        "channels": "This week's inquiries"
+      }
     }
   }
 }

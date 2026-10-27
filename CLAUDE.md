@@ -62,13 +62,19 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 
 ## Videos (lote V1)
 
-- La fábrica filma la demo real cuadro por cuadro: página de render solo en dev (`app/[locale]/render/page.dev.tsx`), piezas en
-  `components/video/pieces/`, driver `scripts/render-video.mjs` (Playwright con reloj simulado + ffmpeg; sin dependencias
-  nuevas). Guía: `docs/video-factory.md`.
-- Ningún precio ni cupo dentro del video; el sello «Demo · datos ficticios» en cada cuadro; cada pieza filma solo lo que su
-  plan incluye. El precio está en el HTML al lado del reproductor.
-- `content/estateos-videos.json` es el registro y el manifest. Si cambia una pieza, el escenario o los textos `video.*`, hay que
-  volver a renderizar (`tests/videos.test.ts` compara el `sourceHash`) y la aprobación de Ignacio vuelve a `null`.
+- **Método Kinetic Studio (guía de motion §0, corrección de Ignacio del 27/10/2026):** nada se filma. Los componentes se
+  reconstruyen para el video (`components/video/ui/`), la película es una línea de tiempo GSAP en pausa movida por `seek`
+  (`components/video/films/<plan>/`: `STORYBOARD.md`, `script.ts`, coreografía, `partitura.ts` a 120 BPM) y el sonido es el
+  motor de Kinetic (`components/video/kinetic/`). Escenario solo en dev (`app/[locale]/trailer/page.dev.tsx`), driver
+  `scripts/render-video.mjs`. Guía: `docs/video-factory.md`.
+- **Cada video explica TODO lo que su plan entrega**, un capítulo por entrega (Contact: web, chat guiado, CRM módulo por módulo,
+  puesta en marcha con la marca) y nada de lo que no incluye: WhatsApp automático va en el video de Growth y la voz en el de
+  Escalar. `tests/video.test.ts` lo comprueba contra la lente (`lockedFromFor`).
+- Ningún precio ni cupo dentro del video; el sello «Demo · datos ficticios» en cada cuadro. El precio está en el HTML al lado del
+  reproductor.
+- `content/estateos-videos.json` es el registro y el manifest. Si cambia la película, el kit, los datos o textos de Lumen o
+  `video.*`, hay que volver a renderizar (`tests/videos.test.ts` compara el `sourceHash`) y la aprobación de Ignacio vuelve a `null`.
+- Antes de cada render completo: un cuadro por segundo en los dos formatos (`--stills --every=1`), revisado en hojas de contacto.
 - Mientras corre un render no edites `components/video/*` ni `messages/*`: el servidor de desarrollo recarga la página y el
   render se corta.
 

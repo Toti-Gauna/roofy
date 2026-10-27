@@ -50,7 +50,7 @@ describe('the video registry (guía de motion v1 §6)', () => {
       const vtt = readFileSync(pub(v.subtitles[locale]), 'utf8');
       expect(vtt.startsWith('WEBVTT'), locale).toBe(true);
       for (const block of vtt.split('\n\n').slice(1).filter(Boolean)) {
-        const lines = block.split('\n').slice(2);
+        const lines = block.split('\n').slice(2).filter(Boolean);
         expect(lines.length, `${locale}: ${block}`).toBeLessThanOrEqual(SUB.maxLines);
         for (const line of lines) expect(line.length, `${locale}: ${line}`).toBeLessThanOrEqual(SUB.maxLine);
       }

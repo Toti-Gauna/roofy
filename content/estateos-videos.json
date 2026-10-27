@@ -7,7 +7,7 @@
       "plan": "contact",
       "version": 1,
       "lang": "es",
-      "durationSec": 36.4,
+      "durationSec": 56,
       "src": "/videos/contact/contact-v1-es-16x9.mp4",
       "poster": "/videos/contact/contact-v1-es-16x9.webp",
       "files": [
@@ -17,11 +17,11 @@
           "poster": "/videos/contact/contact-v1-es-16x9.webp",
           "width": 1920,
           "height": 1080,
-          "durationSec": 36.4,
+          "durationSec": 56,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 5380105,
-          "sha256": "9656e7323e71319ebf0e6c7857970b572e82bfb570bd6a82e490afbfa1bedbc1",
+          "bytes": 5894752,
+          "sha256": "7b7ae72b173c7992c183176cff4be5aa805394fd45fcb13a9a782378b405236f",
           "lufs": -16.1,
           "truePeak": -1.5
         },
@@ -31,13 +31,13 @@
           "poster": "/videos/contact/contact-v1-es-9x16.webp",
           "width": 720,
           "height": 1280,
-          "durationSec": 36.4,
+          "durationSec": 56,
           "fps": 30,
           "codec": "h264 high",
-          "bytes": 3054720,
-          "sha256": "f41a6ea25c9e67867e5336bccf10129e78d9e9a3a267528eabd9da85d885d041",
+          "bytes": 2936587,
+          "sha256": "2cdbca3f907346d5dd4bafbca54875c338e6df565987a6e40ec0984d0c167b50",
           "lufs": -16.1,
-          "truePeak": -1.3
+          "truePeak": -1.5
         }
       ],
       "subtitles": {
@@ -46,16 +46,16 @@
         "pt": "/videos/contact/contact-v1-pt.vtt"
       },
       "transcript": {
-        "es": "Video de 36 segundos, sin locución; los textos están en pantalla. Jueves 8, 23:40: la oficina de Lumen Propiedades está cerrada y su pantalla de «Hoy» se ilumina. En el celular de Carolina, el chat guiado del sitio le contesta con botones: ella cuenta que va a pagar con crédito hipotecario. En el CRM la consulta aparece completa y, cuando Carolina responde que quiere invertir de USD 150.000 a 200.000, su ficha se completa y su tarjeta pasa de «Nuevo» a «Calificado» en el pipeline. La visita queda en la agenda: viernes 9 a las 18:30 en Olmos 1420. Después, la web y una ficha pasan de la plantilla base a la marca de Lumen. Cierre: Contact, la primera fase del eclipse: web, CRM y chat guiado. Es una demo con datos ficticios.",
-        "en": "A 36-second video with no voice-over; the words are on screen. Thursday 8, 11:40 pm: Lumen Propiedades' office is closed and its «Today» screen lights up. On Carolina's phone, the site's guided chat answers her with buttons: she says she will pay with a mortgage. In the CRM the inquiry arrives complete and, when Carolina answers that she wants to spend USD 150,000 to 200,000, her file fills in and her card moves from «New» to «Qualified» in the pipeline. The visit lands in the agenda: Friday 9 at 6:30 pm at Olmos 1420. Then the website and a listing switch from the base template to Lumen's brand. Close: Contact, the first phase of the eclipse: website, CRM and guided chat. It is a demo with fictional data.",
-        "pt": "Vídeo de 36 segundos, sem locução; os textos estão na tela. Quinta 8, 23:40: o escritório da Lumen Propiedades está fechado e a tela «Hoje» se acende. No celular da Carolina, o chat guiado do site responde com botões: ela conta que vai pagar com financiamento. No CRM a consulta chega completa e, quando Carolina responde que quer investir de USD 150.000 a 200.000, a ficha dela se completa e o card passa de «Novo» para «Qualificado» no pipeline. A visita entra na agenda: sexta 9 às 18:30 em Olmos 1420. Depois, o site e um anúncio passam do modelo base para a marca da Lumen. Encerramento: Contact, a primeira fase do eclipse: site, CRM e chat guiado. É uma demo com dados fictícios."
+        "es": "Video de 56 segundos, sin locución; los textos están en pantalla. Arranca con palabras sobre paneles de color: «¿Consultas por todos lados? ¿Planillas que nadie sigue?». Aparece EstateOS · Contact. 1 · Tu web: «Una web profesional.» La web de Lumen Propiedades (Demo), con buscador y propiedades; tres propiedades salen grandes de la pantalla. «Cada propiedad, con su ficha. Te piden visitas desde ahí.» En la ficha de Olmos 1420 un toque pide una visita para el viernes 9 a las 18:30 y queda agendada. 2 · Chat guiado: «Un chat guiado, siempre.» En el celular, Carolina pregunta por Olmos 1420; el chat le contesta con botones y ella elige «Con crédito hipotecario». «La consulta llega completa»: sale del teléfono como una tarjeta con su nombre, la propiedad y cómo paga. «Y del otro lado, tu CRM.» 3 · CRM completo, módulo por módulo: «Todas tus consultas, juntas» (las de la semana por canal: sitio web, WhatsApp, portales y cartel); «Cada contacto, su historia»; «Cada oportunidad, su estado» (la tarjeta de Carolina pasa de Nuevo a Calificado); «La agenda del equipo» (su visita cae el viernes a las 18:30); «Tareas y recordatorios» (se tildan); «Tu cartera, ordenada»; «Roles para tu equipo» (administradora y asesor, con sus permisos). «Y lo ponemos en marcha.» 4 · Puesta en marcha: «Tu marca, en todo» (logo, paleta y tipografía); «De plantilla a tu marca» (la web pasa de la plantilla base a la marca de Lumen); «Revisamos tus redes» (biografía, portada, destacados y llamado a la acción, cada uno con su versión nueva); «Hooks, videos y una guía» (seis ideas de publicación, tres videos de ejemplo y la guía operativa). Cierre: «Tu web. Tu CRM. Chat guiado. Tu marca.» y EstateOS · Contact · Producto base completo. Todos los datos son ficticios.",
+        "en": "A 56-second video with no voice-over; the words are on screen (in Spanish, with subtitles). It opens with words on coloured panels: “Inquiries from everywhere? Spreadsheets nobody follows?”. EstateOS · Contact appears. 1 · Your website: “A professional website.” Lumen Propiedades’ site (Demo), with search and listings; three listings come out of the screen, large. “Every listing, with its page. Viewings booked right there.” On the Olmos 1420 page a tap asks for a viewing on Friday 9 at 18:30 and it is booked. 2 · Guided chat: “Guided chat, always on.” On a phone, Carolina asks about Olmos 1420; the chat answers with buttons and she picks “With a mortgage”. “The inquiry arrives complete”: it leaves the phone as a card with her name, the listing and how she pays. “And behind it all, your CRM.” 3 · Complete CRM, area by area: “All your inquiries, together” (the week’s, by channel: website, WhatsApp, portals and sign); “Every contact, its history”; “Every deal, its stage” (Carolina’s card moves from New to Qualified); “Your team’s calendar” (her viewing lands on Friday at 18:30); “Tasks and reminders” (ticked off); “Your listings, organized”; “Roles for your team” (admin and agent, with their permissions). “And we set it all up.” 4 · Setup: “Your brand, everywhere” (logo, palette and type); “From template to your brand” (the site goes from the base template to Lumen’s brand); “We review your socials” (bio, cover, highlights and call to action, each with its new version); “Hooks, videos and a guide” (six post ideas, three example videos and the operating guide). Closing: “Your website. Your CRM. Guided chat. Your brand.” and EstateOS · Contact · The complete base product. All data is fictional.",
+        "pt": "Vídeo de 56 segundos, sem locução; os textos estão na tela (em espanhol, com legendas). Começa com palavras sobre painéis coloridos: “Consultas por todo lado? Planilhas que ninguém segue?”. Aparece EstateOS · Contact. 1 · Seu site: “Um site profissional.” O site da Lumen Propiedades (Demo), com busca e imóveis; três imóveis saem grandes da tela. “Cada imóvel, com sua página. Pedem visitas ali mesmo.” Na página de Olmos 1420 um toque pede uma visita para sexta, dia 9, às 18:30 e ela fica agendada. 2 · Chat guiado: “Um chat guiado, sempre.” No celular, Carolina pergunta por Olmos 1420; o chat responde com botões e ela escolhe “Com financiamento”. “A consulta chega completa”: sai do telefone como um cartão com o nome dela, o imóvel e como vai pagar. “E do outro lado, o seu CRM.” 3 · CRM completo, área por área: “Todas as consultas, juntas” (as da semana por canal: site, WhatsApp, portais e placa); “Cada contato, sua história”; “Cada negócio, sua etapa” (o cartão de Carolina passa de Novo a Qualificado); “A agenda da equipe” (a visita cai na sexta às 18:30); “Tarefas e lembretes” (vão sendo marcadas); “Sua carteira, organizada”; “Papéis para sua equipe” (administradora e corretor, com suas permissões). “E colocamos tudo no ar.” 4 · Implantação: “Sua marca, em tudo” (logo, paleta e tipografia); “Do modelo à sua marca” (o site passa do modelo base à marca da Lumen); “Revisamos suas redes” (bio, capa, destaques e chamada para ação, cada um com sua nova versão); “Hooks, vídeos e um guia” (seis ideias de post, três vídeos de exemplo e o guia operacional). Fechamento: “Seu site. Seu CRM. Chat guiado. Sua marca.” e EstateOS · Contact · Produto base completo. Todos os dados são fictícios."
       },
       "sourceType": "render",
-      "license": "Eclipse (render propio: interfaz de la demo, tipografías OFL del sitio, música y efectos sintetizados por el motor del sitio)",
+      "license": "Eclipse (render propio: componentes reconstruidos de la demo, tipografías OFL del sitio, música y efectos sintetizados por el motor de Kinetic Studio)",
       "consent": "No aplica: sin personas reales, voces ni material generado",
       "synthetic": false,
       "catalogVersion": "estateos-2026-10-27-v3",
-      "sourceHash": "cd884264cc2f57c46c5cf0321414e1981e23461230dbf9cfbb5fd479f74f8417",
+      "sourceHash": "f9cff27a72099a3b42a406f0213f01c3f15df4f1c30f013ddceaf53fed57a452",
       "approvedAt": null
     }
   ]

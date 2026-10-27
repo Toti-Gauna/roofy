@@ -1,21 +1,42 @@
 /**
- * What a piece's frames are made of, as one hash (the manifest's `sourceHash`, guía de motion v1 §6): the
- * piece's shot list, the stage that films it and the words it shows in every language. The driver writes it;
+ * What a film's frames and sound are made of, as one hash (the manifest's `sourceHash`, guía de motion v1 §0 and §6):
+ * the film's own folder (its script, choreography and score), the trailer kit that draws it, the rebuilt pieces and the
+ * Lumen data and copy they show, and the words on screen in every language. The driver writes it;
  * `tests/videos.test.ts` recomputes it and fails when a video was not re-rendered after one of these changed.
- * (The demo itself is not in it: a change to Lumen is checked by looking at the frames, not by a hash.)
  */
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-export const STAGE_FILES = ['components/video/RenderStage.tsx', 'components/video/video.css', 'components/video/timeline.ts', 'components/video/clock.ts', 'components/video/audio.ts'];
+export const STAGE_FILES = [
+  'components/video/FilmStage.tsx',
+  'components/video/film.ts',
+  'components/video/moves.ts',
+  'components/video/timeline.ts',
+  'components/video/ui/devices.tsx',
+  'components/video/ui/estate.tsx',
+  'components/video/ui/trailer.css',
+  'components/video/kinetic/score.ts',
+  'components/video/kinetic/shim.ts',
+  'components/video/kinetic/audio.js',
+  'components/video/kinetic/recipes-music.js',
+  'components/demos/real-estate/data.ts',
+];
 
-export function sourceHash(root, piece) {
+/** The film's folder, every file in a stable order. */
+export function filmFiles(root, film) {
+  const dir = `components/video/films/${film}`;
+  return readdirSync(join(root, dir))
+    .sort()
+    .map((f) => `${dir}/${f}`);
+}
+
+export function sourceHash(root, film) {
   const hash = createHash('sha256');
-  for (const file of [`components/video/pieces/${piece}.ts`, ...STAGE_FILES]) hash.update(readFileSync(join(root, file)));
+  for (const file of [...filmFiles(root, film), ...STAGE_FILES]) hash.update(readFileSync(join(root, file)));
   for (const locale of ['es', 'en', 'pt']) {
-    const messages = JSON.parse(readFileSync(join(root, 'messages', `${locale}.json`), 'utf8'));
-    hash.update(JSON.stringify({ seal: messages.video.seal, brand: messages.video.brand, piece: messages.video[piece] }));
+    const m = JSON.parse(readFileSync(join(root, 'messages', `${locale}.json`), 'utf8'));
+    hash.update(JSON.stringify({ seal: m.video.seal, brand: m.video.brand, film: m.video[film], plan: m.experience.plans[film], demo: m.demoRealEstate }));
   }
   return hash.digest('hex');
 }

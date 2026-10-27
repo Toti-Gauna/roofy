@@ -1,80 +1,95 @@
-# Fábrica de videos (lote V1)
+# Fábrica de tráileres (lote V1, segundo corte)
 
-Cómo se fabrican los videos de motion graphics de EstateOS (guía de motion v1 §5–§10, en Eclipse-Web
-`docs/v3/estateos/guia-motion.v1.md`). El primero es **P1 · Contact** («Ninguna consulta se pierde»). Las piezas de
-V2–V5 usan la misma fábrica: se agrega un archivo en `components/video/pieces/` y nada más.
+Cómo se fabrican los videos de EstateOS (guía de motion v1, **§0 primero**: en Eclipse-Web
+`docs/v3/estateos/guia-motion.v1.md`). El primero es **P1 · Contact**. V2–V5 usan el mismo kit: una carpeta nueva en
+`components/video/films/<plan>/` con su guion, su coreografía y su partitura.
 
-## La idea
+El primer corte filmaba la demo de Lumen con un reloj simulado. Ignacio lo rechazó el 27/10/2026: era una demo filmada,
+pobre como presentación, y no explicaba todo lo que el cliente recibe. Este corte sigue el método de **Kinetic Studio**
+(`Toti-Gauna/kinetic-studio`).
 
-- **Se filma la demo de verdad.** La página de render monta Lumen tal cual y la mueve con sus propios controles: el
-  botón «Simular» de la SimBar, la navegación y los botones de cada vista. No hay pantallas inventadas.
-- **Cada plano es una toma.** Al empezar un plano se monta Lumen de cero y se reproduce fuera de cámara hasta el
-  momento que el plano filma (los pasos con `at` negativo); después se filma. Así cada plano muestra su momento justo,
-  como en un rodaje.
-- **Cuadro por cuadro, siempre igual.** Playwright simula el reloj de la página (`page.clock`: temporizadores, `Date`,
-  `requestAnimationFrame`) y lo avanza 1/30 s por cuadro. Las animaciones CSS y Web Animations no usan ese reloj; la
-  página las fija al tiempo simulado en cada cuadro (`components/video/clock.ts`). La capa del video (marco,
-  cámara, rótulos, anillo de toque, luz) es una función pura del tiempo (`components/video/timeline.ts`, con las
-  curvas del sitio), sin línea de tiempo en reproducción.
-- **Sin dependencias nuevas:** Chromium y Playwright preinstalados, `ffmpeg` y `ffprobe`.
+## El método (Kinetic Studio)
+
+- **Componentes reconstruidos para el video.** Nada se filma: `components/video/ui/estate.tsx` vuelve a dibujar cada pieza
+  (sitio, ficha, reserva, chat, CRM módulo por módulo, kit de marca, auditoría de redes, hooks, videos, guía) con los datos
+  y los textos reales de Lumen (`components/demos/real-estate/data.ts`, `demoRealEstate`). El dispositivo
+  (`ui/devices.tsx`) dibuja la interfaz más grande que en la web (×1,3 en la ventana, ×1,2 en el celular), porque el
+  video se mira en un teléfono.
+- **Una línea de tiempo GSAP en pausa, en segundos absolutos.** Cada cuadro es un `seek(t)` (como `?t=` en Kinetic): el
+  mismo cuadro siempre, sin reloj simulado. Estados iniciales con `tl.set`, nunca `from`/`fromTo`; solo `transform`,
+  `opacity` y `clip-path`.
+- **El vocabulario** (`components/video/moves.ts`): golpes de palabras sobre paneles que barren el cuadro (con «mitad»),
+  la etiqueta del capítulo, el titular que cae en el tiempo, la **lupa** (una tarjeta sale grande del dispositivo), el
+  dedo que toca, el destello, el borde que pasa.
+- **Storyboard antes de animar.** `films/<plan>/STORYBOARD.md`: un capítulo por cosa que el plan entrega, en el orden en
+  que el cliente la usa, y nada de lo que el plan no incluye.
+- **Partitura a tempo.** 120 BPM (un compás = 2 s): cortes y golpes caen en el tiempo. La música y los efectos son el
+  motor de Kinetic (`components/video/kinetic/audio.js` y `recipes-music.js`, copias byte a byte con su procedencia en
+  `PROCEDENCIA.md`), mezclados sin conexión con semilla fija.
+- **Sin dependencias nuevas:** GSAP ya estaba en el stack; Chromium y Playwright preinstalados; `ffmpeg` y `ffprobe`.
 
 ## Archivos
 
 | Archivo | Qué hace |
 |---|---|
-| `app/[locale]/render/page.dev.tsx` | Página de render. Solo existe en `next dev` (`pageExtensions`): nunca llega al export |
-| `components/video/RenderStage.tsx` | El escenario: monta la toma, ejecuta los pasos, encuadra la cámara y expone `window.__video` al driver |
-| `components/video/piece.ts` · `pieces/*.ts` | Qué es una pieza (planos, tomas, pasos) y cada pieza |
-| `components/video/timeline.ts` | Curvas, formatos, reglas de lectura y de subtítulos, WebVTT (puro, con pruebas) |
-| `components/video/clock.ts` | Fija las animaciones CSS al reloj simulado |
-| `components/video/audio.ts` | Música y efectos del motor de sonido del sitio, renderizados sin conexión con semilla fija |
-| `scripts/render-video.mjs` | El driver: cuadros → H.264, audio → −16 LUFS, poster, subtítulos, manifest, `--probe`, `--stills` |
-| `scripts/video-source.mjs` | El hash del origen de una pieza (`sourceHash` del manifest) |
+| `app/[locale]/trailer/page.dev.tsx` | El escenario. Solo existe en `next dev` (`pageExtensions`): nunca llega al export |
+| `components/video/FilmStage.tsx` | Monta la película, arma la línea de tiempo y expone `window.trailer` (seek, audio, subtítulos) |
+| `components/video/film.ts` | Los dos encuadres (16:9 y 9:16): dónde van etiqueta, titular, dispositivos y lupa |
+| `components/video/moves.ts` | Los movimientos del método |
+| `components/video/ui/` | Dispositivos, piezas de EstateOS reconstruidas y su CSS |
+| `components/video/kinetic/` | El motor de sonido de Kinetic y su adaptación (`score.ts`) |
+| `components/video/films/contact/` | P1: `STORYBOARD.md`, `script.ts` (tiempos y palabras), `ContactFilm.tsx` (coreografía), `partitura.ts` |
+| `components/video/timeline.ts` | Reglas de lectura y de subtítulos, WebVTT, formatos (puro, con pruebas) |
+| `scripts/render-video.mjs` | El driver: cuadros → H.264, audio → −16 LUFS, poster, subtítulos, manifest, `--stills` |
+| `scripts/video-source.mjs` | El hash del origen de una película (`sourceHash` del manifest) |
 | `content/estateos-videos.json` | Registro del reproductor y manifest de cada archivo |
-| `public/videos/<pieza>/` | Los MP4, los posters WebP y los subtítulos WebVTT |
 
 ## Comandos
 
 ```bash
-NEXT_DIST_DIR=.next-render npx next dev -p 3410            # servidor de render (otro distDir)
-node scripts/render-video.mjs --piece=contact --ratio=16x9  # 16:9, español
-node scripts/render-video.mjs --piece=contact --ratio=9x16  # 9:16 (vistas del celular, compuesto aparte)
-node scripts/render-video.mjs --piece=contact --subs        # WebVTT es / en / pt
-node scripts/render-video.mjs --piece=contact --manifest    # entrada del registro (ffprobe, hashes, catálogo)
+NEXT_DIST_DIR=.next-render npx next dev -p 3410             # servidor de render (otro distDir)
+node scripts/render-video.mjs --film=contact --ratio=16x9   # 16:9, español
+node scripts/render-video.mjs --film=contact --ratio=9x16   # 9:16 (entregado a 720 × 1280)
+node scripts/render-video.mjs --film=contact --subs         # WebVTT es / en / pt
+node scripts/render-video.mjs --film=contact --manifest     # entrada del registro (ffprobe, hashes, catálogo)
 # Para dirigir:
-node scripts/render-video.mjs --piece=contact --ratio=16x9 --stills=.render/stills --every=15 [--shot=chat]
-node scripts/render-video.mjs --piece=contact --shot=pipeline --probe="<expresión JS>"   # cuándo cambia algo
-node scripts/render-video.mjs --piece=contact --ratio=16x9 --reuse   # rehace solo audio, poster y mezcla
+node scripts/render-video.mjs --film=contact --ratio=16x9 --stills=.render/stills --every=1     # un cuadro por segundo
+node scripts/render-video.mjs --film=contact --ratio=9x16 --stills=.render/stills --at=12.6,21.6
+node scripts/render-video.mjs --film=contact --ratio=16x9 --reuse   # rehace solo audio, poster y mezcla
 ```
 
-Un 16:9 de 36 s tarda unos 4 min (1.092 cuadros). `.render/` es descartable (está en `.gitignore`): los masters PNG
-no se guardan porque el mismo comando los vuelve a producir idénticos.
+En el navegador: `http://localhost:3410/es/trailer/?film=contact&ratio=16x9&t=21.6` congela un cuadro.
+`.render/` es descartable (está en `.gitignore`).
 
-## Mediciones de V1
+## Revisión cuadro a cuadro (antes de cada render completo)
 
-- **Determinismo:** dos renders del plano del pipeline (con la tarjeta en vuelo) dan los 18 cuadros comparados
-  idénticos byte a byte (md5).
-- **Cuadros por segundo: 30.** La cámara se acerca como mucho un 3 % por plano con curva `IN_OUT`: el borde que más
-  se mueve recorre ≈ 22 px en 4–8 s, con un pico de ≈ 0,3 px por cuadro a 30 fps, muy por debajo del píxel por
-  cuadro en que aparece el temblor de un paneo. 60 fps duplicaría el tiempo de render y el peso sin diferencia visible.
-- **Tiempos de la historia** (medidos con `--probe`, contados desde «Simular»): en el beat 2 Carolina responde «Con
-  crédito» a los 0,5 s y el presupuesto a los 4,0 s (su tarjeta pasa a «Calificado»); en el beat 3 la visita cae a los
-  3,0 s. Los pasos de `pieces/contact.ts` están puestos para que cada cosa pase en cámara.
-- **Peso y sonido** de cada archivo: en el manifest (`content/estateos-videos.json`): bytes, fps, códec, duración,
-  LUFS integrado y pico verdadero.
+Un cuadro por segundo en los dos formatos, en hojas de contacto. Lo que se buscó y se corrigió en este corte:
+escenas que reaparecían (un `autoAlpha` pisaba la visibilidad de la escena), tarjetas lupa encogidas a su palabra más
+larga, interfaz ilegible a 720p (de ahí el zoom de los dispositivos), reservas cortadas por el borde de la ventana,
+ventanas vacías entre módulos del CRM (ahora el corte es en el tiempo), el dedo que reaparecía en cada toque
+(ahora encadena), y el 9:16 cargado arriba (ahora en la banda central, fuera de la interfaz de las plataformas).
 
 ## Reglas que la fábrica hace cumplir
 
-- `tests/video.test.ts`: cada rótulo se sostiene lo necesario (1,2 s por línea de ≤ 6 palabras, ≤ 2,2 palabras/s),
-  la pieza dura lo que dice su ficha (± 5 s), los subtítulos entran en 2 líneas de ≤ 42 caracteres a ≤ 15 car/s, la
-  pieza de Contact no reproduce más beats que los de Contact ni navega a Seguimientos, y ningún texto del video tiene
-  precios ni «IA».
-- `tests/videos.test.ts`: cada archivo del registro existe y pesa lo que dice, está dentro del peso objetivo, su
-  `catalogVersion` es la vigente y su `sourceHash` coincide con el origen actual. Si cambia la pieza, el escenario o
-  sus textos, la prueba falla hasta que se vuelve a renderizar (y `approvedAt` vuelve a `null`).
+- `tests/video.test.ts`: cada titular se sostiene lo necesario (1,2 s por línea de ≤ 6 palabras, ≤ 2,2 palabras/s) en
+  los tres idiomas; los subtítulos entran en 2 líneas de ≤ 42 caracteres a ≤ 15 car/s; **la película muestra cada área que
+  Contact abre y ninguna que no incluye** (contra `lockedFromFor` de la lente); la partitura cubre la película a 120 BPM
+  y golpes y titulares caen en el tiempo; ningún texto del video tiene precios del plan ni «IA».
+- `tests/videos.test.ts`: cada archivo del registro existe, pesa lo que dice y está dentro del peso objetivo; su
+  `catalogVersion` es la vigente y su `sourceHash` coincide con el origen actual (la película, el kit, los datos y los
+  textos de Lumen). Si algo cambia, la prueba falla hasta volver a renderizar (y `approvedAt` vuelve a `null`).
 
 ## Subtítulos
 
-El video no tiene locución todavía (la voz es del lote 3.4): los subtítulos repiten las palabras que aparecen en
-pantalla, en los tres idiomas. En el reproductor se encienden solos cuando el visitante lee otro idioma que el de la
-imagen (español en V1); en español las palabras ya están en el cuadro y el subtítulo queda a un toque.
+Sin locución todavía (la voz es del lote 3.4): los subtítulos repiten las palabras de pantalla en los tres idiomas. En
+el reproductor se encienden solos cuando el visitante lee otro idioma que el de la imagen (español en V1).
+
+## Mediciones (segundo corte)
+
+- **Imagen determinista:** el mismo `seek` da el mismo cuadro; 8 de 8 cuadros comparados entre dos renders, idénticos byte
+  a byte (md5 de los PNG).
+- **Sonido casi determinista:** dos mezclas del mismo origen difieren en 1 bit en el 0,04 % de las muestras (≈ −96 dBFS,
+  inaudible), por redondeo de coma flotante del `OfflineAudioContext`; el propio motor de Kinetic lo documenta. Por eso
+  dos renders del mismo origen no dan el mismo sha256 del MP4: el manifest guarda el del archivo entregado.
+- **Peso:** 16:9 a CRF 20 y AAC 128 kb/s; 9:16 (720 × 1280) a CRF 24 y AAC 96 kb/s, para entrar en sus 3 MB con 56 s.
+- **Tiempo de render:** ≈ 2,5 min por formato de 56 s (1.680 cuadros) en este contenedor.

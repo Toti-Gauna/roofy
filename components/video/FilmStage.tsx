@@ -1,0 +1,96 @@
+'use client';
+
+import { useEffect, useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { useTranslations } from 'next-intl';
+import { planInfo } from '@/lib/plans';
+import { renderAudio, sfxOn } from './kinetic/score';
+import { LAYOUTS, type FilmCtx } from './film';
+import { ContactFilm, buildContact } from './films/contact/ContactFilm';
+import { CONTACT_DURATION, contactTexts } from './films/contact/script';
+import { checkCues, toVtt, type Ratio } from './timeline';
+import './ui/trailer.css';
+
+/** What the render driver reads (scripts/render-video.mjs). */
+export interface TrailerApi {
+  duration: number;
+  width: number;
+  height: number;
+  /** Shows the frame at `t` seconds (events suppressed: no sound while scrubbing). */
+  seek(t: number): void;
+  /** The whole score, mixed offline by Kinetic's engine: 16-bit stereo WAV in base64. */
+  renderAudio(): Promise<string>;
+  /** The on-screen words as WebVTT in this page's language, and the rules they break. */
+  subtitles(): { vtt: string; problems: string[] };
+}
+
+declare global {
+  interface Window {
+    trailer?: TrailerApi;
+  }
+}
+
+/** Mounts a film at its stage size and builds its paused timeline (Kinetic's `?t=` seek, for the driver). */
+export function FilmStage({ film, ratio }: { film: 'contact'; ratio: Ratio }) {
+  const root = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('video.contact');
+  const tv = useTranslations('video');
+  const tx = useTranslations('experience');
+  const L = LAYOUTS[ratio];
+
+  useLayoutEffect(() => {
+    const el = root.current?.querySelector<HTMLElement>('.tr');
+    if (!el) return;
+    const tl = gsap.timeline({ paused: true });
+    const ctx = gsap.context(() => {
+      const c: FilmCtx = {
+        tl,
+        root: el,
+        L,
+        q: (sel) => Array.from(el.querySelectorAll<HTMLElement>(sel)),
+        one: (sel) => {
+          const found = el.querySelector<HTMLElement>(sel);
+          if (!found) throw new Error(`film: nothing matches ${sel}`);
+          return found;
+        },
+        sfx: sfxOn(tl),
+      };
+      if (film === 'contact') buildContact(c);
+    }, el);
+    tl.seek(0, true);
+    const texts = () => contactTexts((k) => tc(k), tx('plans.contact.tagline'), tv('brand'), planInfo('contact').name);
+    window.trailer = {
+      duration: CONTACT_DURATION,
+      width: L.W,
+      height: L.H,
+      seek: (t) => {
+        tl.seek(Math.min(t, tl.duration()), true);
+      },
+      renderAudio: () => renderAudio(tl),
+      subtitles: () => {
+        const cues = texts().map((x) => ({ start: x.at * 1000, end: x.end * 1000, text: x.text }));
+        return { vtt: toVtt(cues), problems: checkCues(cues) };
+      },
+    };
+    // ?t=SECONDS freezes a frame (as Kinetic's trailers).
+    const t = Number(new URLSearchParams(window.location.search).get('t'));
+    if (Number.isFinite(t) && t > 0) tl.seek(t, true);
+    document.documentElement.dataset.trailer = 'ready';
+    return () => {
+      ctx.revert();
+      tl.kill();
+      delete window.trailer;
+      delete document.documentElement.dataset.trailer;
+    };
+  }, [film, L, tc, tv, tx]);
+
+  useEffect(() => {
+    document.body.style.margin = '0';
+  }, []);
+
+  return (
+    <div ref={root} style={{ width: L.W, height: L.H }}>
+      <ContactFilm ratio={ratio} L={L} />
+    </div>
+  );
+}

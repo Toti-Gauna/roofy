@@ -1151,14 +1151,48 @@
     "seal": "Demo · dados fictícios",
     "brand": "EstateOS",
     "contact": {
-      "headline": "Escritório fechado.",
-      "shots": {
-        "chat": "Chat guiado: responde com botões, a qualquer hora.",
-        "inbox": "A consulta chega ao CRM, completa.",
-        "pipeline": "Cada consulta tem etapa e próximo passo.",
-        "brand": "Com a sua marca, desde a implantação."
+      "golpes": {
+        "g1": "Consultas por",
+        "g2": "todo lado?",
+        "g3": "Planilhas que",
+        "g4": "ninguém segue?",
+        "g5": "E do outro lado,",
+        "g6": "o seu CRM.",
+        "g7": "E colocamos",
+        "g8": "tudo no ar.",
+        "s1": "Seu site.",
+        "s2": "Seu CRM.",
+        "s3": "Chat guiado.",
+        "s4": "Sua marca."
       },
-      "close": "site · CRM · chat guiado"
+      "tags": {
+        "web": "Seu site",
+        "chat": "Chat guiado",
+        "crm": "CRM completo",
+        "setup": "Implantação"
+      },
+      "heads": {
+        "web1": "Um site profissional.",
+        "web2": "Cada imóvel, com sua página.",
+        "web3": "Pedem visitas ali mesmo.",
+        "chat1": "Um chat guiado, sempre.",
+        "chat2": "A consulta chega completa.",
+        "inbox": "Todas as consultas, juntas.",
+        "contacts": "Cada contato, sua história.",
+        "pipeline": "Cada negócio, sua etapa.",
+        "visits": "A agenda da equipe.",
+        "tasks": "Tarefas e lembretes.",
+        "listings": "Sua carteira, organizada.",
+        "team": "Papéis para sua equipe.",
+        "kit": "Sua marca, em tudo.",
+        "applied": "Do modelo à sua marca.",
+        "profiles": "Revisamos suas redes.",
+        "library": "Hooks, vídeos e um guia."
+      },
+      "lupa": {
+        "inquiry": "Consulta nova",
+        "channels": "Consultas da semana"
+      }
     }
   }
 }
