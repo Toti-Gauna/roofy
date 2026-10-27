@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "EstateOS · site em preparação",
+    "description": "EstateOS, da Eclipse, para imobiliárias. Estamos montando este site."
+  },
+  "languages": {
+    "label": "Idioma",
+    "es": "Español",
+    "en": "English",
+    "pt": "Português"
+  },
+  "home": {
+    "name": "EstateOS",
+    "status": "Em preparação",
+    "lead": "Estamos montando este site. Até ficar pronto, a demo de imobiliárias continua no site da Eclipse.",
+    "back": "Voltar para a Eclipse"
+  },
+  "link": {
+    "title": "Teste do link",
+    "intro": "Isto é o que este site recebeu da Eclipse. É um teste técnico e vai ser removido.",
+    "language": "Idioma",
+    "currency": "Moeda",
+    "view": "Visão",
+    "area": "Área",
+    "none": "—",
+    "currencies": {
+      "ARS": "Pesos argentinos (ARS)",
+      "BRL": "Reais (BRL)",
+      "USD": "Dólares (USD)"
+    },
+    "views": {
+      "entrada": "Entrada",
+      "guia": "Com guia",
+      "branding": "Branding",
+      "intelligence": "Intelligence",
+      "academy": "Academy"
+    },
+    "areas": {
+      "recepcion": "Recepção",
+      "administracion": "Administração",
+      "ventas": "Vendas",
+      "marketing": "Marketing"
+    }
+  },
+  "notFound": {
+    "title": "Não encontramos essa página",
+    "back": "Ir para o início"
+  }
+}

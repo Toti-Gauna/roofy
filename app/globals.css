@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+
+/* Tokens copied from Eclipse-Web (app/globals.css): same palette, same names. */
+:root {
+  --void: #05050a;
+  --night: #0c0c14;
+  --ash: #1a1a24;
+  --corona: #f5b942;
+  --flare: #ffe8b0;
+  --dawn: #f4efe6;
+  --ink: #111114;
+  --mist: #9a97a6;
+
+  --fg: var(--dawn);
+  --fg-muted: var(--mist);
+  --accent: var(--corona);
+  --line: rgb(244 239 230 / 0.1);
+  --line-strong: rgb(244 239 230 / 0.18);
+  --focus: var(--corona);
+
+  --gutter: 16px;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-night: var(--night);
+  --color-ash: var(--ash);
+  --color-corona: var(--corona);
+  --color-flare: var(--flare);
+  --color-dawn: var(--dawn);
+  --color-mist: var(--mist);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--void);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    background: var(--void);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--corona);
+    color: var(--void);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+
+  /* Mono caption for readings (language, currency, view). */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .readout {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Ghost link, 44 px touch target. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--fg);
+    text-decoration: none;
+    transition:
+      border-color 0.2s var(--ease-expo),
+      background-color 0.2s var(--ease-expo);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover {
+      border-color: var(--corona);
+      background: rgb(245 185 66 / 0.08);
+    }
+  }
+}
+
+/* One static corona glow from the top-right corner: the page is lit from one side. */
+.corona-glow {
+  background: radial-gradient(60rem 40rem at 100% 0%, rgb(245 185 66 / 0.16), transparent 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
