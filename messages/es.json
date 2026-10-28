@@ -14,8 +14,42 @@
     "hero": {
       "section": "Inicio",
       "sub": "Tu web, tu CRM y tus visitas en una sola pantalla. Miralo funcionando en una inmobiliaria de prueba antes de hablar.",
-      "cta": "Ver la demo",
+      "cta": "Ver qué ofrecemos",
+      "demo": "Probar la demo",
       "demoNote": "Lumen Propiedades es una inmobiliaria ficticia: la demo usa datos inventados."
+    },
+    "offer": {
+      "section": "Qué ofrecemos",
+      "title": "Tu inmobiliaria en <em>una sola pantalla</em>.",
+      "lead": "La web de tus propiedades y el CRM de tu equipo, juntos. Cada consulta entra, se ordena y termina en una visita agendada.",
+      "features": {
+        "web": {
+          "name": "Web inmobiliaria",
+          "text": "Tus propiedades con fichas completas, fotos y consulta directa, con tu marca."
+        },
+        "crm": {
+          "name": "CRM completo",
+          "text": "Contactos con su historial, consultas y oportunidades con su etapa, en una sola lista."
+        },
+        "visits": {
+          "name": "Visitas y tareas",
+          "text": "La agenda de visitas y las tareas del equipo, con lo que pasó en cada una."
+        },
+        "chat": {
+          "name": "Chat guiado",
+          "text": "Responde con botones y un guion fijo, toma los datos y propone una visita."
+        },
+        "team": {
+          "name": "Equipo con roles",
+          "text": "Roles básicos: cada persona ve lo que le toca."
+        },
+        "brand": {
+          "name": "Puesta en marcha con tu marca",
+          "text": "Cargamos tu marca, tus propiedades y tu equipo. La puesta en marcha acotada está incluida en el precio."
+        }
+      },
+      "start": "Mirá la demo y elegí tu nivel. Hay seis, desde Contact; todos parten de la web y el CRM completos.",
+      "demo": "Probar la demo"
     },
     "demoBadge": "Demo",
     "footer": {
@@ -1221,5 +1255,9 @@
       "usd": "USD {amount}/mes",
       "rate": "Dólar MEP del {date}"
     }
+  },
+  "autoTour": {
+    "resume": "Seguir con el tour automático",
+    "stop": "Terminar el tour"
   }
 }

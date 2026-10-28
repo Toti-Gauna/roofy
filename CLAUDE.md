@@ -50,9 +50,14 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 - Motor de movimiento y clases de Eclipse-Web (`components/motion/*`, `.btn`, `.ticks`, `.leader`, `[data-reveal]`…) ya están;
   `.label` y `.readout` siguen siendo los de roofy. Un solo ámbar sólido por pantalla: el CTA del hero lleva `data-hero-cta`.
 - CSS del sitio al lado de sus componentes (`components/site/site.css`, `components/hero/hero.css`), no en `app/globals.css`.
-- Hero (B2, `components/hero/`): eclipse en capas CSS (sin WebGL), dial con una marca por plan, estrellas con paralaje solo con
-  mouse y la luna que se corre con el scroll (pin solo con mouse/trackpad en pantallas anchas; nunca en táctil). Movimiento
-  reducido: quieto. El H1 es el nombre y nunca se oculta.
+- Hero (B2, `components/hero/`): eclipse en capas CSS (sin WebGL ni dial: «el eclipse solo»), estrellas con paralaje solo
+  con mouse y la luna que se corre con el scroll (pin solo con mouse/trackpad en pantallas anchas; nunca en táctil; en
+  celular el hero va arriba). Movimiento reducido: quieto. El H1 es el nombre y nunca se oculta.
+- **Acción principal: «Ver qué ofrecemos»** (Ignacio, 28/10/2026), que arranca el **tour automático** (`components/tour`,
+  copia de Eclipse-Web): la página baja sola por los `[data-tour-stop]`, se pausa si el visitante toma el control y ofrece
+  «Seguir con el tour automático». **Cada sección nueva marca sus paradas.** «Probar la demo» queda al lado, sin ámbar.
+- Láminas (`components/sections/products/`, copia de Eclipse-Web): `<Plate id>` las dibuja una vez al entrar y después
+  sigue su bucle mientras se ven (`plateLife`). Secciones y su número/fase: `lib/sections.ts`.
 
 ## La experiencia (lote 3.5)
 

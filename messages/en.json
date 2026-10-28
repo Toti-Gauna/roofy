@@ -14,8 +14,42 @@
     "hero": {
       "section": "Home",
       "sub": "Your website, your CRM and your viewings on one screen. See it working in a sample agency before we talk.",
-      "cta": "See the demo",
+      "cta": "See what we offer",
+      "demo": "Try the demo",
       "demoNote": "Lumen Propiedades is a fictional agency: the demo uses made-up data."
+    },
+    "offer": {
+      "section": "What we offer",
+      "title": "Your agency on <em>one screen</em>.",
+      "lead": "Your listings website and your team's CRM, together. Every inquiry comes in, gets sorted and ends in a booked viewing.",
+      "features": {
+        "web": {
+          "name": "Real estate website",
+          "text": "Your listings with full details, photos and a direct inquiry, under your brand."
+        },
+        "crm": {
+          "name": "Full CRM",
+          "text": "Contacts with their history, inquiries and opportunities with their stage, in one list."
+        },
+        "visits": {
+          "name": "Viewings and tasks",
+          "text": "The viewings calendar and the team's tasks, with what happened at each one."
+        },
+        "chat": {
+          "name": "Guided chat",
+          "text": "Answers with buttons and a fixed script, takes the details and offers a viewing."
+        },
+        "team": {
+          "name": "Team roles",
+          "text": "Basic roles: everyone sees what's theirs."
+        },
+        "brand": {
+          "name": "Setup with your brand",
+          "text": "We load your brand, your listings and your team. The bounded setup is included in the price."
+        }
+      },
+      "start": "See the demo and pick your level. There are six, starting with Contact; all of them start from the full website and CRM.",
+      "demo": "Try the demo"
     },
     "demoBadge": "Demo",
     "footer": {
@@ -1221,5 +1255,9 @@
       "usd": "USD {amount}/month",
       "rate": "MEP dollar rate, {date}"
     }
+  },
+  "autoTour": {
+    "resume": "Continue the automatic tour",
+    "stop": "End the tour"
   }
 }

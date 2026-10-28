@@ -14,8 +14,42 @@
     "hero": {
       "section": "Início",
       "sub": "Seu site, seu CRM e suas visitas em uma só tela. Veja funcionando em uma imobiliária de teste antes de conversar.",
-      "cta": "Ver a demo",
+      "cta": "Ver o que oferecemos",
+      "demo": "Testar a demo",
       "demoNote": "A Lumen Propiedades é uma imobiliária fictícia: a demo usa dados inventados."
+    },
+    "offer": {
+      "section": "O que oferecemos",
+      "title": "Sua imobiliária numa <em>tela só</em>.",
+      "lead": "O site dos seus imóveis e o CRM da sua equipe, juntos. Cada contato entra, se organiza e termina numa visita agendada.",
+      "features": {
+        "web": {
+          "name": "Site imobiliário",
+          "text": "Seus imóveis com fichas completas, fotos e consulta direta, com a sua marca."
+        },
+        "crm": {
+          "name": "CRM completo",
+          "text": "Contatos com histórico, consultas e oportunidades com a sua etapa, numa lista só."
+        },
+        "visits": {
+          "name": "Visitas e tarefas",
+          "text": "A agenda de visitas e as tarefas da equipe, com o que aconteceu em cada uma."
+        },
+        "chat": {
+          "name": "Chat guiado",
+          "text": "Responde com botões e um roteiro fixo, pega os dados e propõe uma visita."
+        },
+        "team": {
+          "name": "Equipe com papéis",
+          "text": "Papéis básicos: cada pessoa vê o que é dela."
+        },
+        "brand": {
+          "name": "Implantação com a sua marca",
+          "text": "Carregamos sua marca, seus imóveis e sua equipe. A implantação limitada já está incluída no preço."
+        }
+      },
+      "start": "Veja a demo e escolha seu nível. São seis, a partir do Contact; todos partem do site e do CRM completos.",
+      "demo": "Testar a demo"
     },
     "demoBadge": "Demo",
     "footer": {
@@ -1221,5 +1255,9 @@
       "usd": "USD {amount}/mês",
       "rate": "Dólar MEP de {date}"
     }
+  },
+  "autoTour": {
+    "resume": "Continuar o tour automático",
+    "stop": "Encerrar o tour"
   }
 }
