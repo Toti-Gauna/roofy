@@ -278,7 +278,7 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* The dial (Dial.tsx): bezel + fixed pointer, marks and readout.       */
+/* The dial (Dial.tsx): marks, fixed pointer and plan numbers.          */
 /* Box = the eclipse square + 8% on each side. Strokes stay 1px.        */
 /* ------------------------------------------------------------------ */
 .hero-dial {
@@ -286,10 +286,6 @@
   inset: -8%;
   z-index: 1;
   pointer-events: none;
-}
-.hero-dial-bezel {
-  position: absolute;
-  inset: 0;
 }
 .hero-dial-svg {
   position: absolute;

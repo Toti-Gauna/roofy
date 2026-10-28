@@ -42,7 +42,7 @@ export function Hero({ locale, id, text }: { locale: Locale; id: string; text: H
                 <span>{text.section}</span>
               </p>
               <h1 id={`${id}-title`} className="hero-title display mt-4">
-                <span className="hero-brand">{text.brand}</span>
+                <span className="hero-brand">{text.brand}</span>{' '}
                 <em className="hero-tagline">{text.tagline}</em>
               </h1>
               <p className="hero-sub mt-5 text-base text-fg-muted sm:text-lg">{text.sub}</p>

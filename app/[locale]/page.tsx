@@ -41,7 +41,7 @@ export default async function SitePage({ params }: { params: Promise<{ locale: s
               languageLabel: tl('label'),
               lead: (
                 <span className="site-mark-lockup">
-                  <span className="site-mark-brand">{t('brand')}</span>
+                  <span className="site-mark-brand">{t('brand')}</span>{' '}
                   <span className="site-mark-tagline">{t('tagline')}</span>
                 </span>
               ),
