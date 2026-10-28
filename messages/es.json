@@ -1,18 +1,18 @@
 {
   "meta": {
-    "title": "Eclipse para inmobiliarias",
+    "title": "Eclipse · para inmobiliarias",
     "description": "La web, el CRM y las visitas de tu inmobiliaria en una sola pantalla. Mirá la demo de Lumen Propiedades, con datos ficticios."
   },
   "demoMeta": {
-    "title": "EstateOS · demo para inmobiliarias",
-    "description": "EstateOS, de Eclipse, para inmobiliarias. Probá la demo de Lumen Propiedades con datos ficticios."
+    "title": "Eclipse · demo para inmobiliarias",
+    "description": "Eclipse para inmobiliarias. Probá la demo de Lumen Propiedades con datos ficticios."
   },
   "site": {
-    "name": "Eclipse para inmobiliarias",
+    "brand": "Eclipse",
+    "tagline": "para inmobiliarias",
     "skip": "Ir al contenido",
     "hero": {
       "section": "Inicio",
-      "title": "Eclipse para <em>inmobiliarias</em>",
       "sub": "Tu web, tu CRM y tus visitas en una sola pantalla. Miralo funcionando en una inmobiliaria de prueba antes de hablar.",
       "cta": "Ver la demo",
       "demoNote": "Lumen Propiedades es una inmobiliaria ficticia: la demo usa datos inventados."
@@ -30,7 +30,7 @@
     "pt": "Português"
   },
   "home": {
-    "name": "EstateOS",
+    "name": "Eclipse",
     "back": "Volver a Eclipse",
     "toSite": "Ir al sitio"
   },
@@ -1096,11 +1096,11 @@
         "name": "Ver por mi cuenta",
         "text": "Tocá y probá todo, a tu ritmo."
       },
-      "eyebrow": "EstateOS · demo de Lumen Propiedades",
+      "eyebrow": "Eclipse · demo de Lumen Propiedades",
       "note": "Demo con datos ficticios. No se envía nada."
     },
     "stage": {
-      "label": "Demo de EstateOS",
+      "label": "Demo de Eclipse para inmobiliarias",
       "exit": "Volver",
       "plan": "Plan",
       "allPlans": "Todos los planes",
@@ -1149,7 +1149,7 @@
       "close": "Cerrar",
       "transcript": "Transcripción",
       "label": "Video de {plan}",
-      "general": "Video de EstateOS",
+      "general": "Video de Eclipse para inmobiliarias",
       "duration": "{seconds} s",
       "back": "Ver la demo de {plan}",
       "subtitles": {

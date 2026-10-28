@@ -1,11 +1,10 @@
 /*
- * «Eclipse para inmobiliarias», the home (lote B1): top row, section 01 and the footer.
- * The eclipse hero (B2) replaces section 01's composition; these rules are its base.
- * Mobile-first: one column, 16 px gutter (.container-x), touch targets ≥ 44 px.
+ * «Eclipse para inmobiliarias», the home: the page frame, the top row over the hero and the footer.
+ * The hero lives in components/hero (lote B2). Mobile-first: 16 px gutter (.container-x), touch
+ * targets ≥ 44 px.
  */
 .site {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  position: relative;
   min-height: 100dvh;
   background: var(--void);
   color: var(--fg);
@@ -22,65 +21,46 @@
   color: var(--fg);
 }
 
+/* The top row sits over the hero (the hero reserves --header-h for it) and scrolls away with it. */
 .site-top {
-  padding-block: 8px;
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  min-height: var(--header-h);
 }
+.site-top > * {
+  flex: 1;
+}
+
+/* The name: «Eclipse» with «para inmobiliarias» beside it (decision of Ignacio, 28/10/2026). */
 .site-mark {
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
-  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--fg);
   text-decoration: none;
 }
-
-/* ---- 01 · Inicio ---------------------------------------------------- */
-.site-hero {
-  display: grid;
-  align-content: center;
-  min-height: calc(100svh - 140px);
-  border-block: 1px solid var(--line);
-}
-.site-hero-inner {
-  padding-block: 56px;
-}
-.site-index {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.site-index svg {
-  color: var(--accent);
-}
-.site-title {
-  max-width: 12ch;
-  margin-top: 20px;
-  font-size: clamp(3rem, 13vw, 8.5rem);
-}
-.site-sub {
-  max-width: 34rem;
-  margin-top: 24px;
-  font-size: 1.0625rem;
-  line-height: 1.55;
-  color: var(--fg-muted);
-}
-.site-cta {
-  display: flex;
-  margin-top: 32px;
-}
-.site-cta .btn {
-  width: 100%;
-}
-.site-note {
-  display: flex;
+.site-mark-lockup {
+  display: inline-flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 10px;
-  max-width: 34rem;
-  margin-top: 20px;
-  font-size: 0.8125rem;
-  line-height: 1.45;
+  align-items: baseline;
+  gap: 0 0.5rem;
+}
+.site-mark-brand {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  line-height: 1;
+}
+.site-mark-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--fg-muted);
 }
+
 /* The «Demo» label in outline: the hero's CTA is the screen's one solid amber. */
 .site-demo {
   padding: 2px 8px;
@@ -101,19 +81,16 @@
   justify-content: space-between;
   gap: 12px 24px;
   padding-block: 24px 32px;
+  border-top: 1px solid var(--line);
 }
 
-@media (min-width: 640px) {
-  .site-cta .btn {
-    width: auto;
+/* Phones: «para inmobiliarias» goes under «Eclipse», so the languages keep to the same row. */
+@media (max-width: 479.98px) {
+  .site-mark-lockup {
+    flex-direction: column;
+    gap: 2px;
   }
-}
-
-@media (min-width: 1024px) {
-  .site-hero-inner {
-    padding-block: 96px;
-  }
-  .site-sub {
-    font-size: 1.1875rem;
+  .site-mark-tagline {
+    font-size: 0.625rem;
   }
 }

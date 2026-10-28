@@ -9,7 +9,7 @@ import { useSearch } from '@/lib/useSearch';
 export interface SiteNavText {
   languageLabel: string;
   /** The way out on the left: «Ir al sitio» on the demo, the site's name on the home. */
-  lead: string;
+  lead: ReactNode;
   languages: Record<Locale, string>;
 }
 
@@ -34,7 +34,7 @@ export function SiteNav({ locale, locales, page, text }: { locale: Locale; local
           {text.lead}
         </a>
       ) : (
-        <a href={siteHref(locale, search)} aria-current="page" className="site-mark inline-flex min-h-11 items-center">
+        <a href={siteHref(locale, search)} aria-current="page" className="site-mark">
           {text.lead}
         </a>
       )}
