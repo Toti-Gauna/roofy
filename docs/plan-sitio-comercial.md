@@ -15,6 +15,13 @@ la estética Efemérides de Eclipse-Web. Un PR por lote, en serie (todos tocan `
 | 6 | Pruebas de navegador | Script local con el Playwright preinstalado; `@playwright/test` no se suma |
 | 7 | Cotización | La de Eclipse-Web: dolarapi con un fallback fijo y fechado |
 
+## Tour automático
+
+«Ver qué ofrecemos» (el botón ámbar del hero) arranca el tour de Eclipse-Web (`components/tour`): la página baja sola por las
+secciones y se detiene en cada parada; si el visitante toca, gira la rueda o usa el teclado, se pausa y aparece «Seguir con el
+tour automático». Las paradas son los `[data-tour-stop]` de la página, en orden: cada sección de B3–B5 marca las suyas. Con
+movimiento reducido no hay tour: el botón salta a la sección.
+
 ## Rutas
 
 - `/<idioma>/` — el sitio.
@@ -45,8 +52,8 @@ Escritorio                                                    Celular (360 px)
 | Lote | Qué | Estado |
 |---|---|---|
 | B1 | Base: demo a `/demo/`, home con la sección 01 y el pie, redirección de los enlaces de demo, motor de movimiento y clases de Eclipse-Web, noindex por página, smoke de Hostinger con `/demo/`, docs | Mergeado (#6) |
-| B2 | Hero con el eclipse en capas CSS, el dial de los seis planes, estrellas y una acción principal; fila superior con el nombre; «Eclipse» + «para inmobiliarias» también en la demo. El menú de secciones llega con las secciones (B3–B5): hoy no hay a dónde llevar | Este PR |
-| B3 | 02 Producto y 05 Otros negocios: `products.json` copiado con digest, láminas SVG (`ProductArt`, `artIdle`, `Walker`), estado honesto, sin precio salvo Roofy | Pendiente |
+| B2 | Hero con el eclipse en capas CSS (sin dial: «el eclipse solo», como en Eclipse-Web), estrellas y el hero arriba en celular; «Ver qué ofrecemos» arranca el **tour automático** (Ignacio, 28/10/2026) y «Probar la demo» queda al lado; **02 Qué ofrecemos** (adelantado de B3 para que el tour tenga recorrido): la lámina de Roofy y sus seis entregas; nombre «Eclipse» + «para inmobiliarias» en el sitio y la demo | PR #7 |
+| B3 | 05 Otros negocios: `products.json` copiado con digest, las láminas de los otros siete rubros, estado honesto (en preparación, fecha de lanzamiento, próximamente), sin ningún precio; «Avisame cuando esté» / «Pedir información» por WhatsApp; suma sus paradas al tour. Se numera 03 mientras no existan Demos y Planes | Este PR |
 | B4 | 04 Planes: textos de cada nivel (`levels.json` copiado con digest en los dos repos), precio del catálogo en la moneda del visitante, «Ver la demo» primero y «Pedir este plan» por WhatsApp, Partner «Propuesta» | Pendiente |
 | B5 | 03 Demos: general + seis planes con su estado (`PLAN_DEMO_STATUS`), «Ver el video» solo si existe; repaso de textos es/en/pt | Pendiente |
 | B6 | QA: 360/1440 px, movimiento reducido, un solo ámbar, build en `/` y en `/roofy`, capturas, docs | Pendiente |

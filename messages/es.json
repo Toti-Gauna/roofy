@@ -14,8 +14,147 @@
     "hero": {
       "section": "Inicio",
       "sub": "Tu web, tu CRM y tus visitas en una sola pantalla. Miralo funcionando en una inmobiliaria de prueba antes de hablar.",
-      "cta": "Ver la demo",
+      "cta": "Ver qué ofrecemos",
+      "demo": "Probar la demo",
       "demoNote": "Lumen Propiedades es una inmobiliaria ficticia: la demo usa datos inventados."
+    },
+    "offer": {
+      "section": "Qué ofrecemos",
+      "title": "Tu inmobiliaria en <em>una sola pantalla</em>.",
+      "lead": "La web de tus propiedades y el CRM de tu equipo, juntos. Cada consulta entra, se ordena y termina en una visita agendada.",
+      "features": {
+        "web": {
+          "name": "Web inmobiliaria",
+          "text": "Tus propiedades con fichas completas, fotos y consulta directa, con tu marca."
+        },
+        "crm": {
+          "name": "CRM completo",
+          "text": "Contactos con su historial, consultas y oportunidades con su etapa, en una sola lista."
+        },
+        "visits": {
+          "name": "Visitas y tareas",
+          "text": "La agenda de visitas y las tareas del equipo, con lo que pasó en cada una."
+        },
+        "chat": {
+          "name": "Chat guiado",
+          "text": "Responde con botones y un guion fijo, toma los datos y propone una visita."
+        },
+        "team": {
+          "name": "Equipo con roles",
+          "text": "Roles básicos: cada persona ve lo que le toca."
+        },
+        "brand": {
+          "name": "Puesta en marcha con tu marca",
+          "text": "Cargamos tu marca, tus propiedades y tu equipo. La puesta en marcha acotada está incluida en el precio."
+        }
+      },
+      "start": "Mirá la demo y elegí tu nivel. Hay seis, desde Contact; todos parten de la web y el CRM completos.",
+      "demo": "Probar la demo"
+    },
+    "others": {
+      "section": "Otros negocios",
+      "title": "Y para <em>otros negocios</em>.",
+      "sub": "Hoy se vende Eclipse para inmobiliarias. Estos son los productos que siguen: lo que resuelve cada uno y en qué estado está. Ninguno tiene precio todavía.",
+      "listLabel": "Productos de Eclipse para otros negocios",
+      "status": {
+        "planned": "En preparación",
+        "launch": "Lanza el {date}",
+        "soon": "Próximamente"
+      },
+      "noPrice": "Sin precio publicado todavía",
+      "soonNote": "Sin precio ni fecha todavía",
+      "forLabel": "Eclipse para",
+      "notify": "Avisame cuando esté",
+      "ask": "Pedir información",
+      "whatsappNote": "Se abre en WhatsApp",
+      "items": {
+        "foody": {
+          "name": "Eclipse para locales de comida",
+          "title": "Locales de comida",
+          "rubro": "gastronomía",
+          "line": "Tu local también en el celular: la carta, el pedido desde la mesa y las reservas.",
+          "points": {
+            "web": "Web del local con tu identidad",
+            "menu": "Carta digital y pedido desde la mesa por QR",
+            "bookings": "Reservas por día, hora y cantidad de personas",
+            "panel": "Panel de pedidos, cobros, reservas y clientes"
+          },
+          "ask": "Hola Eclipse. Tengo un local gastronómico y quiero que me avisen cuando esté Eclipse para locales de comida."
+        },
+        "markyt": {
+          "name": "Eclipse para ecommerce",
+          "title": "Ecommerce",
+          "rubro": "ecommerce",
+          "line": "Tu tienda online con todo lo de atrás: pedidos, stock y clientes.",
+          "points": {
+            "store": "Tienda con tu identidad y tus productos",
+            "catalog": "Catálogo con variantes, carrito y checkout",
+            "orders": "Pedidos, cobros y stock",
+            "crm": "Clientes, historial y postventa"
+          },
+          "ask": "Hola Eclipse. Tengo una tienda y quiero que me avisen cuando esté Eclipse para ecommerce."
+        },
+        "handy": {
+          "name": "Handy",
+          "rubro": "servicios para el hogar",
+          "line": "Especialistas para tu casa en Mar del Plata, desde el celular.",
+          "points": {
+            "trades": "Electricidad, plomería, gas, cerrajería, albañilería y aire acondicionado",
+            "choose": "Vos elegís al especialista; él fija o acepta el precio",
+            "app": "Una web app que se instala en el celular",
+            "city": "Primero en Mar del Plata"
+          },
+          "ask": "Hola Eclipse. Quiero saber más de Handy."
+        },
+        "gym": {
+          "name": "Gimnasios",
+          "rubro": "fitness",
+          "line": "Tu gimnasio con una app para los socios: clases, rachas y desafíos que hacen volver.",
+          "points": {
+            "classes": "Clases y reservas desde el celular",
+            "streaks": "Rachas, misiones y ranking para los socios",
+            "churn": "Panel de los socios que dejan de venir",
+            "winback": "Mensajes para recuperarlos"
+          },
+          "ask": "Hola Eclipse. Tengo un gimnasio y quiero que me avisen cuando esté listo."
+        },
+        "dental": {
+          "name": "DentalOS",
+          "rubro": "salud · odontología",
+          "line": "Cada consulta tiene un próximo paso: turnos, controles y recepción en orden.",
+          "points": {
+            "booking": "Pedido de turno por especialidad y profesional",
+            "reschedule": "Reprogramar por WhatsApp sin perder el control",
+            "reception": "Recepción con la agenda del día y las solicitudes",
+            "patients": "Pacientes, presupuestos y caja"
+          },
+          "ask": "Hola Eclipse. Tengo un consultorio odontológico y quiero que me avisen cuando esté DentalOS."
+        },
+        "clinic": {
+          "name": "Clínicas",
+          "rubro": "salud",
+          "line": "Turnos online, recordatorios por WhatsApp y menos pacientes que faltan.",
+          "points": {
+            "booking": "Reserva de turnos desde la web",
+            "reminders": "Recordatorios por WhatsApp",
+            "noshow": "Panel de ausencias",
+            "reception": "Agenda de recepción por profesional"
+          },
+          "ask": "Hola Eclipse. Tengo una clínica y quiero que me avisen cuando esté lista."
+        },
+        "vet": {
+          "name": "VetOS",
+          "rubro": "animales · veterinarias",
+          "line": "La historia de cada mascota junto a su tutor, en el consultorio y a domicilio.",
+          "points": {
+            "record": "Tutor, mascota y recepción en una misma ficha",
+            "visits": "Turnos en el consultorio y visitas a domicilio",
+            "zones": "Recorridos por zona para las visitas",
+            "reminders": "Avisos y recordatorios para los tutores"
+          },
+          "ask": "Hola Eclipse. Tengo una veterinaria y quiero que me avisen cuando esté VetOS."
+        }
+      }
     },
     "demoBadge": "Demo",
     "footer": {
@@ -1221,5 +1360,9 @@
       "usd": "USD {amount}/mes",
       "rate": "Dólar MEP del {date}"
     }
+  },
+  "autoTour": {
+    "resume": "Seguir con el tour automático",
+    "stop": "Terminar el tour"
   }
 }

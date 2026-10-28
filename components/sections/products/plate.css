@@ -1,0 +1,87 @@
+/*
+ * The plates' drawing (ProductArt and its frame): hairlines in the section's ink, one amber point, the scan that crosses
+ * the plate while it is drawn and the travellers hidden until a loop moves them. Copied from Eclipse-Web
+ * (components/sections/products/products.css, 76767ea: «Plate» and «.pd-mover»). Layout of the frame is the caller's.
+ */
+/* ---- Plate ---------------------------------------------------------------- */
+.pd-art {
+  --tick: 12px;
+  --tick-c: var(--line-strong);
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  aspect-ratio: 480 / 400;
+  padding: 1.25rem;
+  color: var(--fg);
+  overflow: clip;
+}
+.pd-art-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.pd-art-svg :where(path, circle, rect) {
+  vector-effect: non-scaling-stroke;
+}
+.pd-soft {
+  opacity: 0.45;
+}
+.pd-dim {
+  opacity: 0.26;
+}
+.pd-faint {
+  opacity: 0.55;
+}
+.pd-dotted {
+  stroke-dasharray: 1.5 5;
+}
+.pd-fill {
+  fill: currentColor;
+  stroke: none;
+}
+.pd-soft-fill {
+  opacity: 0.55;
+}
+.pd-bar {
+  stroke-width: 3;
+}
+.pd-light-fill {
+  fill: var(--corona);
+  stroke: none;
+}
+.pd-light-stroke {
+  stroke: var(--corona);
+  stroke-width: 2;
+}
+.pd-glow {
+  fill: var(--corona);
+  stroke: none;
+  opacity: 0.12;
+}
+/* The instrument's scan: a hairline that crosses the plate while it is drawn (artEntrance). */
+.pd-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.pd-scan::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  background: var(--flare);
+  box-shadow: 0 0 18px 2px rgb(245 185 66 / 0.55);
+}
+
+/* The plates' travellers (a lead, a parcel, a pulse): they sit at the plate's origin until a loop
+   moves them (artIdle), so the still drawing — no JS, reduced motion — never shows them. */
+.pd-mover {
+  opacity: 0;
+}

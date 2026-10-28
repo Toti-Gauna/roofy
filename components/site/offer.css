@@ -1,0 +1,123 @@
+/*
+ * 02 · Qué ofrecemos. Phones: head, plate, the ledger, the way to the demo — one column. From 1024px: the head and the
+ * plate on the left (sticky while the ledger scrolls by), the ledger on the right. Lit from one side (a corona glow from
+ * the left edge), never a blob. Mobile-first, 16 px gutter, touch targets ≥ 44 px.
+ */
+.offer {
+  padding-block: 72px 80px;
+  border-top: 1px solid var(--line);
+  overflow: clip;
+}
+.offer:focus {
+  outline: none;
+}
+.offer-light {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(60rem, 90vw);
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(40rem 32rem at 0% 30%, rgb(245 185 66 / 0.1), transparent 70%);
+}
+
+.offer-grid {
+  display: grid;
+  gap: 40px;
+}
+.offer-index {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.offer-index svg {
+  color: var(--accent);
+}
+.offer-title {
+  max-width: 14ch;
+  margin-top: 18px;
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+}
+.offer-lead {
+  max-width: 34rem;
+  margin-top: 20px;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+.offer-plate {
+  margin-top: 32px;
+}
+
+/* The ledger: a hairline between rows, the index in mono, the name in serif. */
+.offer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+.offer-item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0 12px;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.offer-item-index {
+  padding-top: 0.45rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+.offer-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.offer-item-text {
+  max-width: 32rem;
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+.offer-foot {
+  display: grid;
+  gap: 20px;
+  margin-top: 32px;
+}
+.offer-start {
+  max-width: 32rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+.offer-demo {
+  justify-self: start;
+}
+
+@media (min-width: 1024px) {
+  .offer {
+    padding-block: 120px;
+  }
+  .offer-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .offer-head {
+    position: sticky;
+    top: 48px;
+  }
+  .offer-plate {
+    max-width: 30rem;
+  }
+  .offer-item {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    padding-block: 28px;
+  }
+  .offer-item-name {
+    font-size: 2.125rem;
+  }
+}

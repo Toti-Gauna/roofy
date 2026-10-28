@@ -5,16 +5,15 @@ import { useIsClient } from '@/components/motion/useIsClient';
 import { useReducedMotion } from '@/components/motion/useReducedMotion';
 import { Eclipse } from './Eclipse';
 import { Starfield } from './Starfield';
-import { Dial } from './Dial';
 import { useStarParallax } from './useStarParallax';
 import { useHeroMotion } from './useHeroMotion';
 
 /**
  * Full-bleed visual layer of the hero (behind the copy, decorative). Adapted from Eclipse-Web
  * (components/hero/HeroStage.tsx, 5cdb887) without the WebGL corona (`ogl` is not a dependency here:
- * the CSS corona is the whole eclipse) and without the rubro dial controller.
+ * the CSS corona is the whole eclipse) and without the dial: «the eclipse alone» (Ignacio, 28/10/2026, Eclipse-Web 76767ea).
  *
- * Layers, back to front: warm sky (scroll) · stars (mouse parallax) · bloom (scroll) · eclipse · dial.
+ * Layers, back to front: warm sky (scroll) · stars (mouse parallax) · bloom (scroll) · eclipse.
  * Nothing moves on its own: at rest it is a still picture that costs no frames. Reduced motion: still.
  * Wrappers keep every motion on its own element:
  *   [data-hero-eclipse-motion] parallax x/y + scroll scale
@@ -36,10 +35,7 @@ export function HeroStage() {
       <div className="hero-eclipse-anchor">
         <div data-hero-eclipse-motion className="relative">
           {motion ? <div data-hero-bloom className="hero-bloom" /> : null}
-          <div className="relative">
-            <Eclipse className="[--eclipse-size:var(--hero-eclipse-size)]" />
-            <Dial />
-          </div>
+          <Eclipse className="[--eclipse-size:var(--hero-eclipse-size)]" />
         </div>
       </div>
     </div>

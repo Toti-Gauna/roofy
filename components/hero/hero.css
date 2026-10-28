@@ -1,6 +1,7 @@
 /*
- * Copied from Eclipse-Web (components/hero/hero.css, 5cdb887) without the WebGL corona host, the
- * dial's readout and the rubro keys (roofy has neither); the headline is roofy's (end of file).
+ * Copied from Eclipse-Web (components/hero/hero.css, 5cdb887 + the phone layout of 76767ea) without the WebGL corona
+ * host, the dial (Ignacio, 28/10/2026: the eclipse alone) and the rubro keys; the headline and the buttons are roofy's
+ * (end of file).
  *
  * Hero eclipse — CSS layers (always rendered, first paint; in roofy, the whole eclipse).
  *
@@ -130,7 +131,7 @@
 /* everything from 1024px — the copy column ends before the dial.       */
 /* ------------------------------------------------------------------ */
 .hero {
-  --hero-eclipse-size: min(48vw, 25svh, 260px);
+  --hero-eclipse-size: min(38vw, 19svh, 190px);
   /* One cell; minmax(0, …) so wide content (the rubro scroller) never widens the page. */
   grid-template-columns: minmax(0, 1fr);
 }
@@ -278,69 +279,6 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* The dial (Dial.tsx): marks, fixed pointer and plan numbers.          */
-/* Box = the eclipse square + 8% on each side. Strokes stay 1px.        */
-/* ------------------------------------------------------------------ */
-.hero-dial {
-  position: absolute;
-  inset: -8%;
-  z-index: 1;
-  pointer-events: none;
-}
-.hero-dial-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.hero-dial-svg * {
-  fill: none;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-.hero-dial-ring {
-  stroke: rgb(244 239 230 / 0.14);
-}
-.hero-dial-tick {
-  stroke: rgb(244 239 230 / 0.2);
-}
-.hero-dial-tick--mid {
-  stroke: rgb(244 239 230 / 0.34);
-}
-.hero-dial-tick--major {
-  stroke: rgb(255 232 176 / 0.72);
-}
-.hero-dial-cross {
-  stroke: rgb(244 239 230 / 0.32);
-}
-.hero-dial-pointer-line {
-  stroke: rgb(245 185 66 / 0.9);
-}
-.hero-dial-svg .hero-dial-pointer {
-  fill: var(--corona);
-  stroke: none;
-}
-.hero-dial-label {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  color: rgb(244 239 230 / 0.5);
-  text-shadow: 0 0 6px rgb(5 5 10 / 0.95);
-  transition: color 0.5s ease;
-}
-.hero-dial-label[data-on] {
-  color: var(--corona);
-}
-@media (min-width: 768px) {
-  .hero-dial-label {
-    font-size: 10px;
-  }
-}
-
-/* ------------------------------------------------------------------ */
 /* roofy · the headline is the name: «Eclipse» very big, and under it   */
 /* the subtitle «para inmobiliarias» (decision of Ignacio, 28/10/2026). */
 /* Both inside the H1, so its name reads whole. Instrument Serif at an  */
@@ -400,4 +338,63 @@
 }
 .hero-index svg {
   color: var(--accent);
+}
+
+/* Phones and portrait tablets (Eclipse-Web 76767ea, decision of Ignacio, 28/10/2026): the hero sits high — the eclipse
+   right under the top row, the copy and both buttons right under the eclipse — instead of the copy pushed to the bottom
+   of a full screen. */
+@media (max-width: 767.98px), (max-width: 1023.98px) and (orientation: portrait) {
+  .hero {
+    min-height: 0;
+  }
+  .hero-eclipse-anchor {
+    top: calc(var(--header-h) + 0.5rem);
+  }
+  .hero-copy-cell {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: calc(var(--header-h) + 0.5rem + var(--hero-eclipse-size) * 1.02 + 1.25rem);
+    padding-bottom: 3rem;
+  }
+}
+
+/* The second way in, «Probar la demo»: as big as the primary action, transparent with a soft grey edge (the look of
+   Eclipse-Web's «Descubrí los productos», 76767ea). Never a second solid amber. */
+.hero-alt {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  border: 1px solid rgb(244 239 230 / 0.34);
+  background: transparent;
+  color: var(--fg);
+  font-size: 0.975rem;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.07);
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+.hero-alt svg {
+  transition: transform 0.35s var(--ease-expo);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-alt:hover {
+    border-color: rgb(244 239 230 / 0.6);
+    background: rgb(244 239 230 / 0.05);
+  }
+  .hero-alt:hover svg {
+    transform: translate(2px, -2px);
+  }
+}
+@media (min-width: 640px) {
+  .hero-alt {
+    display: inline-flex;
+    width: auto;
+  }
 }
