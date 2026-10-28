@@ -28,8 +28,9 @@ export function AutoTourButton({ text }: { text: { resume: string; stop: string 
 }
 
 /**
- * The link that starts the tour: a real link to the section (`href`), so without JS or with reduced motion it simply
- * jumps there; with motion it starts the tour instead. Modifier clicks (new tab…) are left alone.
+ * The link that starts the tour: a real link to the section (`href`, `#id`), so without JS or with reduced motion it
+ * simply jumps there; with motion it starts the tour instead and moves focus to the section without scrolling (the
+ * section is `tabIndex={-1}`). Modifier clicks (new tab…) are left alone.
  */
 export function TourStartLink({ href, className, children }: { href: string; className?: string; children: ReactNode }) {
   return (
@@ -39,7 +40,10 @@ export function TourStartLink({ href, className, children }: { href: string; cla
       className={className}
       onClick={(e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-        if (startTour()) e.preventDefault();
+        if (!startTour()) return;
+        e.preventDefault();
+        // What the native jump would do: keyboard and screen-reader users go on from the section, not from the hero.
+        document.getElementById(href.slice(1))?.focus({ preventScroll: true });
       }}
     >
       {children}

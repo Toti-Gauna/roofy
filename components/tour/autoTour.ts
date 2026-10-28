@@ -65,10 +65,12 @@ export function pickStops(positions: readonly number[], viewportHeight: number, 
 }
 
 const topOf = (el: Element) => el.getBoundingClientRect().top + window.scrollY;
+/** The furthest the page can scroll: a stop below it lands here (else the browser clamps the scroll and the tour would read it as the visitor's). */
+const maxY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
 
 /** Every stop of the tour, as a function that returns its scroll position now. */
 function stops(): (() => number)[] {
-  const all = [...document.querySelectorAll('[data-tour-stop]')].map((el) => () => Math.max(0, topOf(el) - AIR));
+  const all = [...document.querySelectorAll('[data-tour-stop]')].map((el) => () => Math.min(maxY(), Math.max(0, topOf(el) - AIR)));
   return pickStops(
     all.map((f) => f()),
     window.innerHeight,
