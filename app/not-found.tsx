@@ -20,7 +20,7 @@ export default function NotFound() {
           {routing.locales.map((l) => (
             <section key={l} lang={localeTags[l]}>
               <h1 className="display text-4xl">{copy[l].title}</h1>
-              <a href={`${BASE_PATH}/${l}/`} className="btn-ghost mt-4">
+              <a href={`${BASE_PATH}/${l}/`} className="btn btn-ghost btn-sm mt-4">
                 {copy[l].back}
               </a>
             </section>

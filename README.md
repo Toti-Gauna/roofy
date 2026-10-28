@@ -3,12 +3,13 @@
 El sitio de **EstateOS**, la línea de Eclipse para inmobiliarias. Repositorio y subdominio propios
 (`roofy.eclipse-business.com`); «roofy» es solo el nombre técnico.
 
-Estado: **esqueleto del lote 1.6** — una página «en preparación», el contrato de enlace con Eclipse y la
-publicación de prueba (apagada). La experiencia se construye en los lotes 3.5–3.9 de Eclipse v3.
+Estado: la home es el sitio comercial «Eclipse para inmobiliarias» (fase B, en construcción: `docs/plan-sitio-comercial.md`)
+y la demo de Lumen está en `/<idioma>/demo/` (lotes 3.5–3.6). Publicación de prueba: GitHub Pages bajo `/roofy`; Hostinger,
+apagada.
 
 ```bash
 npm ci
-npm test        # contrato de enlace y mensajes
+npm test        # contrato de enlace, rutas, planes, videos y mensajes
 npm run build   # export estático en out/
 npm run dev
 ```

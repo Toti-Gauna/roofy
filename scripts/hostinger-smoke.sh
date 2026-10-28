@@ -7,10 +7,15 @@ fetch() {
   curl --fail --silent --show-error --retry 3 --retry-delay 5 --connect-timeout 15 --max-time 30 "$1"
 }
 fetch "$base/" >/dev/null
+# The home (lote B1) and the Lumen demo, which lives at /<locale>/demo/ since then.
 for locale in es en pt; do
   page=$(fetch "$base/$locale/")
-  [[ "$page" == *'EstateOS'* ]] || { echo "The $locale page does not look like EstateOS." >&2; exit 1; }
-  [[ "$page" == *'name="robots" content="noindex, nofollow"'* ]] || { echo "The $locale page is missing noindex." >&2; exit 1; }
+  [[ "$page" == *'id="inicio"'* ]] || { echo "The $locale home does not look like the EstateOS site." >&2; exit 1; }
+  [[ "$page" == *"location.replace(\"/$locale/demo/\""* ]] || { echo "The $locale home does not send demo links to /$locale/demo/." >&2; exit 1; }
+  [[ "$page" == *'name="robots" content="noindex, nofollow"'* ]] || { echo "The $locale home is missing noindex." >&2; exit 1; }
+  demo=$(fetch "$base/$locale/demo/")
+  [[ "$demo" == *'data-demo-host'* ]] || { echo "The $locale demo does not look like the Lumen demo." >&2; exit 1; }
+  [[ "$demo" == *'name="robots" content="noindex, nofollow"'* ]] || { echo "The $locale demo is missing noindex." >&2; exit 1; }
 done
 robots=$(fetch "$base/robots.txt")
 [[ "$robots" == *'Disallow: /'* ]] || { echo 'robots.txt must disallow everything during the test publication.' >&2; exit 1; }
