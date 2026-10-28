@@ -5,7 +5,9 @@
 Repositorio y subdominio propios de EstateOS (decisión D11 de Ignacio, 26/10/2026):
 `roofy.eclipse-business.com`. «Roofy» es solo el nombre técnico del repo y del subdominio: el visitante ve
 **EstateOS**. Nació en el lote 1.6 de Eclipse v3 como un esqueleto; desde el lote 3.5 muestra la demo de Lumen en pantalla completa
-(ver `docs/v3/` en Eclipse-Web: biblia, guía de motion y lote 3.1 con las decisiones D28–D36).
+(ver `docs/v3/` en Eclipse-Web: biblia, guía de motion y lote 3.1 con las decisiones D28–D36). Desde el lote B1 (28/10/2026) la
+home es el sitio comercial **«Eclipse para inmobiliarias»** y la demo vive en `/<idioma>/demo/` (ver «El sitio (fase B)»).
+El nombre del producto («Roofy» o «EstateOS») está abierto: `docs/decisiones-abiertas.md`. No lo resuelvas vos.
 
 Export estático (`output: 'export'`) en el subdominio (`NEXT_PUBLIC_BASE_PATH` vacío). Next 16 App Router +
 TypeScript + Tailwind v4 + next-intl (es / en / pt). **Mismo stack, mismos tokens y mismas reglas que
@@ -32,6 +34,19 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   `clip-path`. Lo pesado (demos, WebGL, video) se carga bajo demanda.
 - **Un solo ámbar sólido por pantalla.**
 - **Sin dependencias nuevas** sin una razón fuerte (el esqueleto usa las mismas que Eclipse-Web, menos GSAP/OGL).
+
+## El sitio (fase B)
+
+- Plan, decisiones por defecto y estado de los lotes B1–B6: `docs/plan-sitio-comercial.md`. Lo copiado de Eclipse-Web, con su
+  commit de origen: `docs/procedencia-sitio.md`.
+- Rutas: `/<idioma>/` es el sitio (`app/[locale]/page.tsx`); `/<idioma>/demo/` es la demo (`app/[locale]/demo/page.tsx`).
+  Un enlace a la home con `plan`, `vista` o `area` pasa a `/demo/` antes de pintar (`lib/landing-route.ts`, contrato sin cambios).
+- Enlaces: a la demo con `DemoLink` (conserva `moneda` y `utm_*`; `plan` abre la demo de ese plan); a la home con `siteHref`
+  (nunca con `plan`, `vista` ni `area`, que rebotarían a la demo); a Eclipse con `BackToEclipse`. Todo pasa por `BASE_PATH`:
+  el sitio tiene que funcionar bajo `/` (Hostinger) y bajo `/roofy` (Pages).
+- Motor de movimiento y clases de Eclipse-Web (`components/motion/*`, `.btn`, `.ticks`, `.leader`, `[data-reveal]`…) ya están;
+  `.label` y `.readout` siguen siendo los de roofy. Un solo ámbar sólido por pantalla: el CTA del hero lleva `data-hero-cta`.
+- CSS del sitio al lado de sus componentes (`components/site/site.css`), no en `app/globals.css`.
 
 ## La experiencia (lote 3.5)
 
@@ -102,5 +117,5 @@ listas permitidas se descartan; nunca se muestra ni se interpola lo recibido.
 
 - `noindex` en cada página, `robots.txt` con `Disallow: /` y `X-Robots-Tag` en `.htaccess`. Se quitan solo
   en el lote 3.9 (lanzamiento comercial), con el OK de Ignacio.
-- El panel técnico «Prueba del enlace» se eliminó en el lote 3.5: la home es la demo.
+- El panel técnico «Prueba del enlace» se eliminó en el lote 3.5. Desde B1 la home es el sitio y la demo está en `/demo/`.
 - No hay formularios, cuentas, pagos ni envío de datos.

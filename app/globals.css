@@ -94,11 +94,17 @@
     padding-inline: var(--gutter);
   }
 
+  /* Big serif display headings with one italic amber keyword: <h2 class="display">… <em>…</em></h2> */
   .display {
     font-family: var(--font-serif);
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 0.98;
+  }
+  .display em,
+  .em-accent {
+    font-style: italic;
+    color: var(--accent);
   }
 
   /* Mono caption for readings (language, currency, view). */
@@ -116,26 +122,172 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Ghost link, 44 px touch target. */
-  .btn-ghost {
+  /* From here to the end of the layer: Eclipse-Web app/globals.css (5cdb887), docs/procedencia-sitio.md. */
+  .eyebrow {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  /* Buttons — min 44px touch target */
+  .btn {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    padding: 0 20px;
-    border: 1px solid var(--line-strong);
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0 1.5rem;
     border-radius: 999px;
-    color: var(--fg);
-    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.975rem;
+    line-height: 1;
+    white-space: nowrap;
     transition:
-      border-color 0.2s var(--ease-expo),
-      background-color 0.2s var(--ease-expo);
+      transform 0.25s var(--ease-expo),
+      box-shadow 0.35s var(--ease-expo),
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
   }
-  @media (hover: hover) and (pointer: fine) {
-    .btn-ghost:hover {
-      border-color: var(--corona);
-      background: rgb(245 185 66 / 0.08);
-    }
+  .btn:active {
+    transform: scale(0.98);
   }
+  .btn-primary {
+    background: var(--corona);
+    color: var(--void);
+    box-shadow: 0 10px 40px -14px rgb(245 185 66 / 0.7);
+  }
+  .btn-primary:hover {
+    box-shadow:
+      0 0 0 6px rgb(245 185 66 / 0.14),
+      0 14px 48px -12px rgb(245 185 66 / 0.85);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line-strong);
+    color: var(--fg);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+  .btn-sm {
+    min-height: 44px;
+    padding: 0 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  /* "Demo" / "Vista previa" badge — always visible on fictional content */
+  .badge-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: 1.5rem;
+    padding: 0 0.6rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--void);
+    background: var(--corona);
+  }
+
+  /* Subtle film grain for dark backgrounds */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Registration marks on the 4 corners of a frame, no extra DOM. Tune --tick / --tick-c. */
+  .ticks {
+    --tick: 10px;
+    --tick-c: var(--line-strong);
+    --tick-g: linear-gradient(var(--tick-c), var(--tick-c));
+    background-image:
+      var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g),
+      var(--tick-g);
+    background-repeat: no-repeat;
+    background-size:
+      var(--tick) 1px,
+      1px var(--tick),
+      var(--tick) 1px,
+      1px var(--tick),
+      var(--tick) 1px,
+      1px var(--tick),
+      var(--tick) 1px,
+      1px var(--tick);
+    background-position:
+      top left,
+      top left,
+      top right,
+      top right,
+      bottom left,
+      bottom left,
+      bottom right,
+      bottom right;
+  }
+  /* Menu-style dotted leader between a name and its value (a flex child). */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.25rem;
+    align-self: baseline;
+    border-bottom: 1px dotted var(--line-strong);
+  }
+}
+
+
+/* Diagonal amber beam used by <LightSweep> (Eclipse-Web). */
+.light-sweep-beam {
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgb(255 232 176 / 0.15) 42%,
+    rgb(255 232 176 / 0.75) 50%,
+    rgb(245 185 66 / 0.25) 58%,
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+}
+.theme-light .light-sweep-beam {
+  background: linear-gradient(105deg, transparent 30%, rgb(245 185 66 / 0.55) 50%, transparent 70%);
+  mix-blend-mode: multiply;
 }
 
 /* One static corona glow from the top-right corner: the page is lit from one side. */
@@ -143,11 +295,141 @@
   background: radial-gradient(60rem 40rem at 100% 0%, rgb(245 185 66 / 0.16), transparent 60%);
 }
 
+/* ------------------------------------------------------------------ */
+/* Reduced motion: everything collapses to instant / simple fades.     */
+/* Components that need a specific fallback (loader) override this.    */
+/* ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* v2 · motion signature                                                */
+/* The once-only entrances are CSS transitions/animations started by a  */
+/* pooled IntersectionObserver (components/motion/observeEnter): the    */
+/* drawn hairline (<DrawLine>), <Reveal>, <Occult>, <LightSweep>; plus  */
+/* the primary-button glint. No ScrollTrigger, no style reads (v3).     */
+/* Base styles in @layer components so utilities (absolute, w-full…)    */
+/* still win; the entrance states sit outside it (see below).           */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .draw-line {
+    display: block;
+    flex: none;
+    background: var(--line-strong);
+    pointer-events: none;
+  }
+  .draw-line[data-draw='x'] {
+    width: 100%;
+    height: 1px;
+  }
+  .draw-line[data-draw='y'] {
+    width: 1px;
+    height: 100%;
+  }
+  /* Glint: a diamond-ring sparkle (bright point + cross flare) runs along the pill's upper
+     rim once on hover / keyboard focus, clear of the label. The pseudo-element is the
+     button's own box with the sparkle painted 18px from its left edge, translated across:
+     transform + opacity only, and invisible outside the run, so it needs no clipping. */
+  .btn-primary {
+    position: relative;
+    isolation: isolate;
+    /* The sparkle's box travels across the pill: clip it so it never adds page overflow
+       (a hovered button near the right edge used to widen the page). */
+    overflow: hidden;
+    overflow: clip;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      radial-gradient(circle at 18px 9px, #fff 0 1.3px, rgb(255 251 240 / 0.95) 2.4px, rgb(255 244 214 / 0.55) 4.6px, transparent 9px),
+      linear-gradient(90deg, transparent, rgb(255 255 255 / 0.95) 50%, transparent) 0 8.5px / 36px 1px no-repeat,
+      linear-gradient(180deg, transparent, rgb(255 255 255 / 0.9) 50%, transparent) 17.5px 1px / 1px 16px no-repeat;
+  }
+  .btn-primary:hover::after,
+  .btn-primary:focus-visible::after {
+    animation: btn-glint 0.9s var(--ease-soft) backwards;
+  }
+}
+
+/* Entrance states (outside the layer: like the inline styles GSAP used to write, they
+   win over utilities while they apply; they're removed when the entrance ends). */
+.draw-line[data-draw-state] {
+  transform-origin: var(--draw-origin, 0% 50%);
+}
+.draw-line[data-draw='x'][data-draw-state='hidden'] {
+  transform: scaleX(0);
+}
+.draw-line[data-draw='y'][data-draw-state='hidden'] {
+  transform: scaleY(0);
+}
+.draw-line[data-draw-state='drawing'] {
+  transition: transform var(--draw-duration, 0.9s) var(--ease-expo) var(--draw-delay, 0s);
+}
+
+/* <Reveal>: children rise 24px and fade in, staggered (--reveal-delay per child). */
+[data-reveal-root='hidden'] [data-reveal] {
+  opacity: 0;
+  translate: 0 24px;
+}
+[data-reveal-root='playing'] [data-reveal] {
+  transition:
+    opacity 0.9s var(--ease-expo) var(--reveal-delay, 0ms),
+    translate 0.9s var(--ease-expo) var(--reveal-delay, 0ms);
+}
+
+/* <Occult>: a disc or an edge of light uncovers the block (expo in-out). */
+[data-occult='hidden'] {
+  clip-path: var(--occult-from);
+}
+[data-occult='playing'] {
+  clip-path: var(--occult-to);
+  transition: clip-path var(--occult-duration, 0.9s) cubic-bezier(0.87, 0, 0.13, 1) var(--occult-delay, 0s);
+}
+
+/* <LightSweep>: the beam crosses once (power2 in-out). */
+.light-sweep-beam[data-sweep] {
+  animation: light-sweep 1.4s cubic-bezier(0.45, 0, 0.55, 1) both;
+}
+
+@keyframes light-sweep {
+  from {
+    opacity: 1;
+    transform: translateX(-120%);
+  }
+  99% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}
+
+@keyframes btn-glint {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  18%,
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100% - 36px));
   }
 }

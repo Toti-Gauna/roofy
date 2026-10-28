@@ -1,7 +1,27 @@
 {
   "meta": {
+    "title": "Eclipse para inmobiliarias",
+    "description": "La web, el CRM y las visitas de tu inmobiliaria en una sola pantalla. Mirá la demo de Lumen Propiedades, con datos ficticios."
+  },
+  "demoMeta": {
     "title": "EstateOS · demo para inmobiliarias",
     "description": "EstateOS, de Eclipse, para inmobiliarias. Probá la demo de Lumen Propiedades con datos ficticios."
+  },
+  "site": {
+    "name": "Eclipse para inmobiliarias",
+    "skip": "Ir al contenido",
+    "hero": {
+      "section": "Inicio",
+      "title": "Eclipse para <em>inmobiliarias</em>",
+      "sub": "Tu web, tu CRM y tus visitas en una sola pantalla. Miralo funcionando en una inmobiliaria de prueba antes de hablar.",
+      "cta": "Ver la demo",
+      "demoNote": "Lumen Propiedades es una inmobiliaria ficticia: la demo usa datos inventados."
+    },
+    "demoBadge": "Demo",
+    "footer": {
+      "label": "Pie de página",
+      "note": "Sitio de prueba de Eclipse. Todavía no está en los buscadores."
+    }
   },
   "languages": {
     "label": "Idioma",
@@ -11,7 +31,8 @@
   },
   "home": {
     "name": "EstateOS",
-    "back": "Volver a Eclipse"
+    "back": "Volver a Eclipse",
+    "toSite": "Ir al sitio"
   },
   "notFound": {
     "title": "No encontramos esa página",

@@ -37,11 +37,27 @@ Reglas comunes:
 - En EstateOS los links de cambio de idioma conservan lo recibido (`cleanSearch()`), y «Volver a Eclipse» devuelve la
   moneda solo si la visita venía con una moneda explícita (no inventa una elección).
 
+## Dónde aterriza (lote B1, 28/10/2026)
+
+Desde el lote B1 la home `/<idioma>/` es el sitio «Eclipse para inmobiliarias» y la demo de Lumen vive en
+`/<idioma>/demo/`. **El contrato no cambió:** los enlaces se siguen armando como `/<idioma>/?…`, el fixture y su
+`digest` son los mismos y Eclipse-Web no tiene que tocar nada.
+
+- Si la query trae `plan`, `vista` o `area` (con cualquier valor), un script en línea, lo primero de la home, manda
+  la visita a `/<idioma>/demo/` con la query y el hash intactos, con `location.replace` (Atrás no rebota) y antes de
+  pintar nada. La demo filtra los valores como siempre. Las claves salen de una constante, nunca de lo recibido
+  (`lib/landing-route.ts`; `tests/landing-route.test.ts` lo prueba contra cada enlace del fixture).
+- `moneda` y `utm_*` solos se quedan en la home, que los conserva en sus enlaces a la demo y en los de idioma.
+- Desde la demo, «Ir al sitio» vuelve a la home con `moneda` y `utm_*`, sin `plan`, `vista` ni `area` (si no,
+  rebotaría a la demo).
+- Si algún día Eclipse quiere apuntar directo a `/demo/`, eso **sí** es un cambio de contrato: va a los dos repos
+  en el mismo ciclo.
+
 ## Estado
 
 | Lado | Código | Cableado |
 | --- | --- | --- |
-| EstateOS (`lib/handoff.ts`) | Hecho (`plan` desde el lote 3.5) | Sí: `?plan=` abre la demo con esa lente; al elegir otro plan en la barra, la URL se actualiza con `replaceState` y se puede compartir. `vista` y `area` se leen y se limpian, pero todavía no mueven la demo (lotes 3.6–3.8d) |
+| EstateOS (`lib/handoff.ts`) | Hecho (`plan` desde el lote 3.5) | Sí: `?plan=` abre la demo con esa lente (desde B1, pasando de la home a `/demo/`); al elegir otro plan en la barra, la URL se actualiza con `replaceState` y se puede compartir. `vista` y `area` se leen y se limpian, pero todavía no mueven la demo (lotes 3.6–3.8d) |
 | Eclipse-Web (`lib/estateos-link.ts`) | Hecho, con pruebas | **No:** la fila «Inmobiliarias» del selector sigue abriendo la demo de Lumen hasta que EstateOS esté publicado (D11). Se cablea en los lotes 3.5–3.9; leer `moneda` al volver se suma ahí |
 
 ## Cómo se mantiene
