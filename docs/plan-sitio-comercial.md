@@ -53,7 +53,7 @@ Escritorio                                                    Celular (360 px)
 |---|---|---|
 | B1 | Base: demo a `/demo/`, home con la sección 01 y el pie, redirección de los enlaces de demo, motor de movimiento y clases de Eclipse-Web, noindex por página, smoke de Hostinger con `/demo/`, docs | Mergeado (#6) |
 | B2 | Hero con el eclipse en capas CSS (sin dial: «el eclipse solo», como en Eclipse-Web), estrellas y el hero arriba en celular; «Ver qué ofrecemos» arranca el **tour automático** (Ignacio, 28/10/2026) y «Probar la demo» queda al lado; **02 Qué ofrecemos** (adelantado de B3 para que el tour tenga recorrido): la lámina de Roofy y sus seis entregas; nombre «Eclipse» + «para inmobiliarias» en el sitio y la demo | PR #7 |
-| B3 | 05 Otros negocios: `products.json` copiado con digest, láminas de los otros siete rubros, estado honesto, sin precio salvo Roofy; cada pantalla suma su parada del tour | Pendiente |
+| B3 | 05 Otros negocios: `products.json` copiado con digest, las láminas de los otros siete rubros, estado honesto (en preparación, fecha de lanzamiento, próximamente), sin ningún precio; «Avisame cuando esté» / «Pedir información» por WhatsApp; suma sus paradas al tour. Se numera 03 mientras no existan Demos y Planes | Este PR |
 | B4 | 04 Planes: textos de cada nivel (`levels.json` copiado con digest en los dos repos), precio del catálogo en la moneda del visitante, «Ver la demo» primero y «Pedir este plan» por WhatsApp, Partner «Propuesta» | Pendiente |
 | B5 | 03 Demos: general + seis planes con su estado (`PLAN_DEMO_STATUS`), «Ver el video» solo si existe; repaso de textos es/en/pt | Pendiente |
 | B6 | QA: 360/1440 px, movimiento reducido, un solo ámbar, build en `/` y en `/roofy`, capturas, docs | Pendiente |

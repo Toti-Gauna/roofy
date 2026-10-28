@@ -51,6 +51,112 @@
       "start": "See the demo and pick your level. There are six, starting with Contact; all of them start from the full website and CRM.",
       "demo": "Try the demo"
     },
+    "others": {
+      "section": "Other businesses",
+      "title": "And for <em>other businesses</em>.",
+      "sub": "Today, Eclipse for real estate is the one on sale. These are the products that follow: what each one solves and where it stands. None has a price yet.",
+      "listLabel": "Eclipse products for other businesses",
+      "pickLabel": "Pick a product",
+      "status": {
+        "planned": "In the works",
+        "launch": "Launches {date}",
+        "soon": "Coming soon"
+      },
+      "noPrice": "No published price yet",
+      "soonNote": "No price or date yet",
+      "forLabel": "Eclipse for",
+      "notify": "Let me know when it's ready",
+      "ask": "Ask for details",
+      "whatsappNote": "Opens in WhatsApp",
+      "items": {
+        "foody": {
+          "name": "Eclipse for food businesses",
+          "title": "Food businesses",
+          "rubro": "restaurants",
+          "line": "Your place on every phone too: the menu, ordering from the table and bookings.",
+          "points": {
+            "web": "A website for your place, with your identity",
+            "menu": "Digital menu and table ordering by QR code",
+            "bookings": "Bookings by day, time and party size",
+            "panel": "A panel for orders, payments, bookings and customers"
+          },
+          "ask": "Hi Eclipse. I run a restaurant and I'd like to hear when Eclipse for food businesses is ready."
+        },
+        "markyt": {
+          "name": "Eclipse for ecommerce",
+          "title": "Ecommerce",
+          "rubro": "ecommerce",
+          "line": "Your online store with everything behind it: orders, stock and customers.",
+          "points": {
+            "store": "A store with your identity and your products",
+            "catalog": "Catalog with variants, cart and checkout",
+            "orders": "Orders, payments and stock",
+            "crm": "Customers, history and after-sales"
+          },
+          "ask": "Hi Eclipse. I run a store and I'd like to hear when Eclipse for ecommerce is ready."
+        },
+        "handy": {
+          "name": "Handy",
+          "rubro": "home services",
+          "line": "Home repair specialists in Mar del Plata, from your phone.",
+          "points": {
+            "trades": "Electrical, plumbing, gas, locksmith, masonry and air conditioning",
+            "choose": "You choose the specialist; they set or accept the price",
+            "app": "A web app you can install on your phone",
+            "city": "Starting in Mar del Plata"
+          },
+          "ask": "Hi Eclipse. I'd like to know more about Handy."
+        },
+        "gym": {
+          "name": "Gyms",
+          "rubro": "fitness",
+          "line": "Your gym with an app for members: classes, streaks and challenges that bring them back.",
+          "points": {
+            "classes": "Classes and bookings from the phone",
+            "streaks": "Streaks, missions and a ranking for members",
+            "churn": "A panel of members who stop coming",
+            "winback": "Messages to win them back"
+          },
+          "ask": "Hi Eclipse. I run a gym and I'd like to hear when it's ready."
+        },
+        "dental": {
+          "name": "DentalOS",
+          "rubro": "health · dental",
+          "line": "Every visit has a next step: appointments, check-ups and the front desk in order.",
+          "points": {
+            "booking": "Appointment requests by specialty and dentist",
+            "reschedule": "Rescheduling over WhatsApp without losing the check-up",
+            "reception": "A front desk with the day's schedule and requests",
+            "patients": "Patients, estimates and payments"
+          },
+          "ask": "Hi Eclipse. I run a dental practice and I'd like to hear when DentalOS is ready."
+        },
+        "clinic": {
+          "name": "Clinics",
+          "rubro": "health",
+          "line": "Online appointments, WhatsApp reminders and fewer patients who miss them.",
+          "points": {
+            "booking": "Appointment booking from the website",
+            "reminders": "WhatsApp reminders",
+            "noshow": "A no-show panel",
+            "reception": "A front-desk schedule per practitioner"
+          },
+          "ask": "Hi Eclipse. I run a clinic and I'd like to hear when it's ready."
+        },
+        "vet": {
+          "name": "VetOS",
+          "rubro": "pets · veterinary",
+          "line": "Each pet's history together with its owner, at the practice and at home.",
+          "points": {
+            "record": "Owner, pet and front desk in one record",
+            "visits": "Appointments at the practice and home visits",
+            "zones": "Routes by area for home visits",
+            "reminders": "Notices and reminders for owners"
+          },
+          "ask": "Hi Eclipse. I run a veterinary practice and I'd like to hear when VetOS is ready."
+        }
+      }
+    },
     "demoBadge": "Demo",
     "footer": {
       "label": "Footer",

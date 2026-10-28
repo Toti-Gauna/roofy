@@ -34,7 +34,18 @@ textos secundarios de la tarjeta toman su color AA (antes heredaban el del texto
 | `components/sections/products/plate.css` | `components/sections/products/products.css` (76767ea): «Plate» y `.pd-mover` | Sin `order: -1` (el orden lo pone la sección) |
 | Textos de 02 Qué ofrecemos (`site.offer.lead`, `features`, `start`) y `autoTour` | `messages/*.json` (76767ea): `products.items.roofy` y `autoTour` | Ninguno; el título de la sección es propio |
 
+## Lote B3
+
+| Archivo en roofy | Origen en Eclipse-Web | Cambios |
+|---|---|---|
+| `content/products.json` | `content/products.json` (76767ea) | Ninguno, byte a byte. `tests/products.test.ts` fija su digest; si cambia allá, se copia acá y se actualiza el digest |
+| `lib/products.ts` | `lib/content.ts` (tipos de producto) y `components/sections/products/products.ts` (`STATUS_PHASE`, `launchDate`) | Sin niveles ni precios: el «desde» de Roofy se lee del catálogo en B4 |
+| `lib/whatsapp.ts` | `lib/whatsapp.ts` | Solo `whatsappUrl`; el número es `WHATSAPP_NUMBER` en `lib/env.ts` (5492234467881, Ignacio, 28/10/2026) |
+| Textos `site.others.items.*`, `status`, `noPrice`, `soonNote`, `notify`, `ask` | `messages/*.json`: `products.items.<id>`, `products.status`, `products.page` (76767ea) | Ninguno; el título, el sub y la nota «Se abre en WhatsApp» son propios. No se copiaron `lead`, `features`, `start` ni `later`: la sección no los muestra |
+
+Las láminas de los siete rubros ya estaban desde B2 (`ProductArt.tsx` trae las ocho).
+
 ## Escrito en roofy
 
 `lib/landing-route.ts` (a dónde va cada enlace), `app/[locale]/page.tsx` y `components/site/site.css` (la home y la fila con el
-nombre), `SiteNav` (`page`, `BackToEclipse`, `DemoLink`) y los textos `site.*`, `meta`, `demoMeta` y `home.toSite`.
+nombre), `components/site/Others.tsx` (la lista con vista previa), `SiteNav` (`page`, `BackToEclipse`, `DemoLink`) y los textos `site.*`, `meta`, `demoMeta` y `home.toSite`.

@@ -17,7 +17,7 @@ describe('automatic tour · pickStops', () => {
 
 describe('home sections', () => {
   it('numbers them in page order and runs the eclipse from totality to the full sun', () => {
-    expect(SITE_SECTIONS.map(sectionNumber)).toEqual(['01', '02', '03', '04', '05']);
+    expect(SITE_SECTIONS.map(sectionNumber)).toEqual(['01', '02', '03']);
     expect(sectionPhase('inicio')).toBe(1);
     expect(sectionPhase('otros-negocios')).toBe(0);
   });

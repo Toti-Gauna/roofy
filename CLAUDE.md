@@ -56,6 +56,11 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
 - **Acción principal: «Ver qué ofrecemos»** (Ignacio, 28/10/2026), que arranca el **tour automático** (`components/tour`,
   copia de Eclipse-Web): la página baja sola por los `[data-tour-stop]`, se pausa si el visitante toma el control y ofrece
   «Seguir con el tour automático». **Cada sección nueva marca sus paradas.** «Probar la demo» queda al lado, sin ámbar.
+- **05 Otros negocios (B3, `components/site/Others.tsx`):** los otros siete productos de `content/products.json` (copia de
+  Eclipse-Web, digest fijado en `tests/products.test.ts`), cada uno con su estado real: solo Roofy se vende; Foody y Markyt
+  «En preparación», Handy con su fecha, el resto «Próximamente». **Ningún precio en esta sección** (la prueba lo exige en los tres
+  idiomas); la acción es WhatsApp (`lib/whatsapp.ts`, número en `lib/env.ts`). Un producto nuevo o un cambio de estado se hace
+  en Eclipse-Web y se copia.
 - Láminas (`components/sections/products/`, copia de Eclipse-Web): `<Plate id>` las dibuja una vez al entrar y después
   sigue su bucle mientras se ven (`plateLife`). Secciones y su número/fase: `lib/sections.ts`.
 
