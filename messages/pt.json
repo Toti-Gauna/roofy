@@ -56,7 +56,6 @@
       "title": "E para <em>outros negócios</em>.",
       "sub": "Hoje, a Eclipse para imobiliárias é a que está à venda. Estes são os produtos que vêm a seguir: o que cada um resolve e em que estágio está. Nenhum tem preço ainda.",
       "listLabel": "Produtos da Eclipse para outros negócios",
-      "pickLabel": "Escolha um produto",
       "status": {
         "planned": "Em preparação",
         "launch": "Lança em {date}",

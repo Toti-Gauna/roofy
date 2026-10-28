@@ -41,7 +41,9 @@ export interface OthersText {
  * launch date, or coming — and none with a price (only Roofy, section 02, is on sale; its price is in the plans).
  * An index list with a live preview: the list on the left, the selected product's plate (drawn when it is picked, then
  * alive), what it does and its status on the right; on a phone each row opens under itself. Always one product open.
- * One DOM for both: the list is a grid and the open panel is placed in the right column from 1024px (others.css).
+ * One DOM for both: the list is a grid and, from 1024px, every panel sits in the same cell of the right column — the open one
+ * visible, the others only `visibility: hidden` — so the cell is as tall as the tallest panel and the rows never reflow
+ * when another product is picked (others.css).
  *
  * No solid amber here (the hero's is the page's one): the WhatsApp action is the quiet button.
  * Tour stops (`data-tour-stop`): the head and the list.
@@ -65,7 +67,7 @@ export function Others({ id, items, text }: { id: 'otros-negocios'; items: Other
         <p className="ob-sub">{text.sub}</p>
       </div>
 
-      <div className="ob-grid container-x" role="group" aria-label={text.listLabel} data-tour-stop>
+      <div className="ob-grid container-x" role="group" aria-label={text.listLabel} style={{ ['--ob-n' as string]: items.length }} data-tour-stop>
         {items.map((item, i) => {
           const open = i === active;
           return (
@@ -123,8 +125,9 @@ function Row({
           </span>
         </button>
       </h3>
-      <div id={panel} role="region" aria-label={item.name} className="ob-panel" hidden={!open}>
-        {open ? <Plate key={item.id} id={item.id} className="ob-plate" /> : null}
+      <div id={panel} role="region" aria-label={item.name} className="ob-panel" data-open={open || undefined}>
+        {/* The slot keeps the plate's size when closed, so every panel is as tall as the others (the list never reflows). */}
+        <div className="ob-plate">{open ? <Plate key={item.id} id={item.id} /> : null}</div>
         <div className="ob-copy">
           <p className="label ob-meta">
             {titled ? <span>{forLabel}</span> : null}

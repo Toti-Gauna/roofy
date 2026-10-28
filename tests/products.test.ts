@@ -56,7 +56,8 @@ describe('products (content/products.json, a copy of Eclipse-Web)', () => {
 
   it.each(LOCALES)('«otros negocios» in %s never states a price, in any currency', (locale) => {
     const others = get(messages[locale], 'site.others') as Tree;
-    const price = /USD|ARS|BRL|US\$|R\$|\$\s?\d|\d\s?(\/\s?mes|\/\s?month|\/\s?mês)|dólar|dollar|pesos?|reais/i;
+    // A price in any currency, or a monthly fee said in words.
+    const price = /\b(USD|ARS|BRL|EUR)\b|US\$|R\$|€|\$\s?\d|\d\s?(\/\s?mes|\/\s?month|\/\s?mês)|dólar|dollar|pesos?|reais|euros?|por mes|al mes|mensual|monthly|per month|a month|por mês|mensal/i;
     for (const text of strings(others)) expect(text, text).not.toMatch(price);
   });
 });

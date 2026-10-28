@@ -1,7 +1,7 @@
 /*
  * 05 · Otros negocios. Phones: one row per product (index, name, status); the open one shows its panel (plate, what it
  * does, its status and the WhatsApp action) under itself. From 1024px: the rows are the left column and the open panel
- * is the right column, sticky while the list scrolls (same DOM: the grid places it). Lit from the right edge by one
+ * is the right column (same DOM: the grid places it). Lit from the right edge by one
  * corona glow, never a blob. Mobile-first, 16 px gutter, touch targets ≥ 44 px.
  */
 .ob {
@@ -104,17 +104,19 @@
 }
 
 /* ---- The open panel ------------------------------------------------- */
+.ob-plate {
+  width: 100%;
+  aspect-ratio: 480 / 400;
+  max-width: 28rem;
+}
 .ob-panel {
   display: grid;
   gap: 24px;
   padding-block: 8px 32px;
   border-bottom: 1px solid var(--line);
 }
-.ob-panel[hidden] {
+.ob-panel:not([data-open]) {
   display: none;
-}
-.ob-plate {
-  max-width: 28rem;
 }
 .ob-meta {
   display: flex;
@@ -198,15 +200,20 @@
   .ob-row-head {
     grid-column: 1;
   }
-  /* The open panel is the right column, from the first row to the last, and stays in view while the list is read. */
-  .ob-panel {
+  /* Every panel sits in the same cell of the right column, from the first row to the last: the open one is seen, the others
+     are only hidden (not removed) so the cell is as tall as the tallest one and the rows keep their place when you pick
+     another product. */
+  .ob-panel,
+  .ob-panel:not([data-open]) {
+    display: grid;
     grid-column: 2;
-    grid-row: 1 / span 7;
+    grid-row: 1 / span var(--ob-n, 7);
     align-self: start;
-    position: sticky;
-    top: 48px;
     padding-block: 0;
     border-bottom: 0;
+  }
+  .ob-panel:not([data-open]) {
+    visibility: hidden;
   }
   .ob-plate {
     max-width: 22rem;

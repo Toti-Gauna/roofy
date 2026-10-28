@@ -56,7 +56,6 @@
       "title": "And for <em>other businesses</em>.",
       "sub": "Today, Eclipse for real estate is the one on sale. These are the products that follow: what each one solves and where it stands. None has a price yet.",
       "listLabel": "Eclipse products for other businesses",
-      "pickLabel": "Pick a product",
       "status": {
         "planned": "In the works",
         "launch": "Launches {date}",
