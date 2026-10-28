@@ -1,31 +1,69 @@
 @import 'tailwindcss';
 
-/* Tokens copied from Eclipse-Web (app/globals.css): same palette, same names. */
+/* Tokens, theme blocks and @theme: Eclipse-Web app/globals.css (5cdb887), same palette, same names. */
 :root {
-  --void: #05050a;
-  --night: #0c0c14;
-  --ash: #1a1a24;
-  --corona: #f5b942;
-  --flare: #ffe8b0;
-  --dawn: #f4efe6;
-  --ink: #111114;
-  --mist: #9a97a6;
+  --void: #05050a; /* fondo profundo */
+  --night: #0c0c14; /* superficies oscuras */
+  --ash: #1a1a24; /* bordes y cards oscuras */
+  --corona: #f5b942; /* acento principal */
+  --flare: #ffe8b0; /* brillo de corona */
+  --dawn: #f4efe6; /* fondo iluminado */
+  --ink: #111114; /* texto sobre claro */
+  --mist: #9a97a6; /* texto secundario sobre oscuro */
 
+  /* Derived tokens so text on --dawn passes WCAG AA (contrast ≥ 4.5:1). */
+  --corona-deep: #8a5a00; /* 5.2:1 on --dawn */
+  --mist-ink: #5b5866; /* 6.0:1 on --dawn */
+  --dawn-soft: #ebe4d8;
+
+  /* Semantic tokens, switched by .theme-dark / .theme-light */
   --fg: var(--dawn);
   --fg-muted: var(--mist);
   --accent: var(--corona);
   --line: rgb(244 239 230 / 0.1);
   --line-strong: rgb(244 239 230 / 0.18);
+  --surface: rgb(26 26 36 / 0.55);
+  --surface-strong: rgb(26 26 36 / 0.85);
   --focus: var(--corona);
+  --fg-inverse: var(--void);
 
+  --header-h: 64px;
   --gutter: 16px;
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 @media (min-width: 768px) {
   :root {
     --gutter: 32px;
+    --header-h: 72px;
   }
+}
+
+.theme-dark {
+  --fg: var(--dawn);
+  --fg-muted: var(--mist);
+  --accent: var(--corona);
+  --line: rgb(244 239 230 / 0.1);
+  --line-strong: rgb(244 239 230 / 0.18);
+  --surface: rgb(26 26 36 / 0.55);
+  --surface-strong: rgb(26 26 36 / 0.85);
+  --focus: var(--corona);
+  --fg-inverse: var(--void);
+  color: var(--fg);
+}
+
+.theme-light {
+  --fg: var(--ink);
+  --fg-muted: var(--mist-ink);
+  --accent: var(--corona-deep);
+  --line: rgb(17 17 20 / 0.12);
+  --line-strong: rgb(17 17 20 / 0.22);
+  --surface: rgb(255 255 255 / 0.62);
+  --surface-strong: rgb(255 255 255 / 0.9);
+  --focus: var(--corona-deep);
+  --fg-inverse: var(--dawn);
+  color: var(--fg);
 }
 
 @theme inline {
@@ -35,17 +73,30 @@
   --color-corona: var(--corona);
   --color-flare: var(--flare);
   --color-dawn: var(--dawn);
+  --color-ink: var(--ink);
   --color-mist: var(--mist);
+  --color-corona-deep: var(--corona-deep);
+  --color-mist-ink: var(--mist-ink);
+  --color-dawn-soft: var(--dawn-soft);
 
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-accent: var(--accent);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-fg-inverse: var(--fg-inverse);
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, 'Times New Roman', serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --radius-card-sm: 20px;
+  --radius-card: 24px;
+  --radius-card-lg: 28px;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
