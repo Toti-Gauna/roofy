@@ -1,13 +1,16 @@
 @AGENTS.md
 
-# EstateOS — el sitio de Eclipse para inmobiliarias (repo `roofy`)
+# Roofy — el sitio de Eclipse para inmobiliarias (repo `roofy`)
 
-Repositorio y subdominio propios de EstateOS (decisión D11 de Ignacio, 26/10/2026):
-`roofy.eclipse-business.com`. «Roofy» es solo el nombre técnico del repo y del subdominio: el visitante ve
-**EstateOS**. Nació en el lote 1.6 de Eclipse v3 como un esqueleto; desde el lote 3.5 muestra la demo de Lumen en pantalla completa
+Repositorio y subdominio propios de Roofy (antes EstateOS) (decisión D11 de Ignacio, 26/10/2026):
+`roofy.eclipse-business.com`. Nació en el lote 1.6 de Eclipse v3 como un esqueleto; desde el lote 3.5 muestra la demo de Lumen en pantalla completa
 (ver `docs/v3/` en Eclipse-Web: biblia, guía de motion y lote 3.1 con las decisiones D28–D36). Desde el lote B1 (28/10/2026) la
-home es el sitio comercial **«Eclipse para inmobiliarias»** y la demo vive en `/<idioma>/demo/` (ver «El sitio (fase B)»).
-El nombre del producto («Roofy» o «EstateOS») está abierto: `docs/decisiones-abiertas.md`. No lo resuelvas vos.
+home es el sitio comercial y la demo vive en `/<idioma>/demo/` (ver «El sitio (fase B)»).
+
+**Nombre (Ignacio, 28/10/2026):** el producto es **Roofy**, pero por ahora todo lo que el visitante ve del nombre es **«Eclipse»**
+con el subtítulo **«para inmobiliarias»** debajo (en: «for real estate»; pt: «para imobiliárias»), en el sitio y en la demo. Lo
+técnico que dice `EstateOS` (contrato de enlace, catálogo, archivos) no se renombra. El video de Contact todavía dice «EstateOS»
+hasta que se vuelva a renderizar: `docs/decisiones-abiertas.md`.
 
 Export estático (`output: 'export'`) en el subdominio (`NEXT_PUBLIC_BASE_PATH` vacío). Next 16 App Router +
 TypeScript + Tailwind v4 + next-intl (es / en / pt). **Mismo stack, mismos tokens y mismas reglas que
@@ -46,7 +49,10 @@ Eclipse-Web**: si algo no está acá, manda su `CLAUDE.md`.
   el sitio tiene que funcionar bajo `/` (Hostinger) y bajo `/roofy` (Pages).
 - Motor de movimiento y clases de Eclipse-Web (`components/motion/*`, `.btn`, `.ticks`, `.leader`, `[data-reveal]`…) ya están;
   `.label` y `.readout` siguen siendo los de roofy. Un solo ámbar sólido por pantalla: el CTA del hero lleva `data-hero-cta`.
-- CSS del sitio al lado de sus componentes (`components/site/site.css`), no en `app/globals.css`.
+- CSS del sitio al lado de sus componentes (`components/site/site.css`, `components/hero/hero.css`), no en `app/globals.css`.
+- Hero (B2, `components/hero/`): eclipse en capas CSS (sin WebGL), dial con una marca por plan, estrellas con paralaje solo con
+  mouse y la luna que se corre con el scroll (pin solo con mouse/trackpad en pantallas anchas; nunca en táctil). Movimiento
+  reducido: quieto. El H1 es el nombre y nunca se oculta.
 
 ## La experiencia (lote 3.5)
 

@@ -1,18 +1,18 @@
 {
   "meta": {
-    "title": "Eclipse for real estate",
+    "title": "Eclipse · for real estate",
     "description": "Your agency's website, CRM and viewings on one screen. Try the Lumen Propiedades demo, with fictional data."
   },
   "demoMeta": {
-    "title": "EstateOS · real estate demo",
-    "description": "EstateOS, by Eclipse, for real estate agencies. Try the Lumen Propiedades demo with fictional data."
+    "title": "Eclipse · real estate demo",
+    "description": "Eclipse for real estate. Try the Lumen Propiedades demo with fictional data."
   },
   "site": {
-    "name": "Eclipse for real estate",
+    "brand": "Eclipse",
+    "tagline": "for real estate",
     "skip": "Skip to content",
     "hero": {
       "section": "Home",
-      "title": "Eclipse for <em>real estate</em>",
       "sub": "Your website, your CRM and your viewings on one screen. See it working in a sample agency before we talk.",
       "cta": "See the demo",
       "demoNote": "Lumen Propiedades is a fictional agency: the demo uses made-up data."
@@ -30,7 +30,7 @@
     "pt": "Português"
   },
   "home": {
-    "name": "EstateOS",
+    "name": "Eclipse",
     "back": "Back to Eclipse",
     "toSite": "Go to the site"
   },
@@ -1096,11 +1096,11 @@
         "name": "Explore on my own",
         "text": "Tap and try everything, at your pace."
       },
-      "eyebrow": "EstateOS · Lumen Propiedades demo",
+      "eyebrow": "Eclipse · Lumen Propiedades demo",
       "note": "Demo with fictional data. Nothing is sent."
     },
     "stage": {
-      "label": "EstateOS demo",
+      "label": "Eclipse for real estate demo",
       "exit": "Back",
       "plan": "Plan",
       "allPlans": "All plans",
@@ -1149,7 +1149,7 @@
       "close": "Close",
       "transcript": "Transcript",
       "label": "{plan} video",
-      "general": "EstateOS video",
+      "general": "Eclipse for real estate video",
       "duration": "{seconds} s",
       "back": "See the {plan} demo",
       "subtitles": {

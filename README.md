@@ -1,7 +1,7 @@
-# roofy · EstateOS
+# roofy · Eclipse para inmobiliarias
 
-El sitio de **EstateOS**, la línea de Eclipse para inmobiliarias. Repositorio y subdominio propios
-(`roofy.eclipse-business.com`); «roofy» es solo el nombre técnico.
+El sitio de **Roofy**, la línea de Eclipse para inmobiliarias (antes EstateOS). Repositorio y subdominio propios
+(`roofy.eclipse-business.com`). Por ahora el visitante ve «Eclipse» con el subtítulo «para inmobiliarias».
 
 Estado: la home es el sitio comercial «Eclipse para inmobiliarias» (fase B, en construcción: `docs/plan-sitio-comercial.md`)
 y la demo de Lumen está en `/<idioma>/demo/` (lotes 3.5–3.6). Publicación de prueba: GitHub Pages bajo `/roofy`; Hostinger,

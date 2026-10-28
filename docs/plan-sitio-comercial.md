@@ -7,7 +7,7 @@ la estética Efemérides de Eclipse-Web. Un PR por lote, en serie (todos tocan `
 
 | # | Decisión | Valor |
 |---|---|---|
-| 1 | Nombre visible | «Eclipse para inmobiliarias» (en: «Eclipse for real estate»; pt: «Eclipse para imobiliárias»). Roofy vs EstateOS: abierto, ver `decisiones-abiertas.md` |
+| 1 | Nombre visible | Decidido (Ignacio, 28/10/2026): el producto es Roofy; el visitante ve «Eclipse» y debajo «para inmobiliarias» (en: «for real estate»; pt: «para imobiliárias») |
 | 2 | Orden de la home | 01 hero · 02 producto · 03 demos · 04 planes · 05 otros negocios · pie |
 | 3 | Rubros | Los 8 de `content/products.json` de Eclipse-Web, con su estado real (solo Roofy se vende) |
 | 4 | Comercial «Eclipse en 40 segundos» y tour automático | No se replican; lote opcional posterior (el tour todavía no está en `main` de Eclipse-Web) |
@@ -44,8 +44,8 @@ Escritorio                                                    Celular (360 px)
 
 | Lote | Qué | Estado |
 |---|---|---|
-| B1 | Base: demo a `/demo/`, home con la sección 01 y el pie, redirección de los enlaces de demo, motor de movimiento y clases de Eclipse-Web, noindex por página, smoke de Hostinger con `/demo/`, docs | Este PR |
-| B2 | Hero con el eclipse en capas CSS, estrellas, una acción principal; header y menú móvil; «Eclipse para inmobiliarias» también en la demo | Pendiente |
+| B1 | Base: demo a `/demo/`, home con la sección 01 y el pie, redirección de los enlaces de demo, motor de movimiento y clases de Eclipse-Web, noindex por página, smoke de Hostinger con `/demo/`, docs | Mergeado (#6) |
+| B2 | Hero con el eclipse en capas CSS, el dial de los seis planes, estrellas y una acción principal; fila superior con el nombre; «Eclipse» + «para inmobiliarias» también en la demo. El menú de secciones llega con las secciones (B3–B5): hoy no hay a dónde llevar | Este PR |
 | B3 | 02 Producto y 05 Otros negocios: `products.json` copiado con digest, láminas SVG (`ProductArt`, `artIdle`, `Walker`), estado honesto, sin precio salvo Roofy | Pendiente |
 | B4 | 04 Planes: textos de cada nivel (`levels.json` copiado con digest en los dos repos), precio del catálogo en la moneda del visitante, «Ver la demo» primero y «Pedir este plan» por WhatsApp, Partner «Propuesta» | Pendiente |
 | B5 | 03 Demos: general + seis planes con su estado (`PLAN_DEMO_STATUS`), «Ver el video» solo si existe; repaso de textos es/en/pt | Pendiente |
@@ -53,5 +53,4 @@ Escritorio                                                    Celular (360 px)
 
 ## Lo que necesita a Ignacio
 
-- El número real de WhatsApp para el build (B4). No se pone uno inventado: sin él, «Pedir este plan» queda sin enlace y lo dice.
-- Pages: *Settings → Pages → Source: GitHub Actions* y volver a correr el flujo.
+- Cuándo se vuelve a renderizar el video de Contact con el nombre nuevo (`decisiones-abiertas.md`).
